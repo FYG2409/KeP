@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "392176529377",
+    "firebase_url": "https://keep-practicing.firebaseio.com",
+    "project_id": "keep-practicing",
+    "storage_bucket": "keep-practicing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392176529377:android:3d6506e6b281832d",
+        "android_client_info": {
+          "package_name": "com.example.freakdeveloper.kep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392176529377-vk1373har8b7lp80t7cvvjkt6gb1jalb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.freakdeveloper.kep",
+            "certificate_hash": "83afea0233a83a78a69c7f281db4368a57081c4e"
+          }
+        },
+        {
+          "client_id": "392176529377-dg3jk9sao1u3n4q3icbrmu3bceph1n52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvVPDcdXXCkv8z7Fl6mdaD2m0tmxFu5ow"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392176529377-dg3jk9sao1u3n4q3icbrmu3bceph1n52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
