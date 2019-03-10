@@ -14,4 +14,5 @@
     <string name="Usuario">Usuario</string>
     <string name="Contraseña">Contraseña</string>
     <string name="Correo">Correo</string>
+    <string name="Iniciar">Iniciar</string>
 </resources>
