@@ -1,50 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PreguntasInfinitasFragment"
-    android:background="#20D3B8"
+    tools:context=".RegistroPregunta"
     android:orientation="vertical">
 
-    <TextView
+    <EditText
+        android:id="@+id/materia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="MATERIA"
+        />
+
+    <EditText
         android:id="@+id/pregunta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="PREGUNTA"
+        />
 
-    <Button
+    <EditText
         android:id="@+id/rA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@PreguntasInfinitasFragment/clickeoDos"
-        android:background="@color/blanco"
-        android:tag="A"/>
-    <Button
+        android:hint="Respuesta A"
+        />
+
+    <EditText
         android:id="@+id/rB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="B"/>
-    <Button
+        android:hint="Respuesta B"
+        />
+
+    <EditText
         android:id="@+id/rC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="C"/>
-    <Button
+        android:hint="Respuesta C"
+        />
+
+    <EditText
         android:id="@+id/rD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="D"/>
-    <Button
-        android:id="@+id/siguiente"
+        android:hint="Respuesta D"
+        />
+    <EditText
+        android:id="@+id/solucion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Siguiente"
-        android:enabled="false"/>
+        android:hint="SOLUCION"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRA"
+        android:onClick="creaPregunta"/>
+
+
+
+
 
 </LinearLayout>

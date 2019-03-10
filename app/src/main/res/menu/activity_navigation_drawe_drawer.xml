@@ -6,7 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/perfil"
-            android:icon="@drawable/kep_icon" />
+            android:icon="@drawable/kep_icon"
+            />
         <item
             android:id="@+id/duelo"
             android:icon="@drawable/duelo_icon"/>
@@ -21,7 +22,7 @@
             android:icon="@drawable/graficas_icon"/>
         <item
             android:id="@+id/preguntas"
-            android:icon="@drawable/preguntas_icon"/>
+            android:icon="@drawable/preguntas_icon" />
 
     </group>
 

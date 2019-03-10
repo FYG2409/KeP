@@ -25,5 +25,11 @@
         android:text="INICIA"
         android:onClick="irAPrincipal"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRA PREGUNTA"
+        android:onClick="irARegPregunta"
+        />
 
 </LinearLayout>

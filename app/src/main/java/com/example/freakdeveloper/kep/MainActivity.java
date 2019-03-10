@@ -27,4 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NavigationDrawe.class);
         startActivity(intent);
     }
+
+    public void irARegPregunta(View view){
+        Intent intent = new Intent(this, RegistroPregunta.class);
+        startActivity(intent);
+    }
 }
