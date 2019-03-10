@@ -19,5 +19,11 @@
         android:layout_height="wrap_content"
         android:text="Unete a nosotros"
         android:onClick="irARegistro"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INICIA"
+        android:onClick="irAPrincipal"
+        />
 
 </LinearLayout>

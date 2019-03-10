@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/kep_icon" />
+        <item
+            android:id="@+id/duelo"
+            android:icon="@drawable/duelo_icon"/>
+        <item
+            android:id="@+id/infinito"
+            android:icon="@drawable/infinito_icon"/>
+        <item
+            android:id="@+id/ranking"
+            android:icon="@drawable/ranking_icon"/>
+        <item
+            android:id="@+id/graficas"
+            android:icon="@drawable/graficas_icon"/>
+        <item
+            android:id="@+id/preguntas"
+            android:icon="@drawable/preguntas_icon"/>
+
+    </group>
+
+</menu>

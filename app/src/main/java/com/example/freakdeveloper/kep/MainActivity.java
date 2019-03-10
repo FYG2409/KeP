@@ -22,4 +22,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Registro.class);
         startActivity(intent);
     }
+
+    public void irAPrincipal(View view){
+        Intent intent = new Intent(this, NavigationDrawe.class);
+        startActivity(intent);
+    }
 }
