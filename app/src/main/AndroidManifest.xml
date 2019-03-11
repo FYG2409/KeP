@@ -22,7 +22,8 @@
             android:name=".NavigationDrawe"
             android:label="@string/title_activity_navigation_drawe"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RegistroPregunta"></activity>
+        <activity android:name=".RegistroPregunta" />
+        <activity android:name=".Preguntas"></activity>
     </application>
 
 </manifest>
