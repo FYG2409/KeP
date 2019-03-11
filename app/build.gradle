@@ -31,8 +31,13 @@ dependencies {
     //FIREBASE
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
+<<<<<<< HEAD
 
     implementation 'com.android.support:cardview-v7:28.0.0'
+=======
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+>>>>>>> b457f2a99447b0e67a1f2c443e6610c5ccbe6ba5
 }
 //FIREBASE
 apply plugin: 'com.google.gms.google-services'
