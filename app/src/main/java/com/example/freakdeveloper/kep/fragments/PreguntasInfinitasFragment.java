@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.freakdeveloper.kep.Preguntas;
 import com.example.freakdeveloper.kep.R;
 import com.example.freakdeveloper.kep.model.Pregunta;
 import com.google.firebase.database.DataSnapshot;
@@ -145,11 +147,12 @@ public class PreguntasInfinitasFragment extends Fragment {
                     for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                         Pregunta preguntaa = snapshot.getValue(Pregunta.class);
                         arrayPregunta.add(preguntaa);
-                        Toast.makeText(getContext(), "Agregado", Toast.LENGTH_SHORT).show();
                     }
                     cargaPregunta(0);
+                    Log.w("PreguntasInfinitasF.", "Termine de agregar");
                  }else
                     Toast.makeText(getContext(), "No hay preguntas en la base", Toast.LENGTH_SHORT).show();
+                    Log.w("Preguntas", "No hay preguntas en la base");
              }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -192,13 +195,15 @@ public class PreguntasInfinitasFragment extends Fragment {
     }
 
     public void clickeoSiguiente(){
-        if(arrayPregunta.size()<=contaTotal){
+        if(arrayPregunta.size()>contaTotal){
             limpiaColor();
             //Enviando nueva pregunta
             cargaPregunta(contaTotal);
             siguiente.setEnabled(false);
+        }else{
+            Toast.makeText(getContext(), "Ya has contestado todas las preguntas", Toast.LENGTH_SHORT).show();
+            //AQUI
         }
-        Toast.makeText(getContext(), "Ya has contestado todas las preguntas", Toast.LENGTH_SHORT).show();
     }
 
     public void limpiaColor(){
@@ -232,18 +237,6 @@ public class PreguntasInfinitasFragment extends Fragment {
         mListener = null;
     }
 
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

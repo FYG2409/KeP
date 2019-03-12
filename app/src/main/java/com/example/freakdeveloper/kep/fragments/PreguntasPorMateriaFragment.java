@@ -73,9 +73,8 @@ public class PreguntasPorMateriaFragment extends Fragment {
 
     public void clickeo(View view){
         Intent intent = new Intent(getContext(), Preguntas.class);
-        if(view.getTag().toString().equals("fisica")){
-            intent.putExtra("materia", "Fisica");
-        }
+        String materia = view.getTag().toString();
+        intent.putExtra("materia", materia);
         startActivity(intent);
     }
 

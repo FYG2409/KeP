@@ -1,8 +1,10 @@
 package com.example.freakdeveloper.kep;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -94,7 +96,6 @@ public class Preguntas extends AppCompatActivity {
 
 
     }
-
     public void traePreguntas(){
         databaseReference.child(nodoPregunta).addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,15 +104,16 @@ public class Preguntas extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                         Pregunta preguntaa = snapshot.getValue(Pregunta.class);
-                        if(preguntaa.getMateria().equalsIgnoreCase("Fisica")){
+                        if(preguntaa.getMateria().equalsIgnoreCase(materiaSeleccionada)){
                             arrayPregunta.add(preguntaa);
-                            Toast.makeText(Preguntas.this, "Agregado", Toast.LENGTH_SHORT).show();
                         }else
-                            Toast.makeText(Preguntas.this, "No hay preguntas de esa materia en la base", Toast.LENGTH_SHORT).show();
+                            Log.w("Preguntas", "No hay preguntas de esta materia en la base");
                     }
                     cargaPregunta(0);
+                    Log.w("Preguntas", "Termine de agregar");
                 }else
                     Toast.makeText(Preguntas.this, "No hay preguntas en la base", Toast.LENGTH_SHORT).show();
+                    Log.w("Preguntas", "No hay preguntas en la base");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -154,13 +156,15 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void clickeoSiguiente(){
-        if(arrayPregunta.size()<=contaTotal){
+        if(arrayPregunta.size()>contaTotal){
             limpiaColor();
             //Enviando nueva pregunta
             cargaPregunta(contaTotal);
             siguiente.setEnabled(false);
+        }else{
+            Toast.makeText(this, "Ya has contestado todas las preguntas", Toast.LENGTH_SHORT).show();
+            finish();
         }
-        Toast.makeText(this, "Ya has contestado todas las preguntas", Toast.LENGTH_SHORT).show();
     }
 
     public void limpiaColor(){

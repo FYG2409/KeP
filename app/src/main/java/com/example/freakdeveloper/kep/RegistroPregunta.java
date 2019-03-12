@@ -47,8 +47,8 @@ public class RegistroPregunta extends AppCompatActivity {
         rDTxt = rD.getText().toString();
         solucionTxt = solucion.getText().toString();
 
-        Pregunta pregunta = new Pregunta(databaseReference.push().getKey(), materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt);
-        databaseReference.child(nodoPregunta).child(pregunta.getIdPregunta()).setValue(pregunta);
+        Pregunta pregunta = new Pregunta(materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt);
+        databaseReference.child(nodoPregunta).child(databaseReference.push().getKey()).setValue(pregunta);
         Toast.makeText(this, "PREGUNTA REGISTRADA", Toast.LENGTH_SHORT).show();
     }
 }
