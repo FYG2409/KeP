@@ -6,6 +6,7 @@ public class Persona {
     private String contra;
     private String eProcedencia;
     private String eDeseada;
+    private String codigo;
 
     public Persona() {
     }

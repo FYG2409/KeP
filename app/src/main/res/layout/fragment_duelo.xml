@@ -8,13 +8,20 @@
     android:background="#20D32F">
 
     <EditText
-        android:id="@+id/ingresaCodigo"
+        android:id="@+id/codigoIngresado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="INGRESA CODIGO"/>
+    <Button
+        android:id="@+id/enviaCodigo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="ENVIA CODIGO"/>
     <Button
         android:id="@+id/generaCodigo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="GENERA CODIGO"/>
     <TextView
         android:id="@+id/codigo"
         android:layout_width="wrap_content"

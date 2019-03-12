@@ -107,7 +107,10 @@ public class Preguntas extends AppCompatActivity {
                         if(preguntaa.getMateria().equalsIgnoreCase(materiaSeleccionada)){
                             arrayPregunta.add(preguntaa);
                         }else
-                            Log.w("Preguntas", "No hay preguntas de esta materia en la base");
+                            if(materiaSeleccionada.equals("todas")){
+                                arrayPregunta.add(preguntaa);
+                            }else
+                                Log.w("Preguntas", "No hay preguntas de esta materia en la base");
                     }
                     cargaPregunta(0);
                     Log.w("Preguntas", "Termine de agregar");

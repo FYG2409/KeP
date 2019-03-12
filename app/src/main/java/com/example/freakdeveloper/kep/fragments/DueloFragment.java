@@ -1,6 +1,7 @@
 package com.example.freakdeveloper.kep.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.freakdeveloper.kep.Preguntas;
 import com.example.freakdeveloper.kep.R;
+import com.example.freakdeveloper.kep.model.Duelo;
 import com.example.freakdeveloper.kep.model.Persona;
 import com.example.freakdeveloper.kep.model.Pregunta;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,16 +46,17 @@ public class DueloFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private EditText ingresaCodigo;
+    private EditText codigoIngresado;
     private TextView codigo;
-    private String NickName, email;
-    private Button generaCodigo;
-    private  static final String nodoPersona="Usuarios";
+    private String NickName, email, codigoIngresadoTxt;
+    private Button generaCodigo, enviaCodigo;
+    //private  static final String nodoPersona="Usuarios";
+    private  static final String nodoDuelos="Duelos";
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseAuth firebaseAuth;
+    //private FirebaseAuth.AuthStateListener authStateListener;
+    //private FirebaseAuth firebaseAuth;
 
     public DueloFragment() {
         // Required empty public constructor
@@ -83,15 +86,19 @@ public class DueloFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_duelo, container, false);
 
+        //CONSTANTE NICKNAME
+        NickName = "FYG2409";
+        email = "yash@gmail.com";
+
+
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        recuperaUsuario();
+        //firebaseAuth = FirebaseAuth.getInstance();
 
         generaCodigo = (Button) view.findViewById(R.id.generaCodigo);
-        ingresaCodigo = (EditText) view.findViewById(R.id.ingresaCodigo);
+        codigoIngresado = (EditText) view.findViewById(R.id.codigoIngresado);
         codigo = (TextView) view.findViewById(R.id.codigo);
+        enviaCodigo = (Button) view.findViewById(R.id.enviaCodigo);
 
         generaCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,9 +107,15 @@ public class DueloFragment extends Fragment {
             }
         });
 
+        enviaCodigo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validaCodigo(enviaCodigo);
+            }
+        });
         return view;
     }
-
+/*
     public void recuperaUsuario(){
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -139,12 +152,50 @@ public class DueloFragment extends Fragment {
         });
         Log.w("PRUEBA", "HOLA "+NickName);
     }
+*/
+    public void validaCodigo(View view){
+        codigoIngresadoTxt = codigoIngresado.getText().toString();
+        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                        //El codigo si existe
+                        actualizaDuelo();
+
+                    }
+                }else{
+                    //El codigo ingresado no existe
+                    Toast.makeText(getContext(), "El codigo Ingresado no existe", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void actualizaDuelo(){
+        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).child("correoPerDos").setValue(email);
+        Toast.makeText(getContext(), "COMENZANDO DUELO", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getContext(), Preguntas.class);
+        intent.putExtra("materia", "todas");
+        startActivity(intent);
+    }
 
     public void creaCodigo(View view){
-        String currentDate = DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
-        Log.w("PRUEBA", "NickName: "+NickName);
-        Log.w("PRUEBA", "Fecha: "+ currentDate);
+        String codigoAleatorio = "K"+NickName+"P";
+        codigo.setText(codigoAleatorio);
+
+        //Duelo duelo = new Duelo(email, null, null);
+        //databaseReference.child(nodoDuelos).child(codigoAleatorio).setValue(duelo);
+        databaseReference.child(nodoDuelos).child(codigoAleatorio).child("correoPerUno").setValue(email);
+        Toast.makeText(getContext(), "DUELO INICIADO", Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 
@@ -176,7 +227,7 @@ public class DueloFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -188,4 +239,5 @@ public class DueloFragment extends Fragment {
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
     }
+    */
 }
