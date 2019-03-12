@@ -1,6 +1,9 @@
 package com.example.freakdeveloper.kep;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +37,12 @@ public class Preguntas extends AppCompatActivity {
     private ArrayList<Pregunta> arrayPregunta = new ArrayList<>();
     private  static final String nodoPregunta="Preguntas";
 
+    //PARA TIMER
+    private TextView countdownText;
+
+    private CountDownTimer countDownTimer;
+    private long tiempoEnMilisegundos = 5000; //Son los minutos que queremos en milisegundos
+
     //PARA FIREBASE
     private DatabaseReference databaseReference;
 
@@ -42,6 +51,11 @@ public class Preguntas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
         recuperaMateria();
+
+        //PARA TIMER
+        countdownText = (TextView) findViewById(R.id.countdown_text);
+        iniciaTimer();
+        //...
 
         pregunta = (TextView) findViewById(R.id.pregunta);
         rA = (Button) findViewById(R.id.rA);
@@ -96,6 +110,37 @@ public class Preguntas extends AppCompatActivity {
 
 
     }
+
+    public void iniciaTimer(){
+        countDownTimer = new CountDownTimer(tiempoEnMilisegundos, 1000) {
+            @Override
+            public void onTick(long lon) {
+                tiempoEnMilisegundos = lon;
+                updateTimer();
+            }
+            @Override
+            public void onFinish() {
+                //AQUI TERMINA EL TIEMPO
+                finish();
+                Log.w("FEIK", "Se acabo el tiempo");
+            }
+        }.start();
+     }
+
+
+    public void updateTimer(){
+        int minutos = (int) tiempoEnMilisegundos / 60000;
+        int segundos = (int) tiempoEnMilisegundos % 60000 / 1000;
+
+        String timeLeftText;
+
+        timeLeftText = ""+minutos;
+        timeLeftText += ":";
+        if(segundos<10) timeLeftText += 0;
+        timeLeftText += segundos;
+        countdownText.setText(timeLeftText);
+    }
+
     public void traePreguntas(){
         databaseReference.child(nodoPregunta).addValueEventListener(new ValueEventListener() {
             @Override
@@ -166,7 +211,7 @@ public class Preguntas extends AppCompatActivity {
             siguiente.setEnabled(false);
         }else{
             Toast.makeText(this, "Ya has contestado todas las preguntas", Toast.LENGTH_SHORT).show();
-            finish();
+            onStop();
         }
     }
 

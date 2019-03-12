@@ -18,20 +18,11 @@ import android.widget.Toast;
 import com.example.freakdeveloper.kep.Preguntas;
 import com.example.freakdeveloper.kep.R;
 import com.example.freakdeveloper.kep.model.Duelo;
-import com.example.freakdeveloper.kep.model.Persona;
-import com.example.freakdeveloper.kep.model.Pregunta;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
-import java.util.Calendar;
 
 public class DueloFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -48,7 +39,7 @@ public class DueloFragment extends Fragment {
     //MIS VARIABLES
     private EditText codigoIngresado;
     private TextView codigo;
-    private String NickName, email, codigoIngresadoTxt;
+    private String NickName, email;
     private Button generaCodigo, enviaCodigo;
     //private  static final String nodoPersona="Usuarios";
     private  static final String nodoDuelos="Duelos";
@@ -87,7 +78,7 @@ public class DueloFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_duelo, container, false);
 
         //CONSTANTE NICKNAME
-        NickName = "FYG2409";
+        NickName = "yash9130";
         email = "yash@gmail.com";
 
 
@@ -99,7 +90,6 @@ public class DueloFragment extends Fragment {
         codigoIngresado = (EditText) view.findViewById(R.id.codigoIngresado);
         codigo = (TextView) view.findViewById(R.id.codigo);
         enviaCodigo = (Button) view.findViewById(R.id.enviaCodigo);
-
         generaCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,32 +105,18 @@ public class DueloFragment extends Fragment {
         });
         return view;
     }
-/*
-    public void recuperaUsuario(){
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    email = firebaseUser.getEmail();
-                    recuperarNickName();
-                }
-            }
-        };
-    }
 
-    public void recuperarNickName(){
-        databaseReference.child(nodoPersona).addValueEventListener(new ValueEventListener() {
+    public void validaCodigo(View view){
+        final String codigoIngresadoTxt = codigoIngresado.getText().toString();
+
+        databaseReference.child(nodoDuelos).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        Persona persona = snapshot.getValue(Persona.class);
-                        Log.w("PRUEBA", "CorreoF: "+persona.getEmail());
-                        Log.w("PRUEBA", "CorreoFYG: "+email);
-                        if (persona.getEmail().equals(email)){
-                            NickName = persona.getNickName();
-                            Log.w("PRUEBA", "HOLA "+NickName);
+                        Duelo duelo = snapshot.getValue(Duelo.class);
+                        if(duelo.getCorreoPerDos()==null){
+                            actualizaDuelo(codigoIngresadoTxt);
                         }
                     }
                 }
@@ -150,49 +126,24 @@ public class DueloFragment extends Fragment {
 
             }
         });
-        Log.w("PRUEBA", "HOLA "+NickName);
-    }
-*/
-    public void validaCodigo(View view){
-        codigoIngresadoTxt = codigoIngresado.getText().toString();
-        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        //El codigo si existe
-                        actualizaDuelo();
-
-                    }
-                }else{
-                    //El codigo ingresado no existe
-                    Toast.makeText(getContext(), "El codigo Ingresado no existe", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
-    public void actualizaDuelo(){
+    public void actualizaDuelo(String codigoIngresadoTxt){
         databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).child("correoPerDos").setValue(email);
-        Toast.makeText(getContext(), "COMENZANDO DUELO", Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(getContext(), Preguntas.class);
         intent.putExtra("materia", "todas");
         startActivity(intent);
+        Log.w("FEIKS", "ABRI ACTIVITY");
     }
 
     public void creaCodigo(View view){
         String codigoAleatorio = "K"+NickName+"P";
         codigo.setText(codigoAleatorio);
 
-        //Duelo duelo = new Duelo(email, null, null);
-        //databaseReference.child(nodoDuelos).child(codigoAleatorio).setValue(duelo);
-        databaseReference.child(nodoDuelos).child(codigoAleatorio).child("correoPerUno").setValue(email);
+        Duelo duelo = new Duelo(email, null, null, codigoAleatorio);
+        databaseReference.child(nodoDuelos).child(codigoAleatorio).setValue(duelo);
         Toast.makeText(getContext(), "DUELO INICIADO", Toast.LENGTH_SHORT).show();
+
     }
 
 
