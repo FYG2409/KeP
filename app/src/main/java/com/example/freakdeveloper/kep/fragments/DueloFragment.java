@@ -38,7 +38,7 @@ public class DueloFragment extends Fragment {
 
     //MIS VARIABLES
     private EditText codigoIngresado;
-    private TextView codigo;
+    private TextView codigo, esperando;
     private String NickName, email;
     private Button generaCodigo, enviaCodigo;
     //private  static final String nodoPersona="Usuarios";
@@ -90,6 +90,9 @@ public class DueloFragment extends Fragment {
         codigoIngresado = (EditText) view.findViewById(R.id.codigoIngresado);
         codigo = (TextView) view.findViewById(R.id.codigo);
         enviaCodigo = (Button) view.findViewById(R.id.enviaCodigo);
+        esperando = (TextView) view.findViewById(R.id.esperando);
+
+
         generaCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,18 +112,25 @@ public class DueloFragment extends Fragment {
     public void validaCodigo(View view){
         final String codigoIngresadoTxt = codigoIngresado.getText().toString();
 
-        databaseReference.child(nodoDuelos).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        Duelo duelo = snapshot.getValue(Duelo.class);
-                        if(duelo.getCorreoPerDos()==null){
-                            actualizaDuelo(codigoIngresadoTxt);
-                        }
+                    //Si existe el codigo
+                    Duelo duelo = dataSnapshot.getValue(Duelo.class);
+                    if(duelo.getCorreoPerDos()==null){
+                        //LA SEGUNDA PERSONA ESTA DISPONIBLE
+                        iniciaDuelo(codigoIngresadoTxt);
+                    }else{
+                        //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
+                        Toast.makeText(getContext(), "El codigo esta en uso", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    //No existe el codigo
+                    Toast.makeText(getContext(), "No existe el codigo", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -128,22 +138,29 @@ public class DueloFragment extends Fragment {
         });
     }
 
-    public void actualizaDuelo(String codigoIngresadoTxt){
+    public void iniciaDuelo(String codigoIngresadoTxt){
         databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).child("correoPerDos").setValue(email);
         Intent intent = new Intent(getContext(), Preguntas.class);
         intent.putExtra("materia", "todas");
+        intent.putExtra("codigoDuelo", codigoIngresadoTxt);
+        intent.putExtra("tipoPersona", "Dos");
         startActivity(intent);
-        Log.w("FEIKS", "ABRI ACTIVITY");
     }
 
     public void creaCodigo(View view){
         String codigoAleatorio = "K"+NickName+"P";
         codigo.setText(codigoAleatorio);
-
-        Duelo duelo = new Duelo(email, null, null, codigoAleatorio);
+        Duelo duelo = new Duelo(email, null, null, null);
         databaseReference.child(nodoDuelos).child(codigoAleatorio).setValue(duelo);
         Toast.makeText(getContext(), "DUELO INICIADO", Toast.LENGTH_SHORT).show();
 
+
+        Intent intent = new Intent(getContext(), Preguntas.class);
+        intent.putExtra("materia", "todas");
+        intent.putExtra("codigoDuelo", codigoAleatorio);
+        intent.putExtra("tipoPersona", "Uno");
+        intent.putExtra("email", email);
+        startActivity(intent);
     }
 
 

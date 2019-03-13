@@ -36,12 +36,15 @@ public class Preguntas extends AppCompatActivity {
 
     private ArrayList<Pregunta> arrayPregunta = new ArrayList<>();
     private  static final String nodoPregunta="Preguntas";
+    private  static final String nodoDuelos="Duelos";
 
     //PARA TIMER
     private TextView countdownText;
 
     private CountDownTimer countDownTimer;
-    private long tiempoEnMilisegundos = 5000; //Son los minutos que queremos en milisegundos
+    private long tiempoEnMilisegundos = 10000; //Son los minutos que queremos en milisegundos
+
+    private String codigoDuelo, tipoPersona, email;
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
@@ -50,12 +53,7 @@ public class Preguntas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
-        recuperaMateria();
-
-        //PARA TIMER
-        countdownText = (TextView) findViewById(R.id.countdown_text);
-        iniciaTimer();
-        //...
+        recuperaDatosIntent();
 
         pregunta = (TextView) findViewById(R.id.pregunta);
         rA = (Button) findViewById(R.id.rA);
@@ -121,12 +119,25 @@ public class Preguntas extends AppCompatActivity {
             @Override
             public void onFinish() {
                 //AQUI TERMINA EL TIEMPO
-                finish();
-                Log.w("FEIK", "Se acabo el tiempo");
+                if(tipoPersona.equals("Uno")){
+                    databaseReference.child(nodoDuelos).child(codigoDuelo).child("totalBuenasUno").setValue(contaBuenas);
+                }else
+                    if(tipoPersona.equals("Dos")){
+                        databaseReference.child(nodoDuelos).child(codigoDuelo).child("totalBuenasDos").setValue(contaBuenas);
+                    }else
+                        Log.w("Preguntas", "Tipo de persona desconocido");
+
+                verGanador();
             }
         }.start();
      }
 
+     public void verGanador(){
+         Intent intent = new Intent(this, muestraDatos.class);
+         intent.putExtra("codigoDuelo", codigoDuelo);
+         startActivity(intent);
+         finish();
+     }
 
     public void updateTimer(){
         int minutos = (int) tiempoEnMilisegundos / 60000;
@@ -222,10 +233,22 @@ public class Preguntas extends AppCompatActivity {
         rD.setBackgroundColor(getResources().getColor(R.color.blanco));
     }
 
-    public void recuperaMateria(){
+    public void recuperaDatosIntent(){
         Bundle extras = getIntent().getExtras();
         materiaSeleccionada = extras.getString("materia");
-        Toast.makeText(this, materiaSeleccionada, Toast.LENGTH_SHORT).show();
+        email = extras.getString("email");
+
+        tipoPersona = extras.getString("tipoPersona");
+        codigoDuelo = extras.getString("codigoDuelo");
+        if(materiaSeleccionada.equals("todas")){
+            ponTimer();
+        }
+    }
+
+    public void ponTimer(){
+        countdownText = (TextView) findViewById(R.id.countdown_text);
+        countdownText.setVisibility(View.VISIBLE);
+        iniciaTimer();
     }
 
 

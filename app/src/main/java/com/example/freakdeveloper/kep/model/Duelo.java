@@ -1,37 +1,19 @@
 package com.example.freakdeveloper.kep.model;
 
 public class Duelo {
-    private String id;
     private String correoPerUno;
     private String correoPerDos;
-    private String correoGanador;
-
-    private String codigo;
+    private Long totalBuenasUno;
+    private Long totalBuenasDos;
 
     public Duelo() {
     }
 
-    public Duelo(String correoPerUno, String correoPerDos, String correoGanador, String codigo) {
+    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos) {
         this.correoPerUno = correoPerUno;
         this.correoPerDos = correoPerDos;
-        this.correoGanador = correoGanador;
-        this.codigo = codigo;
-    }
-
-    public Duelo(String id, String correoPerUno, String correoPerDos, String correoGanador, String codigo) {
-        this.id = id;
-        this.correoPerUno = correoPerUno;
-        this.correoPerDos = correoPerDos;
-        this.correoGanador = correoGanador;
-        this.codigo = codigo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.totalBuenasUno = totalBuenasUno;
+        this.totalBuenasDos = totalBuenasDos;
     }
 
     public String getCorreoPerUno() {
@@ -50,21 +32,19 @@ public class Duelo {
         this.correoPerDos = correoPerDos;
     }
 
-    public String getCorreoGanador() {
-        return correoGanador;
+    public Long getTotalBuenasUno() {
+        return totalBuenasUno;
     }
 
-    public void setCorreoGanador(String correoGanador) {
-        this.correoGanador = correoGanador;
+    public void setTotalBuenasUno(Long totalBuenasUno) {
+        this.totalBuenasUno = totalBuenasUno;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public Long getTotalBuenasDos() {
+        return totalBuenasDos;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setTotalBuenasDos(Long totalBuenasDos) {
+        this.totalBuenasDos = totalBuenasDos;
     }
-
-
 }
