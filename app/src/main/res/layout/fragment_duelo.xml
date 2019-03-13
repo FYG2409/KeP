@@ -32,6 +32,11 @@
         android:layout_height="wrap_content"
         android:text="ESPERANDO OPONENTE"
         android:visibility="invisible"/>
+    <Button
+        android:id="@+id/creaDuelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREA DUELO"/>
 
 
 </LinearLayout>

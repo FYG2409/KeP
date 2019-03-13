@@ -40,9 +40,11 @@ public class DueloFragment extends Fragment {
     private EditText codigoIngresado;
     private TextView codigo, esperando;
     private String NickName, email;
-    private Button generaCodigo, enviaCodigo;
+    private Button generaCodigo, enviaCodigo, creaDuelo;
     //private  static final String nodoPersona="Usuarios";
     private  static final String nodoDuelos="Duelos";
+    private String codigoDuelo;
+    private int conta;
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
@@ -92,6 +94,18 @@ public class DueloFragment extends Fragment {
         enviaCodigo = (Button) view.findViewById(R.id.enviaCodigo);
         esperando = (TextView) view.findViewById(R.id.esperando);
 
+        creaDuelo = (Button) view.findViewById(R.id.creaDuelo);
+
+        //ENVIANDO CODIGO PARA DUELO
+        codigoDuelo = "K"+NickName+"P";
+        codigo.setText(codigoDuelo);
+
+        creaDuelo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                creaDuelo(creaDuelo);
+            }
+        });
 
         generaCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,9 +162,9 @@ public class DueloFragment extends Fragment {
     }
 
     public void creaCodigo(View view){
-        String codigoAleatorio = "K"+NickName+"P";
-        codigo.setText(codigoAleatorio);
-        Duelo duelo = new Duelo(email, null, null, null);
+        //String codigoAleatorio = "K"+NickName+"P";
+        //codigo.setText(codigoAleatorio);
+        /*Duelo duelo = new Duelo(email, null, null, null);
         databaseReference.child(nodoDuelos).child(codigoAleatorio).setValue(duelo);
         Toast.makeText(getContext(), "DUELO INICIADO", Toast.LENGTH_SHORT).show();
 
@@ -160,7 +174,46 @@ public class DueloFragment extends Fragment {
         intent.putExtra("codigoDuelo", codigoAleatorio);
         intent.putExtra("tipoPersona", "Uno");
         intent.putExtra("email", email);
-        startActivity(intent);
+        startActivity(intent);*/
+    }
+
+
+    public void creaDuelo(View view){
+        conta=0;
+        Duelo duelo = new Duelo(email, null, null, null);
+        databaseReference.child(nodoDuelos).child(codigoDuelo).setValue(duelo);
+        esperando.setVisibility(View.VISIBLE);
+
+        databaseReference.child(nodoDuelos).child(codigoDuelo).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Si existe el codigo
+                    Duelo duelo = dataSnapshot.getValue(Duelo.class);
+                    if(duelo.getCorreoPerDos()==null){
+                        //LA SEGUNDA PERSONA ESTA DISPONIBLE
+                        esperando.setVisibility(View.VISIBLE);
+                    }else{
+                        conta = conta + 1;
+                        if(conta==1){
+                            Log.w("HOLAWAS", "INICIE ACTIVITY");
+                            //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
+                            Intent intent = new Intent(getContext(), Preguntas.class);
+                            intent.putExtra("materia", "todas");
+                            intent.putExtra("codigoDuelo",codigoDuelo);
+                            intent.putExtra("tipoPersona", "Uno");
+                            intent.putExtra("email", email);
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
