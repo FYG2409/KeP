@@ -2,7 +2,6 @@ package com.example.freakdeveloper.kep.model;
 
 public class Pregunta {
 
-    private String idPregunta;
     private String materia;
     private String pregunta;
     private String rA;
@@ -14,8 +13,7 @@ public class Pregunta {
     public Pregunta() {
     }
 
-    public Pregunta(String idPregunta, String materia, String pregunta, String rA, String rB, String rC, String rD, String solucion) {
-        this.idPregunta = idPregunta;
+    public Pregunta(String materia, String pregunta, String rA, String rB, String rC, String rD, String solucion) {
         this.materia = materia;
         this.pregunta = pregunta;
         this.rA = rA;
@@ -23,14 +21,6 @@ public class Pregunta {
         this.rC = rC;
         this.rD = rD;
         this.solucion = solucion;
-    }
-
-    public String getIdPregunta() {
-        return idPregunta;
-    }
-
-    public void setIdPregunta(String idPregunta) {
-        this.idPregunta = idPregunta;
     }
 
     public String getMateria() {

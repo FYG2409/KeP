@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.DueloFragment"
+    android:orientation="vertical"
     android:background="#20D32F">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/codigoIngresado"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="YO SOY DUELO" />
+        android:layout_height="wrap_content"
+        android:hint="INGRESA CODIGO"/>
+    <Button
+        android:id="@+id/enviaCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ENVIA CODIGO"/>
+    <Button
+        android:id="@+id/generaCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GENERA CODIGO"/>
+    <TextView
+        android:id="@+id/codigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/esperando"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ESPERANDO OPONENTE"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/creaDuelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREA DUELO"/>
 
-</FrameLayout>
+
+</LinearLayout>

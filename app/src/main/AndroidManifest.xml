@@ -23,7 +23,12 @@
             android:label="@string/title_activity_navigation_drawe"
             android:theme="@style/AppTheme" />
         <activity android:name=".RegistroPregunta" />
+<<<<<<< HEAD
         <activity android:name=".Recuperar_Contra"></activity>
+=======
+        <activity android:name=".Preguntas" />
+        <activity android:name=".muestraDatos"></activity>
+>>>>>>> b79f7b7f856652d83721cc7241a11697c790038d
     </application>
 
 </manifest>
