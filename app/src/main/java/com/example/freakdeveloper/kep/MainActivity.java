@@ -32,4 +32,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegistroPregunta.class);
         startActivity(intent);
     }
+
+    public void irARegCarrera(View view){
+        Intent intent = new Intent(this, RegistroCarrera.class);
+        startActivity(intent);
+    }
 }
