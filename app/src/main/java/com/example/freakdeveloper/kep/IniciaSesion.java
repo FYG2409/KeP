@@ -115,5 +115,10 @@ public class IniciaSesion extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void Olvide(View V)
+    {
+        Intent Pass = new Intent(this , Recuperar_Contra.class);
+        startActivity(Pass);
+    }
 
 }

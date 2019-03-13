@@ -121,7 +121,13 @@ public class Registro extends AppCompatActivity {
         EscuelaA.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vocacional));
 
         EscuelaI = (Spinner) findViewById(R.id.EIngresar);
-        String[] superior = {"Escuela a Ingresar", "V", "W", "X", "Y", "Z"};
+        String[] superior={"Escuela a Igresar","UPIBI","UPIIZ Campus Zacatecas",
+                "UPIITA","ENCB","UPIIG Campus Guanajuato","ESIA Unidad Zacatenco",
+                "ESIME Unidad Zacatenco","ESIME Unidad Ticomán","ESIME Unidad Culhuacán",
+                "UPIICSA","ESIQIE","ESIME Unidad Azcapotzalco","UPIIH Campus Hidalgo",
+                "ESCOM","ESIA Unidad Ticomán","ESFM","ESIT","ESIA Unidad Tecamachalco",
+                "CICS Unidad Milpa Alta","CICS Unidad Santo Tomás","ESEO","ENMyH",
+                "ESM","ESCA Unidad Santo Tomás","ESCA Unidad Tepepan","ESE","EST"};
         EscuelaI.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, superior));
 
         NickField = (EditText) findViewById(R.id.Nick);

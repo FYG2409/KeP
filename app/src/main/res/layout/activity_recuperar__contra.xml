@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".IniciaSesion"
-    android:padding="40dp"
-    >
+    tools:context=".Recuperar_Contra" android:padding="40dp">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Inicia_Sesion"
+        android:text="@string/Recuper"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -30,32 +29,11 @@
 
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Contraseña"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/Contraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Iniciar"
-        android:text="@string/Inicia_Sesion"
+        android:id="@+id/Recup"
+        android:text="@string/envia"
         />
-
-    <Button
-        android:id="@+id/OlvidaC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="Olvide"
-        android:text="@string/Olvide" />
 
 </LinearLayout>
