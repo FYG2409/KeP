@@ -15,4 +15,7 @@
     <string name="Contraseña">Contraseña</string>
     <string name="Correo">Correo</string>
     <string name="Iniciar">Iniciar</string>
+    <string name="Olvide">Olvide Contraeña</string>
+    <string name="Recuper">Recuperar Contraseña</string>
+    <string name="envia">Enviar correo</string>
 </resources>

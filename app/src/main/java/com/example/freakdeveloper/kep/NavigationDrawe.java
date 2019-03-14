@@ -2,16 +2,11 @@ package com.example.freakdeveloper.kep;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -19,11 +14,11 @@ import com.example.freakdeveloper.kep.fragments.DueloFragment;
 import com.example.freakdeveloper.kep.fragments.GraficasFragment;
 import com.example.freakdeveloper.kep.fragments.PerfilFragment;
 import com.example.freakdeveloper.kep.fragments.PreguntasInfinitasFragment;
-import com.example.freakdeveloper.kep.fragments.PreguntasPorMateria;
+import com.example.freakdeveloper.kep.fragments.PreguntasPorMateriaFragment;
 import com.example.freakdeveloper.kep.fragments.RankingFragment;
 
 public class NavigationDrawe extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, PreguntasInfinitasFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateria.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, PreguntasInfinitasFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateriaFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +29,9 @@ public class NavigationDrawe extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new PerfilFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.content_main,fragment).commit();
     }
 
     @Override
@@ -94,7 +92,7 @@ public class NavigationDrawe extends AppCompatActivity
             fragment = new GraficasFragment();
             fragmentSeleccionado = true;
         } else if (id == R.id.preguntas) {
-            fragment = new PreguntasPorMateria();
+            fragment = new PreguntasPorMateriaFragment();
             fragmentSeleccionado = true;
         }
 
