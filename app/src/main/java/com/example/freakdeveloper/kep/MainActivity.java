@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void irAPrincipal(View view){
-        Intent intent = new Intent(this, NavigationDrawe.class);
+    public void irARegPregunta(View view){
+        Intent intent = new Intent(this, RegistroPregunta.class);
         startActivity(intent);
     }
 
-    public void irARegPregunta(View view){
-        Intent intent = new Intent(this, RegistroPregunta.class);
+    public void irARegCarrera(View view){
+        Intent intent = new Intent(this, RegistroCarrera.class);
         startActivity(intent);
     }
 }

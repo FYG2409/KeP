@@ -1,6 +1,5 @@
 package com.example.freakdeveloper.kep;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,8 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class IniciaSesion extends AppCompatActivity
 {
@@ -108,7 +105,7 @@ public class IniciaSesion extends AppCompatActivity
 
     private void Ir(String ID)
     {
-        Intent intent = new Intent(this , NavigationDrawe.class );
+        Intent intent = new Intent(this , NavigationDrawer.class );
         Bundle IDUsu = new Bundle();
         IDUsu.putString("ID" , ID);
         intent.putExtras(IDUsu);

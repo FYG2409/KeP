@@ -6,5 +6,16 @@
 
     <color name="negro">#000000</color>
     <color name="blanco">#ffffff</color>
+
     <color name="verde">#8DC74E</color>
+    <color name="azul">#00b0f0</color>
+    <color name="naranja">#ff6600</color>
+    <color name="morado">#cc00cc</color>
+    <color name="verdeAgua">#00cc99</color>
+    <color name="amarillo">#febf00</color>
+    <color name="rosa">#ff0066</color>
+    <color name="rojo">#cc0000</color>
+    <color name="moradoOscuro">#983366</color>
+    <color name="azulOscuro">#006699</color>
+    <color name="verdeOscuro">#00b800</color>
 </resources>

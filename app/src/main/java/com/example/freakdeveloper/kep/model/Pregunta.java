@@ -1,5 +1,9 @@
 package com.example.freakdeveloper.kep.model;
 
+import android.net.Uri;
+
+import com.google.android.gms.tasks.Task;
+
 public class Pregunta {
 
     private String materia;
@@ -9,11 +13,16 @@ public class Pregunta {
     private String rC;
     private String rD;
     private String solucion;
+    private String preguntaImg;
+    private String rAImg;
+    private String rBImg;
+    private String rCImg;
+    private String rDImg;
 
     public Pregunta() {
     }
 
-    public Pregunta(String materia, String pregunta, String rA, String rB, String rC, String rD, String solucion) {
+    public Pregunta(String materia, String pregunta, String rA, String rB, String rC, String rD, String solucion, String preguntaImg, String rAImg, String rBImg, String rCImg, String rDImg) {
         this.materia = materia;
         this.pregunta = pregunta;
         this.rA = rA;
@@ -21,6 +30,11 @@ public class Pregunta {
         this.rC = rC;
         this.rD = rD;
         this.solucion = solucion;
+        this.preguntaImg = preguntaImg;
+        this.rAImg = rAImg;
+        this.rBImg = rBImg;
+        this.rCImg = rCImg;
+        this.rDImg = rDImg;
     }
 
     public String getMateria() {
@@ -77,5 +91,45 @@ public class Pregunta {
 
     public void setSolucion(String solucion) {
         this.solucion = solucion;
+    }
+
+    public String getPreguntaImg() {
+        return preguntaImg;
+    }
+
+    public void setPreguntaImg(String preguntaImg) {
+        this.preguntaImg = preguntaImg;
+    }
+
+    public String getrAImg() {
+        return rAImg;
+    }
+
+    public void setrAImg(String rAImg) {
+        this.rAImg = rAImg;
+    }
+
+    public String getrBImg() {
+        return rBImg;
+    }
+
+    public void setrBImg(String rBImg) {
+        this.rBImg = rBImg;
+    }
+
+    public String getrCImg() {
+        return rCImg;
+    }
+
+    public void setrCImg(String rCImg) {
+        this.rCImg = rCImg;
+    }
+
+    public String getrDImg() {
+        return rDImg;
+    }
+
+    public void setrDImg(String rDImg) {
+        this.rDImg = rDImg;
     }
 }
