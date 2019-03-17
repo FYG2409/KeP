@@ -26,20 +26,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ingresa Código"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btnJugar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Jugar"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tvEsperandoOponente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Esperando oponente..."
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
 </LinearLayout>

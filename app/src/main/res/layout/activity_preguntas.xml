@@ -4,8 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Preguntas"
-    android:orientation="vertical">
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/countdown_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        android:text="10:00" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,45 +25,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="40dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorAccent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="10dp"
+                >
+
                 <TextView
                     android:id="@+id/txtPregunta"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="La ganancia de energía cinética, cuando actúan fuerzas conservativas sobre un cuerpo se traduce en perdida de energía:" />
 
                 <ImageView
                     android:id="@+id/imgPregunta"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    />
+                    android:background="@drawable/kep_icon" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/resA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:onClick="clickeo"
-                android:tag="A">
+                android:orientation="vertical"
+                android:tag="A"
+                android:padding="5dp"
+                android:background="@drawable/mi_borde"
+                android:gravity="center"
+                >
 
-                <Button
-                    android:id="@+id/btnRa"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txtRa"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blanco"
-                    />
+                    android:onClick="clickeo"
+                    android:tag="A"
+                    android:text="Térmica"
+                    android:textAlignment="center"
+                    android:padding="5dp"/>
 
                 <ImageView
                     android:id="@+id/imgRa"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    />
+                    android:background="@drawable/kep_icon" />
 
             </LinearLayout>
 
@@ -60,21 +86,29 @@
                 android:id="@+id/resB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
+                android:tag="B"
                 android:onClick="clickeo"
-                android:tag="B">
+                android:padding="5dp"
+                android:background="@drawable/mi_borde"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/btnRb"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txtRb"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blanco"/>
+                    android:text="Potencial"
+                    android:tag="B"
+                    android:onClick="clickeo"
+                    android:textAlignment="center"
+                    android:padding="5dp"/>
 
                 <ImageView
                     android:id="@+id/imgRb"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    />
+                    android:background="@drawable/kep_icon" />
 
             </LinearLayout>
 
@@ -82,21 +116,30 @@
                 android:id="@+id/resC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
+                android:tag="C"
                 android:onClick="clickeo"
-                android:tag="C">
+                android:padding="5dp"
+                android:background="@drawable/mi_borde"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/btnRc"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txtRc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blanco"/>
+                    android:text="Mecánica total"
+                    android:tag="C"
+                    android:onClick="clickeo"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    />
 
                 <ImageView
                     android:id="@+id/imgRc"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    />
+                    android:background="@drawable/kep_icon" />
 
             </LinearLayout>
 
@@ -104,44 +147,49 @@
                 android:id="@+id/resD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical"
+                android:tag="D"
                 android:onClick="clickeo"
-                android:tag="D">
+                android:padding="5dp"
+                android:background="@drawable/mi_borde"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/btnRd"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txtRd"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blanco"/>
+                    android:tag="D"
+                    android:onClick="clickeo"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:text="Debido a fuerzas de fricción" />
 
                 <ImageView
                     android:id="@+id/imgRd"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    />
+                    android:background="@drawable/kep_icon" />
 
             </LinearLayout>
 
-            <Button
+            <ImageView
+                android:layout_marginTop="40dp"
                 android:id="@+id/siguiente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Siguiente"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/siguiente_icon"
+                android:enabled="false"
                 android:onClick="clickeoSiguiente"
-                android:enabled="false"/>
+                android:layout_gravity="right"
+                />
+
             <Button
                 android:id="@+id/salir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SALIR"
-                android:onClick="muestraPopUp"/>
-
-            <TextView
-                android:id="@+id/countdown_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10:00"
-                android:visibility="invisible"/>
+                android:onClick="salir"
+                android:text="SALIR" />
 
         </LinearLayout>
 

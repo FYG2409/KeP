@@ -248,7 +248,7 @@
                 android:layout_rowWeight="1"
                 android:background="@color/moradoOscuro"
                 android:padding="10dp"
-                android:tag="Fisica"
+                android:tag="Quimica"
                 >
                 <ImageView
                     android:layout_width="match_parent"

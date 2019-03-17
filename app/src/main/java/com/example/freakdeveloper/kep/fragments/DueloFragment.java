@@ -146,8 +146,8 @@ public class DueloFragment extends Fragment {
     }
 
     public void metCreaCodigo(){
-        btnCreaCodigo.setVisibility(View.INVISIBLE);
-        btnTengoCodigo.setVisibility(View.INVISIBLE);
+        btnCreaCodigo.setVisibility(View.GONE);
+        btnTengoCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.VISIBLE);
 
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -166,8 +166,8 @@ public class DueloFragment extends Fragment {
     }
 
     public void metTengoCodigo(){
-        btnCreaCodigo.setVisibility(View.INVISIBLE);
-        btnTengoCodigo.setVisibility(View.INVISIBLE);
+        btnCreaCodigo.setVisibility(View.GONE);
+        btnTengoCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.VISIBLE);
         edtIngresaCodigo.setVisibility(View.VISIBLE);
 
@@ -262,10 +262,10 @@ public class DueloFragment extends Fragment {
 
     public void reiniciaVistas(){
         btnCreaCodigo.setVisibility(View.VISIBLE);
-        btnTengoCodigo.setVisibility(View.INVISIBLE);
-        edtIngresaCodigo.setVisibility(View.INVISIBLE);
-        btnJugar.setVisibility(View.INVISIBLE);
-        tvEsperandoOponente.setVisibility(View.INVISIBLE);
+        btnTengoCodigo.setVisibility(View.VISIBLE);
+        edtIngresaCodigo.setVisibility(View.GONE);
+        btnJugar.setVisibility(View.GONE);
+        tvEsperandoOponente.setVisibility(View.GONE);
     }
 
 
@@ -308,14 +308,6 @@ public class DueloFragment extends Fragment {
     public void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
-    }
-
-
-    public void traePersona(){
-
-
-
-
     }
 
 

@@ -1,210 +1,231 @@
 package com.example.freakdeveloper.kep.model;
 
 public class Respuestas {
-    private int RM; //Razonamiento Matematico
-    private int A; //Algebra
-    private int GyT; //Geometria y Trigonometria
-    private int GA; //Geometria Analitica
-    private int CDeI; //Calculo Diferencial e Integral
-    private int PyE; //Probabilidad y Estadistica
-    private int CT; //Comprencion de Textos
-    private int B; //Biologia
-    private int Q; //Quimica
-    private int F; //Fisica
-    private int tRM; //Razonamiento Matematico
-    private int tA; //Algebra
-    private int tGyT; //Geometria y Trigonometria
-    private int tGA; //Geometria Analitica
-    private int tCDeI; //Calculo Diferencial e Integral
-    private int tPyE; //Probabilidad y Estadistica
-    private int tCT; //Comprencion de Textos
-    private int tB; //Biologia
-    private int tQ; //Quimica
-    private int tF; //Fisica
+    private int RazonamientoMatematico;
+    private int Algebra;
+    private int GeometriayTrigonometria;
+    private int GeometriaAnalitica;
+    private int CalculoDiferencialeIntegral;
+    private int ProbabilidadyEstadistica;
+    private int ProduccionEscrita;
+    private int ComprensiondeTextos;
+    private int Biologia;
+    private int Quimica;
+    private int Fisica;
+
+    private int totalRazonamientoMatematico;
+    private int totalAlgebra;
+    private int totalGeometriayTrigonometria;
+    private int totalGeometriaAnalitica;
+    private int totalCalculoDiferencialeIntegral;
+    private int totalProbabilidadyEstadistica;
+    private int totalProduccionEscrita;
+    private int totalComprensiondeTextos;
+    private int totalBiologia;
+    private int totalQuimica;
+    private int totalFisica;
 
     public Respuestas() {
     }
 
-    public Respuestas(int RM, int a, int gyT, int GA, int CDeI, int pyE, int CT, int b, int q, int f, int tRM, int tA, int tGyT, int tGA, int tCDeI, int tPyE, int tCT, int tB, int tQ, int tF) {
-        this.RM = RM;
-        A = a;
-        GyT = gyT;
-        this.GA = GA;
-        this.CDeI = CDeI;
-        PyE = pyE;
-        this.CT = CT;
-        B = b;
-        Q = q;
-        F = f;
-        this.tRM = tRM;
-        this.tA = tA;
-        this.tGyT = tGyT;
-        this.tGA = tGA;
-        this.tCDeI = tCDeI;
-        this.tPyE = tPyE;
-        this.tCT = tCT;
-        this.tB = tB;
-        this.tQ = tQ;
-        this.tF = tF;
+    public Respuestas(int razonamientoMatematico, int algebra, int geometriayTrigonometria, int geometriaAnalitica, int calculoDiferencialeIntegral, int probabilidadyEstadistica, int produccionEscrita, int comprensiondeTextos, int biologia, int quimica, int fisica, int totalRazonamientoMatematico, int totalAlgebra, int totalGeometriayTrigonometria, int totalGeometriaAnalitica, int totalCalculoDiferencialeIntegral, int totalProbabilidadyEstadistica, int totalProduccionEscrita, int totalComprensiondeTextos, int totalBiologia, int totalQuimica, int totalFisica) {
+        RazonamientoMatematico = razonamientoMatematico;
+        Algebra = algebra;
+        GeometriayTrigonometria = geometriayTrigonometria;
+        GeometriaAnalitica = geometriaAnalitica;
+        CalculoDiferencialeIntegral = calculoDiferencialeIntegral;
+        ProbabilidadyEstadistica = probabilidadyEstadistica;
+        ProduccionEscrita = produccionEscrita;
+        ComprensiondeTextos = comprensiondeTextos;
+        Biologia = biologia;
+        Quimica = quimica;
+        Fisica = fisica;
+        this.totalRazonamientoMatematico = totalRazonamientoMatematico;
+        this.totalAlgebra = totalAlgebra;
+        this.totalGeometriayTrigonometria = totalGeometriayTrigonometria;
+        this.totalGeometriaAnalitica = totalGeometriaAnalitica;
+        this.totalCalculoDiferencialeIntegral = totalCalculoDiferencialeIntegral;
+        this.totalProbabilidadyEstadistica = totalProbabilidadyEstadistica;
+        this.totalProduccionEscrita = totalProduccionEscrita;
+        this.totalComprensiondeTextos = totalComprensiondeTextos;
+        this.totalBiologia = totalBiologia;
+        this.totalQuimica = totalQuimica;
+        this.totalFisica = totalFisica;
     }
 
-    public int getRM() {
-        return RM;
+    public int getRazonamientoMatematico() {
+        return RazonamientoMatematico;
     }
 
-    public void setRM(int RM) {
-        this.RM = RM;
+    public void setRazonamientoMatematico(int razonamientoMatematico) {
+        RazonamientoMatematico = razonamientoMatematico;
     }
 
-    public int getA() {
-        return A;
+    public int getAlgebra() {
+        return Algebra;
     }
 
-    public void setA(int a) {
-        A = a;
+    public void setAlgebra(int algebra) {
+        Algebra = algebra;
     }
 
-    public int getGyT() {
-        return GyT;
+    public int getGeometriayTrigonometria() {
+        return GeometriayTrigonometria;
     }
 
-    public void setGyT(int gyT) {
-        GyT = gyT;
+    public void setGeometriayTrigonometria(int geometriayTrigonometria) {
+        GeometriayTrigonometria = geometriayTrigonometria;
     }
 
-    public int getGA() {
-        return GA;
+    public int getGeometriaAnalitica() {
+        return GeometriaAnalitica;
     }
 
-    public void setGA(int GA) {
-        this.GA = GA;
+    public void setGeometriaAnalitica(int geometriaAnalitica) {
+        GeometriaAnalitica = geometriaAnalitica;
     }
 
-    public int getCDeI() {
-        return CDeI;
+    public int getCalculoDiferencialeIntegral() {
+        return CalculoDiferencialeIntegral;
     }
 
-    public void setCDeI(int CDeI) {
-        this.CDeI = CDeI;
+    public void setCalculoDiferencialeIntegral(int calculoDiferencialeIntegral) {
+        CalculoDiferencialeIntegral = calculoDiferencialeIntegral;
     }
 
-    public int getPyE() {
-        return PyE;
+    public int getProbabilidadyEstadistica() {
+        return ProbabilidadyEstadistica;
     }
 
-    public void setPyE(int pyE) {
-        PyE = pyE;
+    public void setProbabilidadyEstadistica(int probabilidadyEstadistica) {
+        ProbabilidadyEstadistica = probabilidadyEstadistica;
     }
 
-    public int getCT() {
-        return CT;
+    public int getProduccionEscrita() {
+        return ProduccionEscrita;
     }
 
-    public void setCT(int CT) {
-        this.CT = CT;
+    public void setProduccionEscrita(int produccionEscrita) {
+        ProduccionEscrita = produccionEscrita;
     }
 
-    public int getB() {
-        return B;
+    public int getComprensiondeTextos() {
+        return ComprensiondeTextos;
     }
 
-    public void setB(int b) {
-        B = b;
+    public void setComprensiondeTextos(int comprensiondeTextos) {
+        ComprensiondeTextos = comprensiondeTextos;
     }
 
-    public int getQ() {
-        return Q;
+    public int getBiologia() {
+        return Biologia;
     }
 
-    public void setQ(int q) {
-        Q = q;
+    public void setBiologia(int biologia) {
+        Biologia = biologia;
     }
 
-    public int getF() {
-        return F;
+    public int getQuimica() {
+        return Quimica;
     }
 
-    public void setF(int f) {
-        F = f;
+    public void setQuimica(int quimica) {
+        Quimica = quimica;
     }
 
-    public int gettRM() {
-        return tRM;
+    public int getFisica() {
+        return Fisica;
     }
 
-    public void settRM(int tRM) {
-        this.tRM = tRM;
+    public void setFisica(int fisica) {
+        Fisica = fisica;
     }
 
-    public int gettA() {
-        return tA;
+    public int getTotalRazonamientoMatematico() {
+        return totalRazonamientoMatematico;
     }
 
-    public void settA(int tA) {
-        this.tA = tA;
+    public void setTotalRazonamientoMatematico(int totalRazonamientoMatematico) {
+        this.totalRazonamientoMatematico = totalRazonamientoMatematico;
     }
 
-    public int gettGyT() {
-        return tGyT;
+    public int getTotalAlgebra() {
+        return totalAlgebra;
     }
 
-    public void settGyT(int tGyT) {
-        this.tGyT = tGyT;
+    public void setTotalAlgebra(int totalAlgebra) {
+        this.totalAlgebra = totalAlgebra;
     }
 
-    public int gettGA() {
-        return tGA;
+    public int getTotalGeometriayTrigonometria() {
+        return totalGeometriayTrigonometria;
     }
 
-    public void settGA(int tGA) {
-        this.tGA = tGA;
+    public void setTotalGeometriayTrigonometria(int totalGeometriayTrigonometria) {
+        this.totalGeometriayTrigonometria = totalGeometriayTrigonometria;
     }
 
-    public int gettCDeI() {
-        return tCDeI;
+    public int getTotalGeometriaAnalitica() {
+        return totalGeometriaAnalitica;
     }
 
-    public void settCDeI(int tCDeI) {
-        this.tCDeI = tCDeI;
+    public void setTotalGeometriaAnalitica(int totalGeometriaAnalitica) {
+        this.totalGeometriaAnalitica = totalGeometriaAnalitica;
     }
 
-    public int gettPyE() {
-        return tPyE;
+    public int getTotalCalculoDiferencialeIntegral() {
+        return totalCalculoDiferencialeIntegral;
     }
 
-    public void settPyE(int tPyE) {
-        this.tPyE = tPyE;
+    public void setTotalCalculoDiferencialeIntegral(int totalCalculoDiferencialeIntegral) {
+        this.totalCalculoDiferencialeIntegral = totalCalculoDiferencialeIntegral;
     }
 
-    public int gettCT() {
-        return tCT;
+    public int getTotalProbabilidadyEstadistica() {
+        return totalProbabilidadyEstadistica;
     }
 
-    public void settCT(int tCT) {
-        this.tCT = tCT;
+    public void setTotalProbabilidadyEstadistica(int totalProbabilidadyEstadistica) {
+        this.totalProbabilidadyEstadistica = totalProbabilidadyEstadistica;
     }
 
-    public int gettB() {
-        return tB;
+    public int getTotalProduccionEscrita() {
+        return totalProduccionEscrita;
     }
 
-    public void settB(int tB) {
-        this.tB = tB;
+    public void setTotalProduccionEscrita(int totalProduccionEscrita) {
+        this.totalProduccionEscrita = totalProduccionEscrita;
     }
 
-    public int gettQ() {
-        return tQ;
+    public int getTotalComprensiondeTextos() {
+        return totalComprensiondeTextos;
     }
 
-    public void settQ(int tQ) {
-        this.tQ = tQ;
+    public void setTotalComprensiondeTextos(int totalComprensiondeTextos) {
+        this.totalComprensiondeTextos = totalComprensiondeTextos;
     }
 
-    public int gettF() {
-        return tF;
+    public int getTotalBiologia() {
+        return totalBiologia;
     }
 
-    public void settF(int tF) {
-        this.tF = tF;
+    public void setTotalBiologia(int totalBiologia) {
+        this.totalBiologia = totalBiologia;
+    }
+
+    public int getTotalQuimica() {
+        return totalQuimica;
+    }
+
+    public void setTotalQuimica(int totalQuimica) {
+        this.totalQuimica = totalQuimica;
+    }
+
+    public int getTotalFisica() {
+        return totalFisica;
+    }
+
+    public void setTotalFisica(int totalFisica) {
+        this.totalFisica = totalFisica;
     }
 }

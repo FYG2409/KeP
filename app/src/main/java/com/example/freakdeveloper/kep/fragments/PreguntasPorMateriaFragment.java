@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private LinearLayout razMatematico, algebra, geoTrigo,geoAnalitica, calDifIntegral, probaEstadistica, prodEscrita, comTextos, biologia, quimica, fisica;
+    private LinearLayout razMatematico, algebra, geoTrigo,geoAnalitica, calDifIntegral, probaEstadistica, prodEscrita, comTextos, biologia, quimica, fisica, infinito;
 
 
     public PreguntasPorMateriaFragment() {
@@ -60,6 +61,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_preguntas_por_materia, container, false);
 
+        infinito = (LinearLayout) v.findViewById(R.id.infinito);
         razMatematico = (LinearLayout) v.findViewById(R.id.razMatematico);
         algebra = (LinearLayout) v.findViewById(R.id.algebra);
         geoTrigo = (LinearLayout) v.findViewById(R.id.geoTrigo);
@@ -71,6 +73,13 @@ public class PreguntasPorMateriaFragment extends Fragment {
         biologia = (LinearLayout) v.findViewById(R.id.biologia);
         quimica = (LinearLayout) v.findViewById(R.id.quimica);
         fisica = (LinearLayout) v.findViewById(R.id.fisica);
+
+        infinito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickeo(infinito);
+            }
+        });
 
         razMatematico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +165,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
         Intent intent = new Intent(getContext(), Preguntas.class);
         String materia = view.getTag().toString();
         intent.putExtra("materia", materia);
+        Log.w("Materia", "Math: "+materia);
         startActivity(intent);
     }
 
