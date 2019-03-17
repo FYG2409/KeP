@@ -13,12 +13,11 @@ import android.view.MenuItem;
 import com.example.freakdeveloper.kep.fragments.DueloFragment;
 import com.example.freakdeveloper.kep.fragments.GraficasFragment;
 import com.example.freakdeveloper.kep.fragments.PerfilFragment;
-import com.example.freakdeveloper.kep.fragments.PreguntasInfinitasFragment;
 import com.example.freakdeveloper.kep.fragments.PreguntasPorMateriaFragment;
 import com.example.freakdeveloper.kep.fragments.RankingFragment;
 
-public class NavigationDrawe extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, PreguntasInfinitasFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateriaFragment.OnFragmentInteractionListener {
+public class NavigationDrawer extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateriaFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +81,6 @@ public class NavigationDrawe extends AppCompatActivity
         } else if (id == R.id.duelo) {
             fragment = new DueloFragment();
             fragmentSeleccionado = true;
-        } else if (id == R.id.infinito) {
-            fragment = new PreguntasInfinitasFragment();
-            fragmentSeleccionado = true;
         } else if (id == R.id.ranking) {
             fragment = new RankingFragment();
             fragmentSeleccionado = true;
@@ -94,6 +90,8 @@ public class NavigationDrawe extends AppCompatActivity
         } else if (id == R.id.preguntas) {
             fragment = new PreguntasPorMateriaFragment();
             fragmentSeleccionado = true;
+        } else if (id == R.id.cerrarSesion) {
+            //PONER AQUI CODIGO PARA CERRAR LA SESION
         }
 
         if(fragmentSeleccionado){

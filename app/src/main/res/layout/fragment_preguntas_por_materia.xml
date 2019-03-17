@@ -4,11 +4,264 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PreguntasPorMateriaFragment"
-    android:background="#21024D"
     android:orientation="vertical"
     android:padding="40dp">
 
-    <include layout="@layout/cardview_fisica" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:columnCount="2"
+            android:rowCount="11"
+            android:background="@color/blanco"
+            >
+
+            <LinearLayout
+                android:id="@+id/infinito"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:background="@color/verde"
+                android:padding="10dp"
+                android:tag="todas"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/infinito_blanco_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PREGUNTAS INFINITAS"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fisica"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:background="@color/azul"
+                android:padding="10dp"
+                android:tag="Fisica"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/fisica_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FISICA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/razMatematico"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/naranja"
+                android:padding="10dp"
+                android:tag="Razonamiento Matematico"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/raz_mat_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RAZONAMIENTO MATEMATICO"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/algebra"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/morado"
+                android:padding="10dp"
+                android:tag="Algebra"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/algebra_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ALGEBRA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/geoTrigo"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/verdeAgua"
+                android:padding="10dp"
+                android:tag="Geometria y Trigonometria"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/geo_y_trigo_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="GEOMETRIA Y TRIGONOMETRIA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/geoAnalitica"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/amarillo"
+                android:padding="10dp"
+                android:tag="Geometria Analitica"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/geo_analitica_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="GEOMETRIA ANALITICA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/calDifIntegral"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/rosa"
+                android:padding="10dp"
+                android:tag="Calculo Diferencial e Integral"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/cal_dif_e_int_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CALCULO DIFERENCIAL E INTEGRAL"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/probaEstadistica"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/rojo"
+                android:padding="10dp"
+                android:tag="Probabilidad y Estadistica"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/proba_y_esta_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PROBABILIDAD Y ESTADISTICA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/prodEscrita"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/verde"
+                android:padding="10dp"
+                android:tag="Produccion Escrita"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/prod_escrita_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PRODUCCION ESCRITA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/compreTextos"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/azulOscuro"
+                android:padding="10dp"
+                android:tag="Comprension de Textos"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/com_textos_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="COMPRENSION DE TEXTOS"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/biologia"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/verdeOscuro"
+                android:padding="10dp"
+                android:tag="Biologia"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/biologia_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BIOLOGIA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/quimica"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@color/moradoOscuro"
+                android:padding="10dp"
+                android:tag="Fisica"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@drawable/quimica_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="QUIMICA"/>
+            </LinearLayout>
+
+        </GridLayout>
+
+    </ScrollView>
 
 </LinearLayout>

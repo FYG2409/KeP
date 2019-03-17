@@ -1,8 +1,11 @@
 package com.example.freakdeveloper.kep;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.freakdeveloper.kep.model.Duelo;
 import com.example.freakdeveloper.kep.model.Pregunta;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,6 +71,10 @@ public class Preguntas extends AppCompatActivity {
 
     private LinearLayout resA, resB, resC, resD;
 
+    //POP-UP
+    Dialog miVentana;
+    String msj;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +110,9 @@ public class Preguntas extends AppCompatActivity {
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        //PARA POP-UP
+        miVentana = new Dialog(this);
+
         traePreguntas();
     }
 
@@ -110,6 +121,7 @@ public class Preguntas extends AppCompatActivity {
         materiaSeleccionada = extras.getString("materia");
         email = extras.getString("email");
 
+        //EXTRAS CUANDO VENGO DE DueloFragment
         tipoPersona = extras.getString("tipoPersona");
         codigoDuelo = extras.getString("codigoDuelo");
         if(materiaSeleccionada.equals("todas")){
@@ -273,8 +285,34 @@ public class Preguntas extends AppCompatActivity {
         txtPregunta.setText("");
     }
 
+    public void muestraPopUp(View view){
+        TextView txtClose, txtBuenas, txtMalas;
+        miVentana.setContentView(R.layout.my_pop_up);
+        txtClose = (TextView) miVentana.findViewById(R.id.txtclose);
+        txtBuenas = (TextView) miVentana.findViewById(R.id.txtBuenas);
+        txtMalas = (TextView) miVentana.findViewById(R.id.txtMalas);
+        txtBuenas.setText(Integer.toString(contaBuenas));
+        txtMalas.setText(Integer.toString(contaMalas));
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miVentana.dismiss();
+                finish();
+            }
+        });
+        miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        miVentana.show();
+    }
+
+
 
     //-------PARA TIMER------------
+
+    public void ponTimer(){
+        countdownText = (TextView) findViewById(R.id.countdown_text);
+        countdownText.setVisibility(View.VISIBLE);
+        iniciaTimer();
+    }
 
     public void iniciaTimer(){
         countDownTimer = new CountDownTimer(tiempoEnMilisegundos, 1000) {
@@ -299,11 +337,80 @@ public class Preguntas extends AppCompatActivity {
         }.start();
      }
 
-     public void verGanador(){
-         Intent intent = new Intent(this, muestraDatos.class);
-         intent.putExtra("codigoDuelo", codigoDuelo);
-         startActivity(intent);
-         finish();
+    public void verGanador(){
+        final TextView txtClose, txtBuenas, txtMalas, txtMensaje;
+        miVentana.setContentView(R.layout.my_pop_up);
+        txtClose = (TextView) miVentana.findViewById(R.id.txtclose);
+        txtBuenas = (TextView) miVentana.findViewById(R.id.txtBuenas);
+        txtMalas = (TextView) miVentana.findViewById(R.id.txtMalas);
+        txtMensaje = (TextView) miVentana.findViewById(R.id.txtMensaje);
+        miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        txtClose.setVisibility(View.INVISIBLE);
+        miVentana.show();
+
+
+        //-----TRAYENDO GANADOR Y PERDEDOR
+        databaseReference.child(nodoDuelos).child(codigoDuelo).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Si existe el codigo
+                    Duelo duelo = dataSnapshot.getValue(Duelo.class);
+                    Long contaBuenasUno = duelo.getTotalBuenasUno();
+                    Long contaBuenasDos = duelo.getTotalBuenasDos();
+
+                    String contaBuenasUnoTxt = String.valueOf(contaBuenasUno);
+                    String contaBuenasDosTxt = String.valueOf(contaBuenasDos);
+
+
+                    if(contaBuenasUnoTxt.equals("null")||contaBuenasDosTxt.equals("null")){
+                        msj="Espera...";
+                    }else{
+                        if(contaBuenasUno>contaBuenasDos){
+                            if(tipoPersona.equals("Uno")){
+                                msj="Ganaste";
+                            }else
+                                if(tipoPersona.equals("Dos")){
+                                    msj="Perdiste";
+                                }
+                        }else
+                        if(contaBuenasDos>contaBuenasUno){
+                            if(tipoPersona.equals("Dos")){
+                                msj="Ganaste";
+                            }else
+                            if(tipoPersona.equals("Uno")){
+                                msj="Perdiste";
+                            }
+                        }else
+                        if(contaBuenasDos == contaBuenasUno){
+                            msj="Empate";
+                        }
+
+                        txtMensaje.setText(msj);
+                        txtBuenas.setText(Integer.toString(contaBuenas));
+                        txtMalas.setText(Integer.toString(contaMalas));
+
+                        txtClose.setVisibility(View.VISIBLE);
+                        txtClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                miVentana.dismiss();
+                                databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
+                                finish();
+                            }
+                        });
+
+                    }
+                    txtMensaje.setText(msj);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //--------------------------------
      }
 
     public void updateTimer(){
@@ -317,12 +424,6 @@ public class Preguntas extends AppCompatActivity {
         if(segundos<10) timeLeftText += 0;
         timeLeftText += segundos;
         countdownText.setText(timeLeftText);
-    }
-
-    public void ponTimer(){
-        countdownText = (TextView) findViewById(R.id.countdown_text);
-        countdownText.setVisibility(View.VISIBLE);
-        iniciaTimer();
     }
 
     //-----------------------------

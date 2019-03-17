@@ -22,13 +22,12 @@
         <activity android:name=".IniciaSesion" />
         <activity android:name=".Registro" />
         <activity
-            android:name=".NavigationDrawe"
+            android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawe"
             android:theme="@style/AppTheme" />
         <activity android:name=".RegistroPregunta" />
         <activity android:name=".Recuperar_Contra"></activity>
         <activity android:name=".Preguntas" />
-        <activity android:name=".muestraDatos"></activity>
     </application>
 
 </manifest>

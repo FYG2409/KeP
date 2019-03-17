@@ -10,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.freakdeveloper.kep.model.Pregunta;
@@ -26,12 +28,11 @@ import com.google.firebase.storage.UploadTask;
 
 public class RegistroPregunta extends AppCompatActivity {
 
-    private EditText idPregunta, materia, pregunta, rA, rB, rC, rD, solucion;
+    private EditText idPregunta, pregunta, rA, rB, rC, rD;
     private String idPreguntaTxt, materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt;
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
-
     private  static final String nodoPregunta="Preguntas";
 
     //AGREGAR IMAGEN
@@ -48,18 +49,19 @@ public class RegistroPregunta extends AppCompatActivity {
     private static final String nodoPreguntasImg="Preguntas/";
     private static final String nodoRespuestasImg="Respuestas/";
 
+    //SPINNER
+    private Spinner spMaterias, spSolucion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_pregunta);
 
-        materia = (EditText) findViewById(R.id.materia);
         pregunta = (EditText) findViewById(R.id.pregunta);
         rA = (EditText) findViewById(R.id.rA);
         rB = (EditText) findViewById(R.id.rB);
         rC = (EditText) findViewById(R.id.rC);
         rD = (EditText) findViewById(R.id.rD);
-        solucion = (EditText) findViewById(R.id.solucion);
 
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -72,6 +74,11 @@ public class RegistroPregunta extends AppCompatActivity {
         imgRepuestaC = (ImageView) findViewById(R.id.imgRepuestaC);
         imgRepuestaD = (ImageView) findViewById(R.id.imgRepuestaD);
         progressDialog = new ProgressDialog(this);
+
+        //SPINNER
+        spMaterias = (Spinner) findViewById(R.id.spMaterias);
+        spSolucion = (Spinner) findViewById(R.id.spSolucion);
+        llenaSpinners();
 
     }
 
@@ -116,13 +123,13 @@ public class RegistroPregunta extends AppCompatActivity {
 
     public void gPregunta(){
         Log.w("FEIK", "ENTRE x2");
-        materiaTxt = materia.getText().toString();
+        materiaTxt = spMaterias.getSelectedItem().toString();
+        solucionTxt = spSolucion.getSelectedItem().toString();
         preguntaTxt = pregunta.getText().toString();
         rATxt = rA.getText().toString();
         rBTxt = rB.getText().toString();
         rCTxt = rC.getText().toString();
         rDTxt = rD.getText().toString();
-        solucionTxt = solucion.getText().toString();
         Pregunta pregunta = new Pregunta(materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt, refFinalPreguntaImg, refFinalRespuestaAImg, refFinalRespuestaBImg, refFinalRespuestaCImg, refFinalRespuestaDImg);
         databaseReference.child(nodoPregunta).child(databaseReference.push().getKey()).setValue(pregunta);
         Toast.makeText(this, "PREGUNTA REGISTRADA", Toast.LENGTH_SHORT).show();
@@ -234,6 +241,17 @@ public class RegistroPregunta extends AppCompatActivity {
             }
         });
     }
+
+    public void llenaSpinners(){
+        String[] opcMaterias = {"Razonamiento Matematico", "Algebra", "Geometria y Trigonometria", "Geometria Analitica", "Calculo Diferencial e Integral", "Probabilidad y Estadistica", "Produccion Escrita", "Comprension de Textos", "Biologia", "Quimica", "Fisica"};
+        ArrayAdapter<String> adapterMaterias = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, opcMaterias);
+        spMaterias.setAdapter(adapterMaterias);
+
+        String[] opcSoluciones = {"A", "B", "C", "D"};
+        ArrayAdapter<String> adapterSoluciones = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, opcSoluciones);
+        spSolucion.setAdapter(adapterSoluciones);
+    }
+
 /*
     public void regresaImagen(Task<Uri> uriTask, final int reqCode){
         uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {

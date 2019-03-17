@@ -11,9 +11,7 @@
         <item
             android:id="@+id/duelo"
             android:icon="@drawable/duelo_icon"/>
-        <item
-            android:id="@+id/infinito"
-            android:icon="@drawable/infinito_icon"/>
+
         <item
             android:id="@+id/ranking"
             android:icon="@drawable/ranking_icon"/>
@@ -23,6 +21,9 @@
         <item
             android:id="@+id/preguntas"
             android:icon="@drawable/preguntas_icon" />
+        <item
+            android:id="@+id/cerrarSesion"
+            android:icon="@drawable/cerrar_sesion_icon" />
 
     </group>
 

@@ -1,5 +1,7 @@
 package com.example.freakdeveloper.kep.fragments;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,21 +42,21 @@ public class DueloFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    //MIS VARIABLES
-    private EditText codigoIngresado;
-    private TextView codigo, esperando;
-    private String NickName, email;
-    private Button enviaCodigo, creaDuelo;
-    private  static final String nodoPersona="Personas";
-    private  static final String nodoDuelos="Duelos";
-    private String codigoDuelo;
-    private int conta;
+        private Button btnCreaCodigo, btnTengoCodigo, btnJugar;
+        private TextView tvEsperandoOponente;
+        private EditText edtIngresaCodigo;
+        private String NickName, email, codigoDuelo;
+        private int conta;
 
-    //PARA FIREBASE
-    private DatabaseReference databaseReference;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
+        //PARA FIREBASE
+        private DatabaseReference databaseReference;
+        private FirebaseAuth.AuthStateListener authStateListener;
+        private FirebaseAuth firebaseAuth;
+        private FirebaseUser firebaseUser;
+
+        private  static final String nodoDuelos="Duelos";
+        private  static final String nodoPersona="Personas";
+
 
     public DueloFragment() {
         // Required empty public constructor
@@ -84,94 +86,38 @@ public class DueloFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_duelo, container, false);
 
-        codigoIngresado = (EditText) view.findViewById(R.id.codigoIngresado);
-        codigo = (TextView) view.findViewById(R.id.codigo);
-        enviaCodigo = (Button) view.findViewById(R.id.enviaCodigo);
-        esperando = (TextView) view.findViewById(R.id.esperando);
-        creaDuelo = (Button) view.findViewById(R.id.creaDuelo);
+            //PARA FIREBASE
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            firebaseAuth = FirebaseAuth.getInstance();
 
-        //PARA FIREBASE
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        firebaseAuth = FirebaseAuth.getInstance();
+            btnCreaCodigo = (Button) view.findViewById(R.id.btnCreaCodigo);
+            btnTengoCodigo = (Button) view.findViewById(R.id.btnTengoCodigo);
+            btnJugar = (Button) view.findViewById(R.id.btnJugar);
+            edtIngresaCodigo = (EditText) view.findViewById(R.id.edtIngresaCodigo);
+            tvEsperandoOponente = (TextView) view.findViewById(R.id.tvEsperandoOponente);
 
-        //-----AQUI----
-        firebaseAuth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                firebaseUser = firebaseAuth.getCurrentUser();
-                email = firebaseUser.getEmail();
-            }
-        };
-
-        databaseReference.child(nodoPersona).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        Persona persona = snapshot.getValue(Persona.class);
-                        if(persona.getEmail().equals(email)){
-                            //SE ENCONTRO LA PERSONA CON EL EMAIL INDICADO
-                            NickName = persona.getNickName();
-                            codigoDuelo = "K"+NickName+"P";
-                            codigo.setText(codigoDuelo);
-                            Log.w("HOLAWAS", "Nick: "+NickName);
-                            Log.w("HOLAWAS", "Codigo: "+codigoDuelo);
-                        }
-                    }
+            //-----TRAYENDO PERSONA----
+            firebaseAuth = FirebaseAuth.getInstance();
+            authStateListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    firebaseUser = firebaseAuth.getCurrentUser();
+                    email = firebaseUser.getEmail();
                 }
-            }
+            };
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        //-------------
-
-        //CONSTANTE NICKNAME
-        //NickName = "yash9130";
-        //email = "yash@gmail.com";
-
-
-        creaDuelo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                creaDuelo(creaDuelo);
-            }
-        });
-
-        enviaCodigo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validaCodigo(enviaCodigo);
-            }
-        });
-        return view;
-    }
-
-    public void validaCodigo(View view){
-        final String codigoIngresadoTxt = codigoIngresado.getText().toString();
-
-        if(codigoIngresadoTxt.equals(codigoDuelo)){
-            Toast.makeText(getContext(), "Ese codigo es tuyo", Toast.LENGTH_SHORT).show();
-        }else {
-            databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).addListenerForSingleValueEvent(new ValueEventListener() {
+            databaseReference.child(nodoPersona).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
-                        //Si existe el codigo
-                        Duelo duelo = dataSnapshot.getValue(Duelo.class);
-                        if(duelo.getCorreoPerDos()==null){
-                            //LA SEGUNDA PERSONA ESTA DISPONIBLE
-                            iniciaDuelo(codigoIngresadoTxt);
-                        }else{
-                            //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
-                            Toast.makeText(getContext(), "El codigo esta en uso", Toast.LENGTH_SHORT).show();
+                        for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                            Persona persona = snapshot.getValue(Persona.class);
+                            if(persona.getEmail().equals(email)){
+                                //SE ENCONTRO LA PERSONA CON EL EMAIL INDICADO
+                                NickName = persona.getNickName();
+                                codigoDuelo = "K"+NickName+"P";
+                            }
                         }
-                    }else{
-                        //No existe el codigo
-                        Toast.makeText(getContext(), "No existe el codigo", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -180,24 +126,97 @@ public class DueloFragment extends Fragment {
 
                 }
             });
-        }
+            //-------------
+
+            btnTengoCodigo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    metTengoCodigo();
+                }
+            });
+
+            btnCreaCodigo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    metCreaCodigo();
+                }
+            });
+
+        return view;
     }
 
-    public void iniciaDuelo(String codigoIngresadoTxt){
-        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).child("correoPerDos").setValue(email);
-        Intent intent = new Intent(getContext(), Preguntas.class);
-        intent.putExtra("materia", "todas");
-        intent.putExtra("codigoDuelo", codigoIngresadoTxt);
-        intent.putExtra("tipoPersona", "Dos");
-        startActivity(intent);
+    public void metCreaCodigo(){
+        btnCreaCodigo.setVisibility(View.INVISIBLE);
+        btnTengoCodigo.setVisibility(View.INVISIBLE);
+        btnJugar.setVisibility(View.VISIBLE);
+
+        ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("text",  codigoDuelo);
+        Toast.makeText(getContext(), "Codigo copiado a portapapeles", Toast.LENGTH_SHORT).show();
+        clipboard.setPrimaryClip(clip);
+
+        btnJugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvEsperandoOponente.setVisibility(View.VISIBLE);
+                validandoCodigoPerUno();
+            }
+        });
+
     }
 
+    public void metTengoCodigo(){
+        btnCreaCodigo.setVisibility(View.INVISIBLE);
+        btnTengoCodigo.setVisibility(View.INVISIBLE);
+        btnJugar.setVisibility(View.VISIBLE);
+        edtIngresaCodigo.setVisibility(View.VISIBLE);
 
-    public void creaDuelo(View view){
+        btnJugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String codigoIngresado = edtIngresaCodigo.getText().toString();
+                if(codigoIngresado.isEmpty()){
+                    Toast.makeText(getContext(), "Ingresa un codigo", Toast.LENGTH_SHORT).show();
+                }else{
+                    validandoCodigoPerDos(codigoIngresado);
+                }
+            }
+        });
+    }
+
+    public void validandoCodigoPerDos(String codIngresado){
+        final String codigoIngresadoTxt = codIngresado;
+        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Si existe el codigo
+                    Duelo duelo = dataSnapshot.getValue(Duelo.class);
+                    if(duelo.getCorreoPerDos()==null){
+                        //LA SEGUNDA PERSONA ESTA DISPONIBLE
+                        iniciaDueloPerDos(codigoIngresadoTxt);
+                    }else{
+                        //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
+                        Toast.makeText(getContext(), "El codigo esta en uso", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    //No existe el codigo
+                    Toast.makeText(getContext(), "No existe el codigo", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void validandoCodigoPerUno(){
         conta=0;
         Duelo duelo = new Duelo(email, null, null, null);
         databaseReference.child(nodoDuelos).child(codigoDuelo).setValue(duelo);
-        esperando.setVisibility(View.VISIBLE);
+        Log.w("FEIK", "Duelo creado");
 
         databaseReference.child(nodoDuelos).child(codigoDuelo).addValueEventListener(new ValueEventListener() {
             @Override
@@ -207,13 +226,12 @@ public class DueloFragment extends Fragment {
                     Duelo duelo = dataSnapshot.getValue(Duelo.class);
                     if(duelo.getCorreoPerDos()==null){
                         //LA SEGUNDA PERSONA ESTA DISPONIBLE
-                        esperando.setVisibility(View.VISIBLE);
+                        tvEsperandoOponente.setVisibility(View.VISIBLE);
                     }else{
                         conta = conta + 1;
                         if(conta==1){
-                            Log.w("HOLAWAS", "INICIE ACTIVITY");
                             //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
-                            esperando.setVisibility(View.INVISIBLE);
+                            reiniciaVistas();
                             Intent intent = new Intent(getContext(), Preguntas.class);
                             intent.putExtra("materia", "todas");
                             intent.putExtra("codigoDuelo",codigoDuelo);
@@ -232,8 +250,23 @@ public class DueloFragment extends Fragment {
 
     }
 
+    public void iniciaDueloPerDos(String codigoIngresadoTxt){
+        databaseReference.child(nodoDuelos).child(codigoIngresadoTxt).child("correoPerDos").setValue(email);
+        reiniciaVistas();
+        Intent intent = new Intent(getContext(), Preguntas.class);
+        intent.putExtra("materia", "todas");
+        intent.putExtra("codigoDuelo", codigoIngresadoTxt);
+        intent.putExtra("tipoPersona", "Dos");
+        startActivity(intent);
+    }
 
-
+    public void reiniciaVistas(){
+        btnCreaCodigo.setVisibility(View.VISIBLE);
+        btnTengoCodigo.setVisibility(View.INVISIBLE);
+        edtIngresaCodigo.setVisibility(View.INVISIBLE);
+        btnJugar.setVisibility(View.INVISIBLE);
+        tvEsperandoOponente.setVisibility(View.INVISIBLE);
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event

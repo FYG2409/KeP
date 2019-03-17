@@ -5,42 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistroPregunta"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <EditText
-                android:id="@+id/materia"
+            <Spinner
+                android:id="@+id/spMaterias"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="MATERIA"
-                />
+                android:layout_height="wrap_content" />
 
             <EditText
                     android:id="@+id/pregunta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="PREGUNTA"
+                    android:hint="Pregunta"
                     />
 
             <ImageView
                 android:id="@+id/imgPregunta"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="traeImagenDeGaleria"
                 android:tag="btnPregunta"
                 android:text="CARGA IMAGEN PARA PREGUNTA" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <EditText
                 android:id="@+id/rA"
@@ -51,8 +60,8 @@
 
             <ImageView
                 android:id="@+id/imgRepuestaA"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
 
@@ -61,8 +70,14 @@
                 android:layout_height="wrap_content"
                 android:onClick="traeImagenDeGaleria"
                 android:tag="btnRespuestaA"
-                android:text="CARGA IMAGEN PARA PREGUNTA" />
+                android:text="CARGA IMAGEN PARA RESPUESTA A" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <EditText
                 android:id="@+id/rB"
@@ -73,8 +88,8 @@
 
             <ImageView
                 android:id="@+id/imgRepuestaB"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
 
@@ -83,7 +98,14 @@
                 android:layout_height="wrap_content"
                 android:onClick="traeImagenDeGaleria"
                 android:tag="btnRespuestaB"
-                android:text="CARGA IMAGEN PARA PREGUNTA" />
+                android:text="CARGA IMAGEN PARA RESPUESTA B" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <EditText
                 android:id="@+id/rC"
@@ -94,8 +116,8 @@
 
             <ImageView
                 android:id="@+id/imgRepuestaC"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
 
@@ -104,7 +126,14 @@
                 android:layout_height="wrap_content"
                 android:onClick="traeImagenDeGaleria"
                 android:tag="btnRespuestaC"
-                android:text="CARGA IMAGEN PARA PREGUNTA" />
+                android:text="CARGA IMAGEN PARA RESPUESTA C" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"/>
 
             <EditText
                 android:id="@+id/rD"
@@ -115,8 +144,8 @@
 
             <ImageView
                 android:id="@+id/imgRepuestaD"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
 
@@ -125,20 +154,29 @@
                 android:layout_height="wrap_content"
                 android:onClick="traeImagenDeGaleria"
                 android:tag="btnRespuestaD"
-                android:text="CARGA IMAGEN PARA PREGUNTA" />
+                android:text="CARGA IMAGEN PARA RESPUESTA D" />
 
-            <EditText
-                android:id="@+id/solucion"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="SOLUCION"
-                />
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"/>
+
+            <Spinner
+                android:id="@+id/spSolucion"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" />
 
             <Button
+                android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="REGISTRA"
-                android:onClick="guardaPregunta"/>
+                android:onClick="guardaPregunta"
+                android:background="@color/colorAccent"/>
+
         </LinearLayout>
     </ScrollView>
 
