@@ -5,52 +5,153 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Preguntas"
-    android:orientation="vertical"
-    android:padding="40dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pregunta"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/rA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@PreguntasInfinitasFragment/clickeoDos"
-        android:background="@color/blanco"
-        android:tag="A"/>
-    <Button
-        android:id="@+id/rB"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="B"/>
-    <Button
-        android:id="@+id/rC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="C"/>
-    <Button
-        android:id="@+id/rD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickeo"
-        android:background="@color/blanco"
-        android:tag="D"/>
-    <Button
-        android:id="@+id/siguiente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Siguiente"
-        android:enabled="false"/>
-    <TextView
-        android:id="@+id/countdown_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10:00"
-        android:visibility="invisible"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="40dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtPregunta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pregunta"/>
+
+                <ImageView
+                    android:id="@+id/imgPregunta"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/kep_icon"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical"
+                android:onClick="clickeo"
+                android:tag="A">
+
+                <Button
+                    android:id="@+id/btnRa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blanco"
+                    android:text="btnRA"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgRa"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/kep_icon"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:orientation="vertical"
+                android:onClick="clickeo"
+                android:tag="B">
+
+                <Button
+                    android:id="@+id/btnRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blanco"
+                    android:text="BTNRB"/>
+
+                <ImageView
+                    android:id="@+id/imgRb"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/kep_icon"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical"
+                android:onClick="clickeo"
+                android:tag="C">
+
+                <Button
+                    android:id="@+id/btnRc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blanco"
+                    android:text="BTNRC"/>
+
+                <ImageView
+                    android:id="@+id/imgRc"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/kep_icon"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:orientation="vertical"
+                android:onClick="clickeo"
+                android:tag="D">
+
+                <Button
+                    android:id="@+id/btnRd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blanco"/>
+
+                <ImageView
+                    android:id="@+id/imgRd"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/kep_icon"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/siguiente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siguiente"
+                android:onClick="clickeoSiguiente"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/countdown_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

@@ -17,7 +17,7 @@
         android:id="@+id/rA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@PreguntasInfinitasFragment/clickeoDos"
+        android:onClick="clickeo"
         android:background="@color/blanco"
         android:tag="A"/>
     <Button

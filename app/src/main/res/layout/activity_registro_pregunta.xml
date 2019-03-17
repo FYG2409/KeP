@@ -6,63 +6,140 @@
     android:layout_height="match_parent"
     tools:context=".RegistroPregunta"
     android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/materia"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="MATERIA"
-        />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/pregunta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="PREGUNTA"
-        />
+            <EditText
+                android:id="@+id/materia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="MATERIA"
+                />
 
-    <EditText
-        android:id="@+id/rA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Respuesta A"
-        />
+            <EditText
+                    android:id="@+id/pregunta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="PREGUNTA"
+                    />
 
-    <EditText
-        android:id="@+id/rB"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Respuesta B"
-        />
+            <ImageView
+                android:id="@+id/imgPregunta"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/kep_icon"
+                />
 
-    <EditText
-        android:id="@+id/rC"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Respuesta C"
-        />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="traeImagenDeGaleria"
+                android:tag="btnPregunta"
+                android:text="CARGA IMAGEN PARA PREGUNTA" />
 
-    <EditText
-        android:id="@+id/rD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Respuesta D"
-        />
-    <EditText
-        android:id="@+id/solucion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="SOLUCION"
-        />
+            <EditText
+                android:id="@+id/rA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Respuesta A"
+                />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="REGISTRA"
-        android:onClick="creaPregunta"/>
+            <ImageView
+                android:id="@+id/imgRepuestaA"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/kep_icon"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="traeImagenDeGaleria"
+                android:tag="btnRespuestaA"
+                android:text="CARGA IMAGEN PARA PREGUNTA" />
 
 
+            <EditText
+                android:id="@+id/rB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Respuesta B"
+                />
 
+            <ImageView
+                android:id="@+id/imgRepuestaB"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/kep_icon"
+                />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="traeImagenDeGaleria"
+                android:tag="btnRespuestaB"
+                android:text="CARGA IMAGEN PARA PREGUNTA" />
+
+            <EditText
+                android:id="@+id/rC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Respuesta C"
+                />
+
+            <ImageView
+                android:id="@+id/imgRepuestaC"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/kep_icon"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="traeImagenDeGaleria"
+                android:tag="btnRespuestaC"
+                android:text="CARGA IMAGEN PARA PREGUNTA" />
+
+            <EditText
+                android:id="@+id/rD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Respuesta D"
+                />
+
+            <ImageView
+                android:id="@+id/imgRepuestaD"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/kep_icon"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="traeImagenDeGaleria"
+                android:tag="btnRespuestaD"
+                android:text="CARGA IMAGEN PARA PREGUNTA" />
+
+            <EditText
+                android:id="@+id/solucion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="SOLUCION"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="REGISTRA"
+                android:onClick="guardaPregunta"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
