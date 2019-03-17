@@ -37,13 +37,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Confirma contraseña" />
+        android:hint="Confirma contraseña"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Escuela Actual"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/EActual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Escuela a Ingresar"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/EIngresar"
@@ -55,4 +72,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Iniciar" />
+
 </LinearLayout>
