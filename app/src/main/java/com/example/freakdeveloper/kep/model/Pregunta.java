@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.Task;
 
 public class Pregunta {
 
+
     private String materia;
     private String pregunta;
     private String rA;
@@ -24,6 +25,20 @@ public class Pregunta {
 
     public Pregunta(String materia, String pregunta, String rA, String rB, String rC, String rD, String solucion, String preguntaImg, String rAImg, String rBImg, String rCImg, String rDImg) {
         this.materia = materia;
+        this.pregunta = pregunta;
+        this.rA = rA;
+        this.rB = rB;
+        this.rC = rC;
+        this.rD = rD;
+        this.solucion = solucion;
+        this.preguntaImg = preguntaImg;
+        this.rAImg = rAImg;
+        this.rBImg = rBImg;
+        this.rCImg = rCImg;
+        this.rDImg = rDImg;
+    }
+
+    public Pregunta(String pregunta, String rA, String rB, String rC, String rD, String solucion, String preguntaImg, String rAImg, String rBImg, String rCImg, String rDImg) {
         this.pregunta = pregunta;
         this.rA = rA;
         this.rB = rB;

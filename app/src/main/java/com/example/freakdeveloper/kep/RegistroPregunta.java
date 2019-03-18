@@ -20,8 +20,11 @@ import com.example.freakdeveloper.kep.model.Pregunta;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,6 +33,7 @@ public class RegistroPregunta extends AppCompatActivity {
 
     private EditText idPregunta, pregunta, rA, rB, rC, rD;
     private String idPreguntaTxt, materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt;
+    private Pregunta preguntaObj;
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
@@ -130,10 +134,28 @@ public class RegistroPregunta extends AppCompatActivity {
         rBTxt = rB.getText().toString();
         rCTxt = rC.getText().toString();
         rDTxt = rD.getText().toString();
-        Pregunta pregunta = new Pregunta(materiaTxt, preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt, refFinalPreguntaImg, refFinalRespuestaAImg, refFinalRespuestaBImg, refFinalRespuestaCImg, refFinalRespuestaDImg);
-        databaseReference.child(nodoPregunta).child(databaseReference.push().getKey()).setValue(pregunta);
-        Toast.makeText(this, "PREGUNTA REGISTRADA", Toast.LENGTH_SHORT).show();
-        Log.w("FEIK", "SUBI");
+        preguntaObj = new Pregunta(preguntaTxt, rATxt, rBTxt, rCTxt, rDTxt, solucionTxt, refFinalPreguntaImg, refFinalRespuestaAImg, refFinalRespuestaBImg, refFinalRespuestaCImg, refFinalRespuestaDImg);
+        databaseReference.child(nodoPregunta).child(materiaTxt).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //Si ya hay registros para esa materia
+                    Long totalHijos = dataSnapshot.getChildrenCount();
+                    Log.w("FEIK", "Total Hijos "+String.valueOf(totalHijos));
+                    databaseReference.child(nodoPregunta).child(materiaTxt).child(String.valueOf(totalHijos+1)).setValue(preguntaObj);
+                }else{
+                    //Si aun no hay registros para esa materia
+                    Log.w("FEIK", "Materia "+materiaTxt+" aun no tiene hijos");
+                    databaseReference.child(nodoPregunta).child(materiaTxt).child("1").setValue(preguntaObj);
+                }
+                Toast.makeText(RegistroPregunta.this, "PREGUNTA REGISTRADA", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     //------PARA IMAGEN------

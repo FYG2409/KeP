@@ -42,17 +42,19 @@ public class DueloFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-        private Button btnCreaCodigo, btnTengoCodigo, btnJugar;
+        private Button btnCreaCodigo, btnTengoCodigo, btnJugar, btnElMejor, btnContraTiempo;
         private TextView tvEsperandoOponente;
         private EditText edtIngresaCodigo;
-        private String NickName, email, codigoDuelo;
-        private int conta;
+        private String NickName, email, codigoDuelo, tipoDuelo;
+        private int conta, totalPreguntas, numeroAleatorio;
+        int[] totales = new int[11];
 
         //PARA FIREBASE
         private DatabaseReference databaseReference;
         private FirebaseAuth.AuthStateListener authStateListener;
         private FirebaseAuth firebaseAuth;
         private FirebaseUser firebaseUser;
+        private  static final String nodoPregunta="Preguntas";
 
         private  static final String nodoDuelos="Duelos";
         private  static final String nodoPersona="Personas";
@@ -90,6 +92,8 @@ public class DueloFragment extends Fragment {
             databaseReference = FirebaseDatabase.getInstance().getReference();
             firebaseAuth = FirebaseAuth.getInstance();
 
+            btnElMejor = (Button) view.findViewById(R.id.btnElMejor);
+            btnContraTiempo = (Button) view.findViewById(R.id.btnContraTiempo);
             btnCreaCodigo = (Button) view.findViewById(R.id.btnCreaCodigo);
             btnTengoCodigo = (Button) view.findViewById(R.id.btnTengoCodigo);
             btnJugar = (Button) view.findViewById(R.id.btnJugar);
@@ -148,20 +152,41 @@ public class DueloFragment extends Fragment {
     public void metCreaCodigo(){
         btnCreaCodigo.setVisibility(View.GONE);
         btnTengoCodigo.setVisibility(View.GONE);
-        btnJugar.setVisibility(View.VISIBLE);
+        btnJugar.setVisibility(View.GONE);
+        btnElMejor.setVisibility(View.VISIBLE);
+        btnContraTiempo.setVisibility(View.VISIBLE);
+        //btnJugar.setVisibility(View.VISIBLE);
 
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("text",  codigoDuelo);
         Toast.makeText(getContext(), "Codigo copiado a portapapeles", Toast.LENGTH_SHORT).show();
         clipboard.setPrimaryClip(clip);
 
+        btnElMejor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvEsperandoOponente.setVisibility(View.VISIBLE);
+                tipoDuelo = "elMejor";
+                validandoCodigoPerUno();
+            }
+        });
+
+        btnContraTiempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvEsperandoOponente.setVisibility(View.VISIBLE);
+                tipoDuelo = "contraTiempo";
+                numAleatorio();
+            }
+        });
+        /*
         btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvEsperandoOponente.setVisibility(View.VISIBLE);
                 validandoCodigoPerUno();
             }
-        });
+        });*/
 
     }
 
@@ -194,6 +219,9 @@ public class DueloFragment extends Fragment {
                     Duelo duelo = dataSnapshot.getValue(Duelo.class);
                     if(duelo.getCorreoPerDos()==null){
                         //LA SEGUNDA PERSONA ESTA DISPONIBLE
+                        tipoDuelo = duelo.getTipoDuelo();
+                        numeroAleatorio = (duelo.getNumAleatorio()).intValue();
+                        totalPreguntas = (duelo.getTotalPreguntas()).intValue();
                         iniciaDueloPerDos(codigoIngresadoTxt);
                     }else{
                         //LA SEGUNDA PERSONA NO ESTA DISPONIBLE
@@ -214,7 +242,7 @@ public class DueloFragment extends Fragment {
 
     public void validandoCodigoPerUno(){
         conta=0;
-        Duelo duelo = new Duelo(email, null, null, null);
+        Duelo duelo = new Duelo(email, null, null, null, (long)numeroAleatorio, tipoDuelo, (long)totalPreguntas);
         databaseReference.child(nodoDuelos).child(codigoDuelo).setValue(duelo);
         Log.w("FEIK", "Duelo creado");
 
@@ -237,6 +265,9 @@ public class DueloFragment extends Fragment {
                             intent.putExtra("codigoDuelo",codigoDuelo);
                             intent.putExtra("tipoPersona", "Uno");
                             intent.putExtra("email", email);
+                            intent.putExtra("tipoDuelo", tipoDuelo);
+                            intent.putExtra("numInicio", numeroAleatorio);
+                            intent.putExtra("totalHijos", totalPreguntas);
                             startActivity(intent);
                         }
                     }
@@ -257,6 +288,9 @@ public class DueloFragment extends Fragment {
         intent.putExtra("materia", "todas");
         intent.putExtra("codigoDuelo", codigoIngresadoTxt);
         intent.putExtra("tipoPersona", "Dos");
+        intent.putExtra("tipoDuelo", tipoDuelo);
+        intent.putExtra("numInicio", numeroAleatorio);
+        intent.putExtra("totalHijos", totalPreguntas);
         startActivity(intent);
     }
 
@@ -266,6 +300,66 @@ public class DueloFragment extends Fragment {
         edtIngresaCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.GONE);
         tvEsperandoOponente.setVisibility(View.GONE);
+        btnElMejor.setVisibility(View.GONE);
+        btnContraTiempo.setVisibility(View.GONE);
+    }
+
+    public void valida(String materia){
+        databaseReference.child(nodoPregunta).child(materia).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    totalPreguntas = (int) dataSnapshot.getChildrenCount();
+
+                }else{
+                    //Si aun no hay registros para esa materia
+                    totalPreguntas = 0;
+                }
+                totales[conta] = totalPreguntas;
+                conta = conta+1;
+                if(conta==11){
+                    Boolean primera = true;
+                    totalPreguntas = 0;
+                    for(int i = 0; i<11; i++){
+                        if(primera){
+                            totalPreguntas = totales[i];
+                            primera = false;
+                        }else
+                        if(totalPreguntas>totales[i]){
+                            totalPreguntas = totales[i];
+                        }
+                    }
+                    Log.w("FEIK", "Menor "+Integer.toString(totalPreguntas));
+                    if(totalPreguntas==0){
+                        Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para todas las materias", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //GENERANDO NUM ALEATORIO
+                        numeroAleatorio = (int) (Math.random() * totalPreguntas) + 1;
+                        validandoCodigoPerUno();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void numAleatorio(){
+        valida("Razonamiento Matematico");
+        valida("Algebra");
+        valida("Geometria y Trigonometria");
+        valida("Geometria Analitica");
+        valida("Calculo Diferencial e Integral");
+        valida("Probabilidad y Estadistica");
+        valida("Produccion Escrita");
+        valida("Comprension de Textos");
+        valida("Biologia");
+        valida("Quimica");
+        valida("Fisica");
     }
 
 

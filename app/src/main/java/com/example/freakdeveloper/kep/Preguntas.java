@@ -45,8 +45,17 @@ import java.util.ArrayList;
 
 public class Preguntas extends AppCompatActivity {
 
+    //PARA ALEATORIO
+    private int num1, num2;
+    private int numAleatorio, totalPreguntas;
+    private Pregunta preguntaObj;
+    private int contaMaterias;
+    private Boolean todasMaterias;
+    String[] opcMaterias = {"Razonamiento Matematico", "Algebra", "Geometria y Trigonometria", "Geometria Analitica", "Calculo Diferencial e Integral", "Probabilidad y Estadistica", "Produccion Escrita", "Comprension de Textos", "Biologia", "Quimica", "Fisica"};
+
     private Boolean hayPreguntas;
     private int bande;
+    private int marca;
 
     private TextView txtPregunta;
     private Button salir;
@@ -55,8 +64,8 @@ public class Preguntas extends AppCompatActivity {
 
     private ImageView imgRa, imgRb, imgRc, imgRd, imgPregunta, siguiente;
     private ArrayList<Pregunta> arrayPreguntas = new ArrayList<>();
-    private int contaBuenas, contaMalas, contaTotal;
-    private String codigoDuelo, tipoPersona, email, materiaSeleccionada, solucion;
+    private int contaBuenas, contaMalas, contaTotal, numInicio=0;
+    private String codigoDuelo, tipoPersona, email, materiaSeleccionada, solucion, tipoDuelo;
 
     //PARA FIREBASE
     private DatabaseReference databaseReference;
@@ -69,7 +78,7 @@ public class Preguntas extends AppCompatActivity {
     //PARA TIMER
     private TextView countdownText;
     private CountDownTimer countDownTimer;
-    private long tiempoEnMilisegundos = 10000; //Son los minutos que queremos en milisegundos
+    private long tiempoEnMilisegundos = (2*60000); //Son los minutos que queremos en milisegundos
 
     //PARA MENSAJE CARGANDO
     private ProgressDialog progressDialog;
@@ -92,10 +101,11 @@ public class Preguntas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
-        recuperaDatosIntent();
 
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        todasMaterias = false;
+        Log.w("HOLAWAS", "P: "+todasMaterias.toString());
 
         //-----PARA IMAGENES----
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -112,6 +122,7 @@ public class Preguntas extends AppCompatActivity {
         txtRc = (TextView) findViewById(R.id.txtRc);
         txtRd = (TextView) findViewById(R.id.txtRd);
         siguiente = (ImageView) findViewById(R.id.siguiente);
+        salir = (Button) findViewById(R.id.salir);
 
         resA = (LinearLayout) findViewById(R.id.resA);
         resB = (LinearLayout) findViewById(R.id.resB);
@@ -123,66 +134,47 @@ public class Preguntas extends AppCompatActivity {
         contaBuenas = 0;
         contaMalas = 0;
         contaTotal = 0;
+        contaMaterias = 0;
 
         //PARA POP-UP
         miVentana = new Dialog(this);
         limpiaCampos();
-        traePreguntas();
+        //traePreguntas();
         traePersona();
+        recuperaDatosIntent();
     }
 
-    public void recuperaDatosIntent(){
-        Bundle extras = getIntent().getExtras();
-        materiaSeleccionada = extras.getString("materia");
-        email = extras.getString("email");
-
-        //EXTRAS CUANDO VENGO DE DueloFragment
-        tipoPersona = extras.getString("tipoPersona");
-        codigoDuelo = extras.getString("codigoDuelo");
-        if(codigoDuelo!=null){
-            ponTimer();
+    //PARA ALEATORIO
+    public void generarNumAleatorio(){
+        numAleatorio = (int) (Math.random() * totalPreguntas) + 1;
+        traePregunta();
+        if(!(numInicio==0)){
+            Log.w("FYGorFEIK", "ENTRE" + Integer.toString(numInicio));
+            numAleatorio = numInicio;
         }
+        Log.w("FYGorFEIK", "NumAlea" + Integer.toString(numAleatorio));
     }
 
-    public void traePreguntas(){
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Trayendo datos...");
-        progressDialog.setMessage("Trayendo preguntas de firebase");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        hayPreguntas = false;
-
-        databaseReference.child(nodoPregunta).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void traePregunta() {
+        if(todasMaterias){
+            materiaSeleccionada = opcMaterias[contaMaterias];
+        }
+        Log.w("FYGorFEIK", "Materia "+materiaSeleccionada);
+        Log.w("FYGorFEIK", "NumAleatorio "+numAleatorio);
+        databaseReference.child(nodoPregunta).child(materiaSeleccionada).child(Integer.toString(numAleatorio)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayPreguntas.clear();
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        Pregunta preguntaa = snapshot.getValue(Pregunta.class);
-                        if(preguntaa.getMateria().equalsIgnoreCase(materiaSeleccionada)){
-                            arrayPreguntas.add(preguntaa);
-                            hayPreguntas = true;
-                        }else
-                        if(materiaSeleccionada.equals("todas")){
-                            arrayPreguntas.add(preguntaa);
-                            hayPreguntas = true;
-                        }else {
-                            hayPreguntas = false;
-                            Log.w("Preguntas", "No hay preguntas de esta materia en la base");
-                        }
+                if (dataSnapshot.exists()) {
+                    //Si existe la pregunta
+                    if(dataSnapshot.getKey().equals(Integer.toString(numAleatorio))){
+                        //Si el id de la pregunta es igual a mi numero aleatorio
+                        preguntaObj = dataSnapshot.getValue(Pregunta.class);
+                        muestraPregunta();
+                        //arrayPreguntas.add(preguntaa);
                     }
-                    if(hayPreguntas){
-                        cargaPregunta(0);
-                    }else{
-                        Toast.makeText(Preguntas.this, "Lo sentimos aun no tenemos preguntas para esta materia", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    Log.w("Preguntas", "Termine de agregar");
-                    progressDialog.dismiss();
-                }else
-                    Toast.makeText(Preguntas.this, "No hay preguntas en la base", Toast.LENGTH_SHORT).show();
-                    Log.w("Preguntas", "No hay preguntas en la base");
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -190,50 +182,75 @@ public class Preguntas extends AppCompatActivity {
         });
     }
 
-    public void cargaPregunta(int index){
-        txtPregunta.setText(arrayPreguntas.get(index).getPregunta());
-        txtRa.setText(arrayPreguntas.get(index).getrA());
-        txtRb.setText(arrayPreguntas.get(index).getrB());
-        txtRc.setText(arrayPreguntas.get(index).getrC());
-        txtRd.setText(arrayPreguntas.get(index).getrD());
-        solucion = arrayPreguntas.get(index).getSolucion();
+    public void muestraPregunta(){
+        txtPregunta.setText(preguntaObj.getPregunta());
+        txtRa.setText(preguntaObj.getrA());
+        txtRb.setText(preguntaObj.getrB());
+        txtRc.setText(preguntaObj.getrC());
+        txtRd.setText(preguntaObj.getrD());
+        solucion = preguntaObj.getSolucion();
 
         //Validando que existan imagenes
 
-            if(arrayPreguntas.get(index).getPreguntaImg() != null){
-                traeImagen(arrayPreguntas.get(index).getPreguntaImg(), 1, nodoPreguntasImg);
-                imgPregunta.setVisibility(View.VISIBLE);
-            }else{
-                imgPregunta.setVisibility(View.GONE);
-            }
+        if(preguntaObj.getPreguntaImg() != null){
+            traeImagen(preguntaObj.getPreguntaImg(), 1, nodoPreguntasImg);
+            imgPregunta.setVisibility(View.VISIBLE);
+        }else{
+            imgPregunta.setVisibility(View.GONE);
+        }
 
-            if(arrayPreguntas.get(index).getrAImg() != null){
-                traeImagen(arrayPreguntas.get(index).getrAImg(), 2, nodoRespuestasImg);
-                imgRa.setVisibility(View.VISIBLE);
-            }else {
-                imgRa.setVisibility(View.GONE);
-            }
+        if(preguntaObj.getrAImg() != null){
+            traeImagen(preguntaObj.getrAImg(), 2, nodoRespuestasImg);
+            imgRa.setVisibility(View.VISIBLE);
+        }else {
+            imgRa.setVisibility(View.GONE);
+        }
 
-            if(arrayPreguntas.get(index).getrBImg() != null){
-                traeImagen(arrayPreguntas.get(index).getrBImg(), 3, nodoRespuestasImg);
-                imgRb.setVisibility(View.VISIBLE);
-            }else {
-                imgRb.setVisibility(View.GONE);
-            }
+        if(preguntaObj.getrBImg() != null){
+            traeImagen(preguntaObj.getrBImg(), 3, nodoRespuestasImg);
+            imgRb.setVisibility(View.VISIBLE);
+        }else {
+            imgRb.setVisibility(View.GONE);
+        }
 
-            if(arrayPreguntas.get(index).getrCImg() != null){
-                traeImagen(arrayPreguntas.get(index).getrCImg(), 4, nodoRespuestasImg);
-                imgRc.setVisibility(View.VISIBLE);
-            }else {
-                imgRc.setVisibility(View.GONE);
-            }
+        if(preguntaObj.getrCImg() != null){
+            traeImagen(preguntaObj.getrCImg(), 4, nodoRespuestasImg);
+            imgRc.setVisibility(View.VISIBLE);
+        }else {
+            imgRc.setVisibility(View.GONE);
+        }
 
-            if(arrayPreguntas.get(index).getrDImg() != null){
-                traeImagen(arrayPreguntas.get(index).getrDImg(), 5, nodoRespuestasImg);
-                imgRd.setVisibility(View.VISIBLE);
-            }else {
-                imgRd.setVisibility(View.GONE);
-            }
+        if(preguntaObj.getrDImg() != null){
+            traeImagen(preguntaObj.getrDImg(), 5, nodoRespuestasImg);
+            imgRd.setVisibility(View.VISIBLE);
+        }else {
+            imgRd.setVisibility(View.GONE);
+        }
+    }
+
+    public void recuperaDatosIntent(){
+        Bundle extras = getIntent().getExtras();
+        materiaSeleccionada = extras.getString("materia");
+        email = extras.getString("email");
+        totalPreguntas = extras.getInt("totalHijos");
+
+        if(materiaSeleccionada.equals("todas")){
+            todasMaterias = true;
+        }else{
+            todasMaterias = false;
+        }
+
+        //EXTRAS CUANDO VENGO DE DueloFragment
+        tipoPersona = extras.getString("tipoPersona");
+        codigoDuelo = extras.getString("codigoDuelo");
+        tipoDuelo = extras.getString("tipoDuelo");
+        numInicio = extras.getInt("numInicio");
+        if(codigoDuelo!=null && tipoDuelo.equals("contraTiempo")){
+            ponTimer();
+        }
+
+
+        generarNumAleatorio();
     }
 
     public void traeImagen(String nombre, final int regCode, String nodo){
@@ -305,19 +322,6 @@ public class Preguntas extends AppCompatActivity {
         }
     }
 
-    public void clickeoSiguiente(View v){
-        if(arrayPreguntas.size()>contaTotal){
-            limpiaCampos();
-            bande = 0;
-            //Enviando nueva pregunta
-            cargaPregunta(contaTotal);
-            siguiente.setEnabled(false);
-        }else{
-            guardaRespuestas();
-            muestraPopUp("Ya has contestado todas las preguntas");
-        }
-    }
-
     public void limpiaCampos(){
         //LIMPIANDO IMAGENES
         imgPregunta.setImageDrawable(null);
@@ -340,6 +344,28 @@ public class Preguntas extends AppCompatActivity {
         viewB.setStroke(8, this.getResources().getColor(R.color.negro));
         viewC.setStroke(8, this.getResources().getColor(R.color.negro));
         viewD.setStroke(8, this.getResources().getColor(R.color.negro));
+    }
+
+    public void clickeoSiguiente(View v){
+
+        siguiente.setEnabled(false);
+        if (numAleatorio == totalPreguntas) {
+            numAleatorio = 1;
+        } else {
+            numAleatorio = numAleatorio + 1;
+        }
+
+        if(todasMaterias){
+            if(contaMaterias==(opcMaterias.length-1)){
+                contaMaterias = 0;
+            }else{
+                contaMaterias = contaMaterias + 1;
+            }
+        }
+
+        traePregunta();
+        bande = 0;
+        limpiaCampos();
     }
 
     public void muestraPopUp(String mensaje){

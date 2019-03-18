@@ -1,4 +1,4 @@
-package com.example.freakdeveloper.kep;
+﻿package com.example.freakdeveloper.kep;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,28 +10,18 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
-=======
 import android.widget.Toast;
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
 import android.widget.Spinner;
 import android.widget.Toast;
-
-<<<<<<< HEAD
 import com.example.freakdeveloper.kep.model.Carrera;
-=======
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
 import com.example.freakdeveloper.kep.model.Persona;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-<<<<<<< HEAD
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-=======
 import com.google.firebase.auth.FirebaseUser;
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -41,7 +31,7 @@ import java.util.ArrayList;
 
 public class Registro extends AppCompatActivity
 {
-
+/*
     private EditText NickField, CorField, PassField, PassField2;
     private Button RegistroButton;
     private FirebaseAuth Auth;
@@ -51,10 +41,6 @@ public class Registro extends AppCompatActivity
     //PARA FIREBASE
     private DatabaseReference databaseReference;
     private FirebaseAuth.AuthStateListener AuthListener;
-    //PARA FIREBASE
-    private DatabaseReference databaseReference;
-
-    private  static final String nodoPersona="Personas";
 
     private  static final String nodoPersona="Personas";
 
@@ -114,7 +100,6 @@ public class Registro extends AppCompatActivity
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(contra) && !TextUtils.isEmpty(contra2))
         {
-<<<<<<< HEAD
             //anterior
             if (contra2.equals(contra)) {
                 Task<AuthResult> authResultTask = Auth.createUserWithEmailAndPassword(email, contra)
@@ -142,7 +127,6 @@ public class Registro extends AppCompatActivity
 
                                             } else {
                                                 Toast.makeText(Registro.this, "Error En El Registro", Toast.LENGTH_SHORT).show();
-=======
             if (contra2.equals(contra))
             {
 
@@ -171,19 +155,15 @@ public class Registro extends AppCompatActivity
                                             else
                                             {
                                                 Toast.makeText(Registro.this, "Error De Verificación", Toast.LENGTH_SHORT).show();
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
                                             }
                                         }
                                     });
-
-<<<<<<< HEAD
                                     Dialog.setMessage("Registrando...");
                                     Dialog.show();
                                 }
 
                             }
                         });
-=======
 
                         }
                         else
@@ -195,7 +175,6 @@ public class Registro extends AppCompatActivity
 
                 Dialog.setMessage("Registrando...");
                 Dialog.show();
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
             }
         }
     }
@@ -206,13 +185,10 @@ public class Registro extends AppCompatActivity
         String[] vocacional = {"Escuela Actual", "CECyT 1", "CECyT 2", "CECyT 3", "CECyT 4", "CECyT 5", "CECyT 6", "CECyT 7", "CECyT 8", "CECyT 9",
                 "CECyT 10", "CECyT 11", "CECyT 12", "CECyT 13", "CECyT 14", "CECyT 15", "CECyT 16", "CECyT 17", "CECyT 18", "CET","ENP1","ENP2"
                 ,"ENP3","ENP4","ENP5","ENP6","ENP7","ENP8","ENP9","CCH Naucalpan","CCH Vallejo","CCH Azcapotzalco","CCH Oriente","CCH Sur","Otro"};
-<<<<<<< HEAD
         EscuelaA.setAdapter(new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, vocacional));
         //spinner carreras
 
-=======
         EscuelaA.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vocacional));
->>>>>>> 961d81570ea689e4f5219176683231d13eb3d3bf
 
         DatabaseReference recupera = FirebaseDatabase.getInstance().getReference(getString(R.string.nodoCarrera));
         recupera.addValueEventListener(new ValueEventListener() {
@@ -239,7 +215,7 @@ public class Registro extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         //String[] superior=sup;
                 /*{"Escuela a Igresar","UPIBI","UPIIZ Campus Zacatecas",
@@ -250,12 +226,12 @@ public class Registro extends AppCompatActivity
                 "CICS Unidad Milpa Alta","CICS Unidad Santo Tomás","ESEO","ENMyH",
                 "ESM","ESCA Unidad Santo Tomás","ESCA Unidad Tepepan","ESE","EST"};*/
 
-
+/*
         NickField = (EditText) findViewById(R.id.Nick);
         CorField = (EditText) findViewById(R.id.Cor);
         PassField = (EditText) findViewById(R.id.Pass);
         PassField2 = (EditText) findViewById(R.id.Pass2);
         RegistroButton = (Button) findViewById(R.id.Registro);
 
-    }
+    }*/
 }

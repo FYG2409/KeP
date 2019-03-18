@@ -5,6 +5,9 @@ public class Duelo {
     private String correoPerDos;
     private Long totalBuenasUno;
     private Long totalBuenasDos;
+    private Long numAleatorio;
+    private String tipoDuelo;
+    private Long totalPreguntas;
 
     public Duelo() {
     }
@@ -14,6 +17,57 @@ public class Duelo {
         this.correoPerDos = correoPerDos;
         this.totalBuenasUno = totalBuenasUno;
         this.totalBuenasDos = totalBuenasDos;
+    }
+
+    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio) {
+        this.correoPerUno = correoPerUno;
+        this.correoPerDos = correoPerDos;
+        this.totalBuenasUno = totalBuenasUno;
+        this.totalBuenasDos = totalBuenasDos;
+        this.numAleatorio = numAleatorio;
+    }
+
+    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio, String tipoDuelo) {
+        this.correoPerUno = correoPerUno;
+        this.correoPerDos = correoPerDos;
+        this.totalBuenasUno = totalBuenasUno;
+        this.totalBuenasDos = totalBuenasDos;
+        this.numAleatorio = numAleatorio;
+        this.tipoDuelo = tipoDuelo;
+    }
+
+    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio, String tipoDuelo, Long totalPreguntas) {
+        this.correoPerUno = correoPerUno;
+        this.correoPerDos = correoPerDos;
+        this.totalBuenasUno = totalBuenasUno;
+        this.totalBuenasDos = totalBuenasDos;
+        this.numAleatorio = numAleatorio;
+        this.tipoDuelo = tipoDuelo;
+        this.totalPreguntas = totalPreguntas;
+    }
+
+    public Long getTotalPreguntas() {
+        return totalPreguntas;
+    }
+
+    public void setTotalPreguntas(Long totalPreguntas) {
+        this.totalPreguntas = totalPreguntas;
+    }
+
+    public String getTipoDuelo() {
+        return tipoDuelo;
+    }
+
+    public void setTipoDuelo(String tipoDuelo) {
+        this.tipoDuelo = tipoDuelo;
+    }
+
+    public Long getNumAleatorio() {
+        return numAleatorio;
+    }
+
+    public void setNumAleatorio(Long numAleatorio) {
+        this.numAleatorio = numAleatorio;
     }
 
     public String getCorreoPerUno() {

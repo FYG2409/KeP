@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -11,9 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.freakdeveloper.kep.Preguntas;
 import com.example.freakdeveloper.kep.R;
+import com.example.freakdeveloper.kep.RegistroPregunta;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class PreguntasPorMateriaFragment extends Fragment {
@@ -29,8 +37,16 @@ public class PreguntasPorMateriaFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private LinearLayout razMatematico, algebra, geoTrigo,geoAnalitica, calDifIntegral, probaEstadistica, prodEscrita, comTextos, biologia, quimica, fisica, infinito;
+    private int totalPreguntas, conta;
+    int[] totales = new int[11];
+    private Boolean todasMaterias = false;
 
+    private LinearLayout razMatematico, algebra, geoTrigo,geoAnalitica, calDifIntegral, probaEstadistica, prodEscrita, comTextos, biologia, quimica, fisica, infinito;
+    //PARA FIREBASE
+    private DatabaseReference databaseReference;
+    private  static final String nodoPregunta="Preguntas";
+
+    private String materia;
 
     public PreguntasPorMateriaFragment() {
         // Required empty public constructor
@@ -60,6 +76,8 @@ public class PreguntasPorMateriaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_preguntas_por_materia, container, false);
+        //PARA FIREBASE
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         infinito = (LinearLayout) v.findViewById(R.id.infinito);
         razMatematico = (LinearLayout) v.findViewById(R.id.razMatematico);
@@ -74,99 +92,172 @@ public class PreguntasPorMateriaFragment extends Fragment {
         quimica = (LinearLayout) v.findViewById(R.id.quimica);
         fisica = (LinearLayout) v.findViewById(R.id.fisica);
 
+        conta = 0;
+
         infinito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(infinito);
+                validaInfinito(infinito);
             }
         });
 
         razMatematico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(razMatematico);
+                validaExistenPreguntas(razMatematico);
             }
         });
 
         algebra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(algebra);
+                validaExistenPreguntas(algebra);
             }
         });
 
         geoTrigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(geoTrigo);
+                validaExistenPreguntas(geoTrigo);
             }
         });
 
         geoAnalitica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(geoAnalitica);
+                validaExistenPreguntas(geoAnalitica);
             }
         });
 
         calDifIntegral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(calDifIntegral);
+                validaExistenPreguntas(calDifIntegral);
             }
         });
 
         probaEstadistica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(probaEstadistica);
+                validaExistenPreguntas(probaEstadistica);
             }
         });
 
         prodEscrita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(prodEscrita);
+                validaExistenPreguntas(prodEscrita);
             }
         });
 
         comTextos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(comTextos);
+                validaExistenPreguntas(comTextos);
             }
         });
 
         biologia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(biologia);
+                validaExistenPreguntas(biologia);
             }
         });
 
         quimica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(quimica);
+                validaExistenPreguntas(quimica);
             }
         });
 
         fisica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickeo(fisica);
+                validaExistenPreguntas(fisica);
             }
         });
 
         return v;
     }
 
-    public void clickeo(View view){
+    public void cambiaActivity(int totalHijos){
         Intent intent = new Intent(getContext(), Preguntas.class);
-        String materia = view.getTag().toString();
         intent.putExtra("materia", materia);
-        Log.w("Materia", "Math: "+materia);
+        intent.putExtra("totalHijos", totalHijos);
         startActivity(intent);
+    }
+
+    public void valida(String materia){
+        databaseReference.child(nodoPregunta).child(materia).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    totalPreguntas = (int) dataSnapshot.getChildrenCount();
+
+                }else{
+                    //Si aun no hay registros para esa materia
+                    totalPreguntas = 0;
+                }
+                if(todasMaterias){
+                    totales[conta] = totalPreguntas;
+                    conta = conta+1;
+                    if(conta==11){
+                        Boolean primera = true;
+                        totalPreguntas = 0;
+                        for(int i = 0; i<11; i++){
+                            if(primera){
+                                totalPreguntas = totales[i];
+                                primera = false;
+                            }else
+                                if(totalPreguntas>totales[i]){
+                                    totalPreguntas = totales[i];
+                                }
+                        }
+                        Log.w("FEIK", "Menor "+Integer.toString(totalPreguntas));
+                        if(totalPreguntas==0){
+                            Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para todas las materias", Toast.LENGTH_SHORT).show();
+                        }else{
+                            cambiaActivity(totalPreguntas);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void validaExistenPreguntas(View view){
+        materia = view.getTag().toString();
+        todasMaterias=false;
+        valida(materia);
+        if(totalPreguntas==0){
+            //Si no existieron preguntas
+            Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para esa matetria", Toast.LENGTH_SHORT).show();
+        }else{
+            //Si existieron preguntas
+            cambiaActivity(totalPreguntas);
+        }
+    }
+
+    public void validaInfinito(View view) {
+        materia = view.getTag().toString();
+        todasMaterias=true;
+        valida("Razonamiento Matematico");
+        valida("Algebra");
+        valida("Geometria y Trigonometria");
+        valida("Geometria Analitica");
+        valida("Calculo Diferencial e Integral");
+        valida("Probabilidad y Estadistica");
+        valida("Produccion Escrita");
+        valida("Comprension de Textos");
+        valida("Biologia");
+        valida("Quimica");
+        valida("Fisica");
     }
 
 
