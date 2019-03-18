@@ -155,7 +155,6 @@ public class DueloFragment extends Fragment {
         btnJugar.setVisibility(View.GONE);
         btnElMejor.setVisibility(View.VISIBLE);
         btnContraTiempo.setVisibility(View.VISIBLE);
-        //btnJugar.setVisibility(View.VISIBLE);
 
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("text",  codigoDuelo);
@@ -167,7 +166,8 @@ public class DueloFragment extends Fragment {
             public void onClick(View v) {
                 tvEsperandoOponente.setVisibility(View.VISIBLE);
                 tipoDuelo = "elMejor";
-                validandoCodigoPerUno();
+                numAleatorio();
+                //validandoCodigoPerUno();
             }
         });
 
@@ -179,14 +179,6 @@ public class DueloFragment extends Fragment {
                 numAleatorio();
             }
         });
-        /*
-        btnJugar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvEsperandoOponente.setVisibility(View.VISIBLE);
-                validandoCodigoPerUno();
-            }
-        });*/
 
     }
 
