@@ -149,6 +149,7 @@ public class RegistroPregunta extends AppCompatActivity {
                     databaseReference.child(nodoPregunta).child(materiaTxt).child("1").setValue(preguntaObj);
                 }
                 Toast.makeText(RegistroPregunta.this, "PREGUNTA REGISTRADA", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
@@ -221,7 +222,7 @@ public class RegistroPregunta extends AppCompatActivity {
         progressDialog.show();
 
         Uri file = uri;
-
+        Log.w("RegistroPregunta", "FEIK: "+ file.getLastPathSegment());
         final StorageReference imagenRef = storageRef.child(nodo+file.getLastPathSegment());
 
         final UploadTask uploadTask = imagenRef.putFile(file);

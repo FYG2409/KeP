@@ -37,7 +37,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private int totalPreguntas, conta;
+    private int totalPreguntas=0, conta;
     int[] totales = new int[11];
     private Boolean todasMaterias = false;
 
@@ -221,6 +221,14 @@ public class PreguntasPorMateriaFragment extends Fragment {
                             cambiaActivity(totalPreguntas);
                         }
                     }
+                }else{
+                    if(totalPreguntas==0){
+                        //Si no existieron preguntas
+                        Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para esa materia", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //Si existieron preguntas
+                        cambiaActivity(totalPreguntas);
+                    }
                 }
             }
 
@@ -235,13 +243,6 @@ public class PreguntasPorMateriaFragment extends Fragment {
         materia = view.getTag().toString();
         todasMaterias=false;
         valida(materia);
-        if(totalPreguntas==0){
-            //Si no existieron preguntas
-            Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para esa matetria", Toast.LENGTH_SHORT).show();
-        }else{
-            //Si existieron preguntas
-            cambiaActivity(totalPreguntas);
-        }
     }
 
     public void validaInfinito(View view) {

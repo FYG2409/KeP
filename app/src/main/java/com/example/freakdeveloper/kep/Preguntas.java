@@ -3,6 +3,7 @@ package com.example.freakdeveloper.kep;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,16 +48,13 @@ import java.util.ArrayList;
 public class Preguntas extends AppCompatActivity {
 
     //PARA ALEATORIO
-    private int num1, num2;
     private int numAleatorio, totalPreguntas;
     private Pregunta preguntaObj;
     private int contaMaterias;
     private Boolean todasMaterias;
     String[] opcMaterias = {"Razonamiento Matematico", "Algebra", "Geometria y Trigonometria", "Geometria Analitica", "Calculo Diferencial e Integral", "Probabilidad y Estadistica", "Produccion Escrita", "Comprension de Textos", "Biologia", "Quimica", "Fisica"};
 
-    private Boolean hayPreguntas;
     private int bande;
-    private int marca;
 
     private TextView txtPregunta;
     private Button salir;
@@ -80,9 +79,6 @@ public class Preguntas extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long tiempoEnMilisegundos = (2*60000); //Son los minutos que queremos en milisegundos
 
-    //PARA MENSAJE CARGANDO
-    private ProgressDialog progressDialog;
-
     //PARA POP-UP
     private Dialog miVentana;
     private String msj;
@@ -101,6 +97,8 @@ public class Preguntas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
+
+        existe = false;
 
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -291,6 +289,9 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void clickeo(View v){
+
+        Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+
         String resSeleccionada = v.getTag().toString();
         bande = bande + 1;
         if(bande == 1){
@@ -298,10 +299,13 @@ public class Preguntas extends AppCompatActivity {
                 //Si la contesto bien
                 contaBuenas = contaBuenas + 1;
                 contaTotal = contaTotal + 1;
+
             }else {
                 //Si la contesto mal
                 contaMalas = contaMalas + 1;
                 contaTotal = contaTotal + 1;
+                //agregando vibracion
+                vibrator.vibrate(500);
             }
 
             GradientDrawable viewCorrecto = null;

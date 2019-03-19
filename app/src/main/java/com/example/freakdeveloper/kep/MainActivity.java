@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void irARegistro(View view){
-        Intent intent = new Intent(this, Registro.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, Registro.class);
+        //startActivity(intent);
     }
 
     public void irARegPregunta(View view){
