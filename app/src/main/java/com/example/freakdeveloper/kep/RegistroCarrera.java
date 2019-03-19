@@ -30,7 +30,7 @@ public class RegistroCarrera extends AppCompatActivity {
 
 
         //PARA FIREBASE
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         AreaS = (Spinner) findViewById(R.id.ASpinner);

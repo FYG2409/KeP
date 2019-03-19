@@ -8,32 +8,20 @@ public class Duelo {
     private Long numAleatorio;
     private String tipoDuelo;
     private Long totalPreguntas;
+    private Long malas;
 
     public Duelo() {
     }
 
-    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos) {
-        this.correoPerUno = correoPerUno;
-        this.correoPerDos = correoPerDos;
-        this.totalBuenasUno = totalBuenasUno;
-        this.totalBuenasDos = totalBuenasDos;
-    }
-
-    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio) {
-        this.correoPerUno = correoPerUno;
-        this.correoPerDos = correoPerDos;
-        this.totalBuenasUno = totalBuenasUno;
-        this.totalBuenasDos = totalBuenasDos;
-        this.numAleatorio = numAleatorio;
-    }
-
-    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio, String tipoDuelo) {
+    public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio, String tipoDuelo, Long totalPreguntas, Long malas) {
         this.correoPerUno = correoPerUno;
         this.correoPerDos = correoPerDos;
         this.totalBuenasUno = totalBuenasUno;
         this.totalBuenasDos = totalBuenasDos;
         this.numAleatorio = numAleatorio;
         this.tipoDuelo = tipoDuelo;
+        this.totalPreguntas = totalPreguntas;
+        this.malas = malas;
     }
 
     public Duelo(String correoPerUno, String correoPerDos, Long totalBuenasUno, Long totalBuenasDos, Long numAleatorio, String tipoDuelo, Long totalPreguntas) {

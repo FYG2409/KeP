@@ -1,5 +1,6 @@
 package com.example.freakdeveloper.kep;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.example.freakdeveloper.kep.fragments.GraficasFragment;
 import com.example.freakdeveloper.kep.fragments.PerfilFragment;
 import com.example.freakdeveloper.kep.fragments.PreguntasPorMateriaFragment;
 import com.example.freakdeveloper.kep.fragments.RankingFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateriaFragment.OnFragmentInteractionListener {
@@ -91,7 +93,9 @@ public class NavigationDrawer extends AppCompatActivity
             fragment = new PreguntasPorMateriaFragment();
             fragmentSeleccionado = true;
         } else if (id == R.id.cerrarSesion) {
-            //PONER AQUI CODIGO PARA CERRAR LA SESION
+            FirebaseAuth.getInstance().signOut();
+            Intent Menu = new Intent(this, MainActivity.class);
+            startActivity(Menu);
         }
 
         if(fragmentSeleccionado){

@@ -63,7 +63,7 @@ public class Preguntas extends AppCompatActivity {
 
     private ImageView imgRa, imgRb, imgRc, imgRd, imgPregunta, siguiente;
     private ArrayList<Pregunta> arrayPreguntas = new ArrayList<>();
-    private int contaBuenas, contaMalas, contaTotal, numInicio=0;
+    private int contaBuenas, contaMalas, contaTotal, numInicio;
     private String codigoDuelo, tipoPersona, email, materiaSeleccionada, solucion, tipoDuelo;
 
     //PARA FIREBASE
@@ -77,7 +77,7 @@ public class Preguntas extends AppCompatActivity {
     //PARA TIMER
     private TextView countdownText;
     private CountDownTimer countDownTimer;
-    private long tiempoEnMilisegundos = (2*60000); //Son los minutos que queremos en milisegundos
+    private long tiempoEnMilisegundos = (10*60000); //Son los minutos que queremos en milisegundos
 
     //PARA POP-UP
     private Dialog miVentana;
@@ -104,6 +104,7 @@ public class Preguntas extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         todasMaterias = false;
         Log.w("HOLAWAS", "P: "+todasMaterias.toString());
+        recuperaDatosIntent();
 
         //-----PARA IMAGENES----
         storageRef = FirebaseStorage.getInstance().getReference();
@@ -120,7 +121,6 @@ public class Preguntas extends AppCompatActivity {
         txtRc = (TextView) findViewById(R.id.txtRc);
         txtRd = (TextView) findViewById(R.id.txtRd);
         siguiente = (ImageView) findViewById(R.id.siguiente);
-        salir = (Button) findViewById(R.id.salir);
 
         resA = (LinearLayout) findViewById(R.id.resA);
         resB = (LinearLayout) findViewById(R.id.resB);
@@ -139,26 +139,21 @@ public class Preguntas extends AppCompatActivity {
         limpiaCampos();
         //traePreguntas();
         traePersona();
-        recuperaDatosIntent();
     }
 
     //PARA ALEATORIO
     public void generarNumAleatorio(){
         numAleatorio = (int) (Math.random() * totalPreguntas) + 1;
+        Log.w("FEIKK", "NumAlea" + Integer.toString(numAleatorio));
         traePregunta();
-        if(!(numInicio==0)){
-            Log.w("FYGorFEIK", "ENTRE" + Integer.toString(numInicio));
-            numAleatorio = numInicio;
-        }
-        Log.w("FYGorFEIK", "NumAlea" + Integer.toString(numAleatorio));
+        //if(tipoDuelo)
     }
 
     public void traePregunta() {
         if(todasMaterias){
             materiaSeleccionada = opcMaterias[contaMaterias];
         }
-        Log.w("FYGorFEIK", "Materia "+materiaSeleccionada);
-        Log.w("FYGorFEIK", "NumAleatorio "+numAleatorio);
+
         databaseReference.child(nodoPregunta).child(materiaSeleccionada).child(Integer.toString(numAleatorio)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
