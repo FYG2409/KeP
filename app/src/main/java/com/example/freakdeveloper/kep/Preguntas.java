@@ -148,7 +148,7 @@ public class Preguntas extends AppCompatActivity {
         numAleatorio = (int) (Math.random() * totalPreguntas) + 1;
         Log.w("FEIKK", "NumAlea" + Integer.toString(numAleatorio));
         traePregunta();
-        if(tipoDuelo)
+        //if(tipoDuelo)
     }
 
     public void traePregunta() {

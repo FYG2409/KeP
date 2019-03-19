@@ -1,10 +1,10 @@
-﻿package com.example.freakdeveloper.kep;
+package com.example.freakdeveloper.kep;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
-
-public class Registro extends AppCompatActivity {
-
+public class Registro extends AppCompatActivity
+{
     private EditText NickField, CorField, PassField, PassField2;
     private Button RegistroButton;
     private FirebaseAuth Auth;
@@ -42,15 +41,6 @@ public class Registro extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private  static final String nodoPersona="Personas";
-    private  static final String nodoCarrera="Carrera";
-
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        Auth.addAuthStateListener(AuthListener);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,13 +69,7 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
             {
-                if (firebaseAuth.getCurrentUser() != null)
-                {
-                    Intent intent = new Intent(Registro.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
+           }
         };
     }
 
@@ -100,42 +84,42 @@ public class Registro extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(contra) && !TextUtils.isEmpty(contra2))
         {
+            Dialog.setMessage("Registrando...");
+            Dialog.show();
             //anterior
-            if (contra2.equals(contra)) {
+            if (contra2.equals(contra))
+            {
                 Task<AuthResult> authResultTask = Auth.createUserWithEmailAndPassword(email, contra)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                        {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Dialog.dismiss();
-                                if (task.isSuccessful()) {
+                            public void onComplete(@NonNull Task<AuthResult> task)
+                            {
+                                if (task.isSuccessful())
+                                {
                                     Auth.signInWithEmailAndPassword(email, contra);
-                                    //Toast.makeText(ActivityRegister.this, user_id, Toast.LENGTH_SHORT).show();
-
                                     DatabaseReference Database = FirebaseDatabase.getInstance().getReference().child("usuarios");
                                     DatabaseReference currentUserDB = Database.child(Auth.getCurrentUser().getUid());
                                     //nuevo
-                                    Auth.createUserWithEmailAndPassword(email, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            Dialog.dismiss();
-                                            if (task.isSuccessful()) {
 
-                                                Auth.signInWithEmailAndPassword(email, contra);
+                                                FirebaseUser Usu= Auth.getCurrentUser();
+                                                Usu.sendEmailVerification();
                                                 String ID = Auth.getCurrentUser().getUid();
                                                 Persona persona = new Persona(ID, name, EA, EI,email,contra);
                                                 databaseReference.child(nodoPersona).child(persona.getIdPersona()).setValue(persona);
+                                                FirebaseAuth.getInstance().signOut();
+                                                Intent intent = new Intent(Registro.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                                Dialog.dismiss();
 
                                             } else {
                                                 Toast.makeText(Registro.this, "Error En El Registro", Toast.LENGTH_SHORT).show();
                                             }
-                                        }
-                                    });
 
-                                    Dialog.setMessage("Registrando...");
-                                    Dialog.show();
                                 }
 
-                            }
+
                         });
             }
         }
@@ -144,10 +128,10 @@ public class Registro extends AppCompatActivity {
     private void IniciarVistas()
     {
         EscuelaA = (Spinner) findViewById(R.id.EActual);
-        String[] vocacional = {"Escuela Actual", "CECyT 1", "CECyT 2", "CECyT 3", "CECyT 4", "CECyT 5", "CECyT 6", "CECyT 7", "CECyT 8", "CECyT 9",
+        String[] vocacional = {"CECyT 1", "CECyT 2", "CECyT 3", "CECyT 4", "CECyT 5", "CECyT 6", "CECyT 7", "CECyT 8", "CECyT 9",
                 "CECyT 10", "CECyT 11", "CECyT 12", "CECyT 13", "CECyT 14", "CECyT 15", "CECyT 16", "CECyT 17", "CECyT 18", "CET","ENP1","ENP2"
                 ,"ENP3","ENP4","ENP5","ENP6","ENP7","ENP8","ENP9","CCH Naucalpan","CCH Vallejo","CCH Azcapotzalco","CCH Oriente","CCH Sur","Otro"};
-        EscuelaA.setAdapter(new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, vocacional));
+        EscuelaA.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, vocacional));
         //spinner carreras
 
 
@@ -168,7 +152,7 @@ public class Registro extends AppCompatActivity {
                 for(int i=0;i<sup.size();i++) {
                     superior[i]=sup.get(i);
                 }
-                EscuelaI.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, superior));
+                EscuelaI.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, superior));
 
             }
 
@@ -177,15 +161,6 @@ public class Registro extends AppCompatActivity {
 
             }
         });
-
-        //String[] superior=sup;
-                /*{"Escuela a Igresar","UPIBI","UPIIZ Campus Zacatecas",
-                "UPIITA","ENCB","UPIIG Campus Guanajuato","ESIA Unidad Zacatenco",
-                "ESIME Unidad Zacatenco","ESIME Unidad Ticomán","ESIME Unidad Culhuacán",
-                "UPIICSA","ESIQIE","ESIME Unidad Azcapotzalco","UPIIH Campus Hidalgo",
-                "ESCOM","ESIA Unidad Ticomán","ESFM","ESIT","ESIA Unidad Tecamachalco",
-                "CICS Unidad Milpa Alta","CICS Unidad Santo Tomás","ESEO","ENMyH",
-                "ESM","ESCA Unidad Santo Tomás","ESCA Unidad Tepepan","ESE","EST"};*/
 
 
         NickField = (EditText) findViewById(R.id.Nick);

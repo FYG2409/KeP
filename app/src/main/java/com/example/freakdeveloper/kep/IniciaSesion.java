@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class IniciaSesion extends AppCompatActivity
 {
@@ -54,8 +55,19 @@ public class IniciaSesion extends AppCompatActivity
             {
                 if(firebaseAuth.getCurrentUser() != null)
                 {
-                    String ID= firebaseAuth.getCurrentUser().getUid();
-                    Ir(ID);
+                    FirebaseUser Usu= firebaseAuth.getCurrentUser();
+                    if(!Usu.isEmailVerified())
+                    {
+                        Toast.makeText(IniciaSesion.this , "DEBES VERIFICAR EL EMAIL" , Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                    }
+                    else
+                    {
+                        Toast.makeText(IniciaSesion.this , "INICIO DE SESION EXITOSO" , Toast.LENGTH_SHORT).show();
+                        String ID= firebaseAuth.getCurrentUser().getUid();
+                        Ir(ID);
+                    }
+
                 }
             }
         };
@@ -84,7 +96,7 @@ public class IniciaSesion extends AppCompatActivity
                     Dialogo.dismiss();
                     if(task.isSuccessful())
                     {
-                            Toast.makeText(IniciaSesion.this , "INICIO DE SESION EXITOSO" , Toast.LENGTH_SHORT).show();
+
                     }
                     else
                     {
