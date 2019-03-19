@@ -7,21 +7,21 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Spinner;
-import android.widget.Toast;
-import com.example.freakdeveloper.kep.model.Carrera;
+import android.widget.ArrayAdapter;
+
 import com.example.freakdeveloper.kep.model.Persona;
+import com.example.freakdeveloper.kep.model.Carrera;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -29,18 +29,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class Registro extends AppCompatActivity
-{
-/*
+
+public class Registro extends AppCompatActivity {
+
     private EditText NickField, CorField, PassField, PassField2;
     private Button RegistroButton;
     private FirebaseAuth Auth;
     private ProgressDialog Dialog;
     private Spinner EscuelaA, EscuelaI;
-
+    private FirebaseAuth.AuthStateListener AuthListener;
     //PARA FIREBASE
     private DatabaseReference databaseReference;
-    private FirebaseAuth.AuthStateListener AuthListener;
 
     private  static final String nodoPersona="Personas";
 
@@ -127,54 +126,16 @@ public class Registro extends AppCompatActivity
 
                                             } else {
                                                 Toast.makeText(Registro.this, "Error En El Registro", Toast.LENGTH_SHORT).show();
-            if (contra2.equals(contra))
-            {
-
-                Auth.createUserWithEmailAndPassword(email, contra).addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Dialog.dismiss();
-                        if (task.isSuccessful())
-                        {
-
-                            Auth.signInWithEmailAndPassword(email, contra);
-                            String ID= Auth.getCurrentUser().getUid();
-                            Persona persona = new Persona(ID , name, EA, EI , email , contra);
-                            databaseReference.child(nodoPersona).child(persona.getIdPersona()).setValue(persona);
-                            FirebaseUser Usuario= Auth.getCurrentUser();
-
-                            Usuario.sendEmailVerification()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful())
-                                            {
-                                                Toast.makeText(Registro.this, "Por favor Revisa tu correo", Toast.LENGTH_SHORT).show();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(Registro.this, "Error De Verificación", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
+
                                     Dialog.setMessage("Registrando...");
                                     Dialog.show();
                                 }
 
                             }
                         });
-
-                        }
-                        else
-                        {
-                            Toast.makeText(Registro.this, "Error En El Registro", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-                Dialog.setMessage("Registrando...");
-                Dialog.show();
             }
         }
     }
@@ -188,7 +149,6 @@ public class Registro extends AppCompatActivity
         EscuelaA.setAdapter(new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, vocacional));
         //spinner carreras
 
-        EscuelaA.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, vocacional));
 
         DatabaseReference recupera = FirebaseDatabase.getInstance().getReference(getString(R.string.nodoCarrera));
         recupera.addValueEventListener(new ValueEventListener() {
@@ -215,7 +175,7 @@ public class Registro extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
         //String[] superior=sup;
                 /*{"Escuela a Igresar","UPIBI","UPIIZ Campus Zacatecas",
@@ -226,12 +186,12 @@ public class Registro extends AppCompatActivity
                 "CICS Unidad Milpa Alta","CICS Unidad Santo Tomás","ESEO","ENMyH",
                 "ESM","ESCA Unidad Santo Tomás","ESCA Unidad Tepepan","ESE","EST"};*/
 
-/*
+
         NickField = (EditText) findViewById(R.id.Nick);
         CorField = (EditText) findViewById(R.id.Cor);
         PassField = (EditText) findViewById(R.id.Pass);
         PassField2 = (EditText) findViewById(R.id.Pass2);
         RegistroButton = (Button) findViewById(R.id.Registro);
 
-    }*/
+    }
 }
