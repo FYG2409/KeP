@@ -3,10 +3,7 @@
     package="com.example.freakdeveloper.kep">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.VIBRATE" />
-=======
->>>>>>> 6d0cfab677820a365e842e7567521912f1e55eb4
 
     <application
         android:allowBackup="true"
@@ -15,11 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-=======
-        <activity android:name=".Registro"></activity>
->>>>>>> 6d0cfab677820a365e842e7567521912f1e55eb4
-        <activity android:name=".RegistroCarrera" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,10 +27,8 @@
         <activity android:name=".RegistroPregunta" />
         <activity android:name=".Recuperar_Contra" />
         <activity android:name=".Preguntas" />
-        <activity android:name=".muestraDatos" />
-        <activity android:name=".Recuperar_Contra" />
-        <activity android:name=".Preguntas" />
-        <activity android:name=".Registro"></activity>
+        <activity android:name=".Registro"/>
+        <activity android:name=".RegistroCarrera" />
     </application>
 
 </manifest>
