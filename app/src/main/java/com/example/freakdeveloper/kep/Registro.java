@@ -42,6 +42,7 @@ public class Registro extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private  static final String nodoPersona="Personas";
+    private  static final String nodoCarrera="Carrera";
 
     @Override
     protected void onStart()
