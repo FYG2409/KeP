@@ -25,7 +25,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/kep_icon"
+            android:src="@drawable/kep_icon_blanco"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"/>
         <TextView
@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:text="¡FELICIDADES!"
             android:textStyle="bold"
-            android:textColor="@color/blanco"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"/>
     </LinearLayout>

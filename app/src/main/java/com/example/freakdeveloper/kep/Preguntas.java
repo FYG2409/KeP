@@ -504,7 +504,8 @@ public class Preguntas extends AppCompatActivity {
     public void ponTimer(){
         countdownText = (TextView) findViewById(R.id.countdown_text);
         countdownText.setVisibility(View.VISIBLE);
-        salir.setVisibility(View.GONE);
+        //salir = (Button) findViewById(R.id.salir);
+        //salir.setVisibility(View.GONE);
         iniciaTimer();
     }
 

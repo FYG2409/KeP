@@ -5,18 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Preguntas"
-    android:padding="20dp">
+    tools:context=".Preguntas">
 
-    <TextView
-        android:id="@+id/countdown_text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:textSize="20sp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        android:text="10:00" />
+        android:background="#d6d6d6"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        >
+
+        <TextView
+            android:id="@+id/countdown_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:text="10:00"
+            android:visibility="gone"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/txtPregunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/imgPregunta"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,30 +53,6 @@
             >
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
-                android:background="@color/colorAccent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="10dp"
-                >
-
-                <TextView
-                    android:id="@+id/txtPregunta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:text="La ganancia de energía cinética, cuando actúan fuerzas conservativas sobre un cuerpo se traduce en perdida de energía:" />
-
-                <ImageView
-                    android:id="@+id/imgPregunta"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/kep_icon" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/resA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,6 +61,7 @@
                 android:tag="A"
                 android:padding="5dp"
                 android:background="@drawable/mi_borde"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 >
 
@@ -70,15 +71,13 @@
                     android:layout_height="wrap_content"
                     android:onClick="clickeo"
                     android:tag="A"
-                    android:text="Térmica"
                     android:textAlignment="center"
                     android:padding="5dp"/>
 
                 <ImageView
                     android:id="@+id/imgRa"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/kep_icon" />
+                    android:layout_height="100dp" />
 
             </LinearLayout>
 
@@ -98,7 +97,6 @@
                     android:id="@+id/txtRb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Potencial"
                     android:tag="B"
                     android:onClick="clickeo"
                     android:textAlignment="center"
@@ -107,8 +105,7 @@
                 <ImageView
                     android:id="@+id/imgRb"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/kep_icon" />
+                    android:layout_height="100dp"/>
 
             </LinearLayout>
 
@@ -128,7 +125,6 @@
                     android:id="@+id/txtRc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mecánica total"
                     android:tag="C"
                     android:onClick="clickeo"
                     android:textAlignment="center"
@@ -138,8 +134,7 @@
                 <ImageView
                     android:id="@+id/imgRc"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/kep_icon" />
+                    android:layout_height="100dp"/>
 
             </LinearLayout>
 
@@ -162,14 +157,12 @@
                     android:tag="D"
                     android:onClick="clickeo"
                     android:textAlignment="center"
-                    android:padding="5dp"
-                    android:text="Debido a fuerzas de fricción" />
+                    android:padding="5dp"/>
 
                 <ImageView
                     android:id="@+id/imgRd"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/kep_icon" />
+                    android:layout_height="100dp"/>
 
             </LinearLayout>
 
@@ -189,7 +182,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="salir"
-                android:text="SALIR" />
+                android:layout_marginTop="40dp"
+                style="@style/AppTheme.boton"
+                android:text="Abandonar Partida" />
 
         </LinearLayout>
 

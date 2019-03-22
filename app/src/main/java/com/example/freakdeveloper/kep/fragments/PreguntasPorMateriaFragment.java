@@ -37,7 +37,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private int totalPreguntas=0, conta;
+    private int totalPreguntas=0, conta=0;
     int[] totales = new int[11];
     private Boolean todasMaterias = false;
 
@@ -78,7 +78,6 @@ public class PreguntasPorMateriaFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_preguntas_por_materia, container, false);
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
         infinito = (LinearLayout) v.findViewById(R.id.infinito);
         razMatematico = (LinearLayout) v.findViewById(R.id.razMatematico);
         algebra = (LinearLayout) v.findViewById(R.id.algebra);
