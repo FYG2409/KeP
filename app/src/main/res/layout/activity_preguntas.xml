@@ -37,7 +37,7 @@
 
         <ImageView
             android:id="@+id/imgPregunta"
-            android:layout_width="100dp"
+            android:layout_width="100dp" android:contentDescription="TODO" 
             android:layout_height="100dp"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
@@ -76,7 +76,7 @@
 
                 <ImageView
                     android:id="@+id/imgRa"
-                    android:layout_width="100dp"
+                    android:layout_width="100dp" android:contentDescription="TODO" 
                     android:layout_height="100dp" />
 
             </LinearLayout>
@@ -104,7 +104,7 @@
 
                 <ImageView
                     android:id="@+id/imgRb"
-                    android:layout_width="100dp"
+                    android:layout_width="100dp" android:contentDescription="TODO" 
                     android:layout_height="100dp"/>
 
             </LinearLayout>
@@ -133,7 +133,7 @@
 
                 <ImageView
                     android:id="@+id/imgRc"
-                    android:layout_width="100dp"
+                    android:layout_width="100dp" android:contentDescription="TODO" 
                     android:layout_height="100dp"/>
 
             </LinearLayout>
@@ -161,7 +161,7 @@
 
                 <ImageView
                     android:id="@+id/imgRd"
-                    android:layout_width="100dp"
+                    android:layout_width="100dp" android:contentDescription="TODO" 
                     android:layout_height="100dp"/>
 
             </LinearLayout>
@@ -172,7 +172,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/siguiente_icon"
-                android:enabled="false"
+                android:contentDescription="TODO" android:enabled="false"
                 android:onClick="clickeoSiguiente"
                 android:layout_gravity="right"
                 />

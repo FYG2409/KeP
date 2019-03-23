@@ -21,14 +21,16 @@
         <activity android:name=".Preguntas" />
         <activity android:name=".Registro" />
         <activity android:name=".RegistroCarrera" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".IniciaSesion" />
         <activity android:name=".splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".faqs"></activity>
     </application>
 
 </manifest>

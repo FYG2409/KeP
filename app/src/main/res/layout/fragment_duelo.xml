@@ -41,14 +41,6 @@
         />
 
     <Button
-        android:id="@+id/btnElMejor"
-        android:text="El mejor"
-        style="@style/AppTheme.boton"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
-        />
-
-    <Button
         android:id="@+id/btnContraTiempo"
         android:text="Contra tiempo"
         android:layout_marginTop="20dp"

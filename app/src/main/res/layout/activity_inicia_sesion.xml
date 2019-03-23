@@ -23,7 +23,7 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:background="@drawable/kep_icon_blanco"

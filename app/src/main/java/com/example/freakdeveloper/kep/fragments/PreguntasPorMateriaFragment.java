@@ -52,7 +52,6 @@ public class PreguntasPorMateriaFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     // TODO: Rename and change types and number of parameters
     public static PreguntasPorMateriaFragment newInstance(String param1, String param2) {
         PreguntasPorMateriaFragment fragment = new PreguntasPorMateriaFragment();
@@ -188,6 +187,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     }
 
     public void valida(String materia){
+        Log.w("HOLA", "HOALWASMK "+conta);
         databaseReference.child(nodoPregunta).child(materia).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -241,12 +241,14 @@ public class PreguntasPorMateriaFragment extends Fragment {
     public void validaExistenPreguntas(View view){
         materia = view.getTag().toString();
         todasMaterias=false;
+        conta = 0;
         valida(materia);
     }
 
     public void validaInfinito(View view) {
         materia = view.getTag().toString();
         todasMaterias=true;
+        conta=0;
         valida("Razonamiento Matematico");
         valida("Algebra");
         valida("Geometria y Trigonometria");

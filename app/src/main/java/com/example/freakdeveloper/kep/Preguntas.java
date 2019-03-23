@@ -15,6 +15,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,9 +48,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class Preguntas extends AppCompatActivity {
-
     //PARA ALEATORIO
-    private int numAleatorio, totalPreguntas;
+    private int numAleatorio, totalPreguntas, conta;
     private Pregunta preguntaObj;
     private int contaMaterias;
     private Boolean todasMaterias;
@@ -144,9 +145,7 @@ public class Preguntas extends AppCompatActivity {
     //PARA ALEATORIO
     public void generarNumAleatorio(){
         numAleatorio = (int) (Math.random() * totalPreguntas) + 1;
-        Log.w("FEIKK", "NumAlea" + Integer.toString(numAleatorio));
         traePregunta();
-        //if(tipoDuelo)
     }
 
     public void traePregunta() {
@@ -242,7 +241,6 @@ public class Preguntas extends AppCompatActivity {
             ponTimer();
         }
 
-
         generarNumAleatorio();
     }
 
@@ -271,8 +269,6 @@ public class Preguntas extends AppCompatActivity {
                 Glide.with(Preguntas.this)
                         .load(uri)
                         .into(img);
-
-                Log.w("Preguntas", "Imagen traida correctamente");
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -389,8 +385,87 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void salir(View view){
-        guardaRespuestas();
-        muestraPopUp("Felicidades...!");
+        if(codigoDuelo!=null){
+            //CUANDO ABANDONAMOS UN DUELO
+            LinearLayout marcadores;
+            TextView txtClose, txtMensaje;
+            miVentana.setContentView(R.layout.my_pop_up);
+            txtClose = (TextView) miVentana.findViewById(R.id.txtclose);
+            marcadores = (LinearLayout) miVentana.findViewById(R.id.marcadores);
+            txtMensaje = (TextView) miVentana.findViewById(R.id.txtMensaje);
+            marcadores.setVisibility(View.GONE);
+            txtMensaje.setText("Abandonaste la partida");
+            if(tipoPersona.equals("Uno")){
+                databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
+            }else
+            if(tipoPersona.equals("Dos")){
+                databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
+            }
+            miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            miVentana.show();
+            txtClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    miVentana.dismiss();
+                    finish();
+                }
+            });
+
+        }else{
+            guardaRespuestas();
+            muestraPopUp("Felicidades...!");
+        }
+    }
+
+    public void escuchaDuelo(){
+        databaseReference.child(nodoDuelos).child(codigoDuelo).addChildEventListener(new ChildEventListener() {
+
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    conta = conta + 1;
+                    if(conta == 1){
+                        Log.w("lo borre", "BORRE");
+                        //LA PERSONA ABANDONO EL DUELO
+                        LinearLayout marcadores;
+                        TextView txtClose, txtMensaje;
+                        miVentana.setContentView(R.layout.my_pop_up);
+                        txtClose = (TextView) miVentana.findViewById(R.id.txtclose);
+                        marcadores = (LinearLayout) miVentana.findViewById(R.id.marcadores) ;
+                        txtMensaje = (TextView) miVentana.findViewById(R.id.txtMensaje);
+                        marcadores.setVisibility(View.GONE);
+                        txtMensaje.setText("La otra persona abandono el duelo");
+                        miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Log.w("HOLAWAS", "Entre preg");
+                        miVentana.show(); //AQUI HAY PROBLEMAS
+                        txtClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                miVentana.dismiss();
+                                finish();
+                            }
+                        });
+                    }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     //------PARA RESPUESTAS--------
@@ -507,6 +582,7 @@ public class Preguntas extends AppCompatActivity {
         //salir = (Button) findViewById(R.id.salir);
         //salir.setVisibility(View.GONE);
         iniciaTimer();
+        escuchaDuelo();
     }
 
     public void iniciaTimer(){
@@ -524,8 +600,7 @@ public class Preguntas extends AppCompatActivity {
                 }else
                     if(tipoPersona.equals("Dos")){
                         databaseReference.child(nodoDuelos).child(codigoDuelo).child("totalBuenasDos").setValue(contaBuenas);
-                    }else
-                        Log.w("Preguntas", "Tipo de persona desconocido");
+                    }
 
                 verGanador();
             }
@@ -581,16 +656,16 @@ public class Preguntas extends AppCompatActivity {
                             msj="Empate";
                         }
 
+                        databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
+
                         txtMensaje.setText(msj);
                         txtBuenas.setText(Integer.toString(contaBuenas));
                         txtMalas.setText(Integer.toString(contaMalas));
-
                         txtClose.setVisibility(View.VISIBLE);
                         txtClose.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 miVentana.dismiss();
-                                databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
                                 finish();
                             }
                         });
