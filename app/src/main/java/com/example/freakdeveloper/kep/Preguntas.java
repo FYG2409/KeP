@@ -104,7 +104,6 @@ public class Preguntas extends AppCompatActivity {
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
         todasMaterias = false;
-        Log.w("HOLAWAS", "P: "+todasMaterias.toString());
         recuperaDatosIntent();
 
         //-----PARA IMAGENES----
@@ -381,6 +380,7 @@ public class Preguntas extends AppCompatActivity {
             }
         });
         miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        miVentana.setCancelable(false);
         miVentana.show();
     }
 
@@ -402,6 +402,7 @@ public class Preguntas extends AppCompatActivity {
                 databaseReference.child(nodoDuelos).child(codigoDuelo).removeValue();
             }
             miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            miVentana.setCancelable(false);
             miVentana.show();
             txtClose.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -433,7 +434,6 @@ public class Preguntas extends AppCompatActivity {
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                     conta = conta + 1;
                     if(conta == 1){
-                        Log.w("lo borre", "BORRE");
                         //LA PERSONA ABANDONO EL DUELO
                         LinearLayout marcadores;
                         TextView txtClose, txtMensaje;
@@ -444,7 +444,7 @@ public class Preguntas extends AppCompatActivity {
                         marcadores.setVisibility(View.GONE);
                         txtMensaje.setText("La otra persona abandono el duelo");
                         miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        Log.w("HOLAWAS", "Entre preg");
+                        miVentana.setCancelable(false);
                         miVentana.show(); //AQUI HAY PROBLEMAS
                         txtClose.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -615,6 +615,7 @@ public class Preguntas extends AppCompatActivity {
         txtMalas = (TextView) miVentana.findViewById(R.id.txtMalas);
         txtMensaje = (TextView) miVentana.findViewById(R.id.txtMensaje);
         miVentana.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        miVentana.setCancelable(false);
         txtClose.setVisibility(View.GONE);
         miVentana.show();
 

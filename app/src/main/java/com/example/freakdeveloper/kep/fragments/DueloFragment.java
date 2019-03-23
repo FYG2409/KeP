@@ -148,7 +148,6 @@ public class DueloFragment extends Fragment {
     }
 
     public void metCreaCodigo(){
-        Log.w("HOLAAAA", "Entre");
         btnCreaCodigo.setVisibility(View.GONE);
         btnTengoCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.GONE);
@@ -161,7 +160,6 @@ public class DueloFragment extends Fragment {
         btnContraTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.w("HOLAAAA", "Entre x2");
                 tvEsperandoOponente.setVisibility(View.VISIBLE);
                 tipoDuelo = "contraTiempo";
                 numAleatorio();
@@ -248,7 +246,6 @@ public class DueloFragment extends Fragment {
                             intent.putExtra("tipoDuelo", tipoDuelo);
                             intent.putExtra("numInicio", numeroAleatorio);
                             intent.putExtra("totalHijos", totalPreguntas);
-                            Log.w("HOLAAAA", "Entre FUI");
                             startActivity(intent);
                         }
                     }
