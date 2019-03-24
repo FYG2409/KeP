@@ -17,9 +17,7 @@
     <string name="Recuper">Recuperar Contraseña</string>
     <string name="envia">Enviar correo</string>
     <string name="nodoCarrera">Carreras</string>
-<<<<<<< HEAD
     <string name="nodoPersona">Personas</string>
-=======
 
 
     //STRING AYLIN
@@ -36,5 +34,4 @@
     <string name="olvido_contraseña">¿Olvidaste tu contraseña?</string>
     <string name="msj_recupera_contra">Introduce tu correo electronico para recuperar tu contraseña</string>
     <string name="enviar">Enviar</string>
->>>>>>> 8710fa01a247624297b01a8bae5a549f76cd56a7
 </resources>

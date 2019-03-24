@@ -81,33 +81,12 @@
             android:layout_marginRight="60sp"
             />
 
-        <ImageButton
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_height="500dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Graficas"
-            android:id="@drawable/duelo_grande_icon"
-            android:textAlignment="center"
-            android:textSize="28sp"
-            android:textColor="@color/negro"
-            android:background="@color/amarillo"
-            android:layout_marginTop="50sp"
-
-            />
-
-        <ListView
-            android:id="@+id/listA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
-
-        <ListView
-            android:id="@+id/listT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
-
-        <ListView
-            android:id="@+id/listM"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_weight="1"
+            android:id="@+id/barChar">
+        </com.github.mikephil.charting.charts.BarChart>
 
         <Button
             android:layout_width="match_parent"
@@ -135,6 +114,7 @@
             android:layout_marginTop="30sp"
             android:layout_marginLeft="60sp"
             android:layout_marginRight="60sp"
+            android:layout_marginBottom="60sp"
             />
     </LinearLayout>
     </ScrollView>

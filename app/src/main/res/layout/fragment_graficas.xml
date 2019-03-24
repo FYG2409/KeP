@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.GraficasFragment"
     android:background="#D32020">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="YO SOY GRAFICAS" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_height="500dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/barChar">
+            </com.github.mikephil.charting.charts.BarChart>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:layout_height="500dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/pieChart">
+            </com.github.mikephil.charting.charts.PieChart>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

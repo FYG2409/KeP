@@ -1,5 +1,24 @@
 package com.example.freakdeveloper.kep.fragments;
 
+import android.os.Bundle;
+import android.graphics.Color;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +49,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class PerfilFragment extends Fragment
@@ -53,11 +73,33 @@ public class PerfilFragment extends Fragment
     private  static final String nodoPersona="Personas";
     private  static final String nodoRespuestas="Respuestas";
 
+    //Colores
+    private int CA= Color.rgb(167, 254, 58); //(aciertos)
+    private int CE= Color.rgb(255, 97 , 97); //(errores);
+
+    private int C1= Color.rgb(97  , 185 , 255);
+    private int C2= Color.rgb(255 , 167 , 97);
+    private int C3= Color.rgb(252 , 166 , 246);
+    private int C4= Color.rgb(246 , 255 , 131);
+    private int C5= Color.rgb(166 , 166 , 252);
+    private int C6= Color.rgb(166 , 252 , 197);
+    private int C7= Color.rgb(188 , 106 , 106);
+    private int C8= Color.rgb(2   , 71  , 117);
+    private int C9= Color.rgb(181 , 103 , 255);
+    private int C10= Color.rgb(217, 176 , 80);
+    private int C11= Color.rgb(138, 220 , 201);
+
+    private int [] Colores =  new int [] {C1, C2 , C3 , C4 , C5 , C6, C7, C8 , C9 , C10, C11};
+
+
     //VARIABLES
     private String Email;
     private int[] totales=new int[11];
     private int[] aciertos=new int[11];
     private String[] materias=new String[11];
+
+    private BarChart barChart;
+    //private int [] Colores =  new int [] {Color.BLACK , Color.RED , Color.BLUE , Color.MAGENTA};
 
 
     //TRAER DATOS
@@ -75,7 +117,7 @@ public class PerfilFragment extends Fragment
     private TextView Ran;
     private Button btnAjustes;
     private Button btnEliminar;
-    private ListView ListaA,ListaT,ListaM;
+
 
     public PerfilFragment()
     {
@@ -121,9 +163,8 @@ public class PerfilFragment extends Fragment
         EA = (TextView) view.findViewById(R.id.E_A);
         EI = (TextView) view.findViewById(R.id.E_I);
         Ran= (TextView) view.findViewById(R.id.RankG);
-        ListaA=(ListView) view.findViewById(R.id.listA);
-        ListaT=(ListView) view.findViewById(R.id.listT);
-        ListaM=(ListView) view.findViewById(R.id.listM);
+        this.barChart = (BarChart)view.findViewById(R.id.barChar);
+        
 
         //-----TRAYENDO PERSONA----
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -209,21 +250,9 @@ public class PerfilFragment extends Fragment
                             materias[10]="RazonamientoMatematico";
                             break;
                         }
-                        else {
 
-                        }
                     }
-                     /*aquiiii
-                    //answer.setText(": " + NickName );
-                    ArrayAdapter A=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, Collections.singletonList(aciertos));
-                    ListaA.setAdapter(A);
-                    ArrayAdapter T=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, Collections.singletonList(totales));
-                    ListaT.setAdapter(T);
-                    ArrayAdapter<String> M=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, materias);
-                    ListaM.setAdapter(M);
-                    //hacer graficas aqui
-                    */
-
+                    createChart();
                 }
             }
 
@@ -324,6 +353,92 @@ public class PerfilFragment extends Fragment
     {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private Chart getSameChart(Chart chart , String Des , int TextC , int Back , int Time)
+    {
+        chart.getDescription().setText(Des);
+        chart.getDescription().setTextSize(15);
+        chart.setBackgroundColor(Back);
+        chart.animateY(Time);
+
+        legend(chart);
+        return chart;
+    }
+
+    private void legend(Chart chart)
+    {
+        Legend legend = chart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        ArrayList<LegendEntry> entries = new ArrayList<> ();
+        for(int i=0; i<aciertos.length ; i++)
+        {
+            LegendEntry entry = new LegendEntry();
+            entry.formColor= Colores[i];
+            entry.label = materias[i];
+            entries.add(entry);
+        }
+
+        legend.setCustom(entries);
+    }
+
+    private ArrayList<BarEntry>getBarEntries()
+    {
+        ArrayList <BarEntry> entries = new ArrayList<> ();
+        for(int i=0; i<aciertos.length ; i++)
+        {
+            entries.add(new BarEntry(i , aciertos[i]));
+        }
+        return entries;
+    }
+
+
+    private void axisX(XAxis axis)
+    {
+        axis.setGranularityEnabled(true);
+        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        axis.setValueFormatter(new IndexAxisValueFormatter(materias));
+    }
+
+    private void axisLeft(YAxis axis)
+    {
+        axis.setSpaceBottom(60);
+        axis.setAxisMinimum(0);
+    }
+
+    private void axisRight(YAxis axis)
+    {
+        axis.setEnabled(false);
+    }
+
+    private void createChart()
+    {
+        barChart = (BarChart) getSameChart(barChart, "ACIERTOS" , Color.BLACK , Color.WHITE , 5000);
+        barChart.setDrawGridBackground(true);
+        barChart.setDrawBarShadow(false);
+        barChart.setData(getBarData());
+        axisX(barChart.getXAxis());
+        axisLeft(barChart.getAxisLeft());
+        axisRight(barChart.getAxisRight());
+
+    }
+
+    private DataSet getData (DataSet dataSet)
+    {
+        dataSet.setColors(this.Colores);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextSize(10);
+        return dataSet;
+    }
+
+    private BarData getBarData()
+    {
+        BarDataSet barDataSet= (BarDataSet) getData(new BarDataSet(getBarEntries() , ""));
+        barDataSet.setBarShadowColor(Color.GRAY);
+        BarData barData = new BarData(barDataSet);
+        barData.setBarWidth(0.25f);
+        return barData;
     }
 
 
