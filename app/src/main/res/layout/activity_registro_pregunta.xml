@@ -25,14 +25,14 @@
 
             <EditText
                     android:id="@+id/pregunta"
-                    android:layout_width="match_parent"
+                    android:layout_width="match_parent" android:inputType="" 
                     android:layout_height="wrap_content"
                     android:hint="Pregunta"
                     />
 
             <ImageView
                 android:id="@+id/imgPregunta"
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
@@ -53,14 +53,14 @@
 
             <EditText
                 android:id="@+id/rA"
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" android:inputType="" 
                 android:layout_height="wrap_content"
                 android:hint="Respuesta A"
                 />
 
             <ImageView
                 android:id="@+id/imgRepuestaA"
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
@@ -81,14 +81,14 @@
 
             <EditText
                 android:id="@+id/rB"
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" android:inputType="" 
                 android:layout_height="wrap_content"
                 android:hint="Respuesta B"
                 />
 
             <ImageView
                 android:id="@+id/imgRepuestaB"
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
@@ -109,14 +109,14 @@
 
             <EditText
                 android:id="@+id/rC"
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" android:inputType="" 
                 android:layout_height="wrap_content"
                 android:hint="Respuesta C"
                 />
 
             <ImageView
                 android:id="@+id/imgRepuestaC"
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
@@ -137,14 +137,14 @@
 
             <EditText
                 android:id="@+id/rD"
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" android:inputType="" 
                 android:layout_height="wrap_content"
                 android:hint="Respuesta D"
                 />
 
             <ImageView
                 android:id="@+id/imgRepuestaD"
-                android:layout_width="100dp"
+                android:layout_width="100dp" android:contentDescription="TODO" 
                 android:layout_height="100dp"
                 android:background="@drawable/kep_icon"
                 />
@@ -171,11 +171,9 @@
 
             <Button
                 android:layout_marginTop="40dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="REGISTRA"
                 android:onClick="guardaPregunta"
-                android:background="@color/colorAccent"/>
+                style="@style/AppTheme.boton"/>
 
         </LinearLayout>
     </ScrollView>

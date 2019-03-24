@@ -7,54 +7,57 @@
     android:orientation="vertical"
     android:background="@drawable/duelo_grande_icon"
     android:gravity="center"
+    android:padding="40dp"
     >
 
     <Button
         android:id="@+id/btnCreaCodigo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Crea un Código"/>
+        android:text="Crea un Código"
+        style="@style/AppTheme.boton"
+        />
 
     <Button
         android:id="@+id/btnTengoCodigo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tengo un Código"/>
+        android:text="Tengo un Código"
+        style="@style/AppTheme.boton"
+        android:layout_marginTop="20dp"
+        />
 
     <EditText
         android:id="@+id/edtIngresaCodigo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Ingresa Código"
-        android:visibility="gone"/>
+        android:digits="abcdefghijklmnñopqrstuvxwyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789 "
+        style="@style/AppTheme.txtFondoClaro"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
 
     <Button
         android:id="@+id/btnJugar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Jugar"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/tvEsperandoOponente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Esperando oponente..."
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/btnElMejor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="El mejor"
-        android:visibility="gone"/>
+        style="@style/AppTheme.boton"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
 
     <Button
         android:id="@+id/btnContraTiempo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Contra tiempo"
-        android:visibility="gone"/>
+        android:layout_marginTop="20dp"
+        style="@style/AppTheme.boton"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tvEsperandoOponente"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Esperando oponente..."
+        android:textSize="17dp"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        />
 
 
 

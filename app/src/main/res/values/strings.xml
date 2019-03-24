@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">KEP</string>
-    <string name="Inicia_Sesion">Inicia Sesion</string>
     <string name="title_activity_navigation_drawe">NavigationDrawe</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,10 +13,28 @@
     <string name="Usuario">Usuario</string>
     <string name="Contraseña">Contraseña</string>
     <string name="Correo">Correo</string>
-    <string name="Iniciar">Iniciar</string>
     <string name="Olvide">Olvide Contraeña</string>
     <string name="Recuper">Recuperar Contraseña</string>
     <string name="envia">Enviar correo</string>
     <string name="nodoCarrera">Carreras</string>
+<<<<<<< HEAD
     <string name="nodoPersona">Personas</string>
+=======
+
+
+    //STRING AYLIN
+    <string name="inicia_sesion">Inicia Sesión</string>
+    <string name="unete_a_nosotros">Únete a nosotros</string>
+    <string name="registra_pregunta">Registra Pregunta</string>
+    <string name="registra_carrera">Registra Carrera</string>
+    <string name="freak_developer">FREAK.DEVELOPER</string>
+    <string name="nick_name">NickName</string>
+    <string name="correo_electronico">Correo Electronico</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="confirma_contraseña">Confirma contraseña</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="olvido_contraseña">¿Olvidaste tu contraseña?</string>
+    <string name="msj_recupera_contra">Introduce tu correo electronico para recuperar tu contraseña</string>
+    <string name="enviar">Enviar</string>
+>>>>>>> 8710fa01a247624297b01a8bae5a549f76cd56a7
 </resources>

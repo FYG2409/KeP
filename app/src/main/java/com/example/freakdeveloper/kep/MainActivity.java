@@ -4,13 +4,34 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button regPregunta, regCarrera;
+    private int conta = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        regPregunta = findViewById(R.id.regPregunta);
+        regCarrera = findViewById(R.id.regCarrera);
+
+    }
+
+    public void visualiza(View view){
+        if(conta==0){
+            regPregunta.setVisibility(View.VISIBLE);
+            regCarrera.setVisibility(View.VISIBLE);
+            conta = 1;
+        }else if (conta == 1) {
+            regPregunta.setVisibility(View.GONE);
+            regCarrera.setVisibility(View.GONE);
+            conta = 0;
+        }
     }
 
 

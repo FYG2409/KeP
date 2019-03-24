@@ -37,7 +37,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     //MIS VARIABLES
-    private int totalPreguntas=0, conta;
+    private int totalPreguntas=0, conta=0;
     int[] totales = new int[11];
     private Boolean todasMaterias = false;
 
@@ -51,7 +51,6 @@ public class PreguntasPorMateriaFragment extends Fragment {
     public PreguntasPorMateriaFragment() {
         // Required empty public constructor
     }
-
 
     // TODO: Rename and change types and number of parameters
     public static PreguntasPorMateriaFragment newInstance(String param1, String param2) {
@@ -78,7 +77,6 @@ public class PreguntasPorMateriaFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_preguntas_por_materia, container, false);
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
         infinito = (LinearLayout) v.findViewById(R.id.infinito);
         razMatematico = (LinearLayout) v.findViewById(R.id.razMatematico);
         algebra = (LinearLayout) v.findViewById(R.id.algebra);
@@ -189,6 +187,7 @@ public class PreguntasPorMateriaFragment extends Fragment {
     }
 
     public void valida(String materia){
+        Log.w("HOLA", "HOALWASMK "+conta);
         databaseReference.child(nodoPregunta).child(materia).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -242,12 +241,14 @@ public class PreguntasPorMateriaFragment extends Fragment {
     public void validaExistenPreguntas(View view){
         materia = view.getTag().toString();
         todasMaterias=false;
+        conta = 0;
         valida(materia);
     }
 
     public void validaInfinito(View view) {
         materia = view.getTag().toString();
         todasMaterias=true;
+        conta=0;
         valida("Razonamiento Matematico");
         valida("Algebra");
         valida("Geometria y Trigonometria");

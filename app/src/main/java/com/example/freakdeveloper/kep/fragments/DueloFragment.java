@@ -42,7 +42,7 @@ public class DueloFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-        private Button btnCreaCodigo, btnTengoCodigo, btnJugar, btnElMejor, btnContraTiempo;
+        private Button btnCreaCodigo, btnTengoCodigo, btnJugar, btnContraTiempo;
         private TextView tvEsperandoOponente;
         private EditText edtIngresaCodigo;
         private String NickName, email, codigoDuelo, tipoDuelo;
@@ -58,7 +58,6 @@ public class DueloFragment extends Fragment {
 
         private  static final String nodoDuelos="Duelos";
         private  static final String nodoPersona="Personas";
-
 
     public DueloFragment() {
         // Required empty public constructor
@@ -92,7 +91,6 @@ public class DueloFragment extends Fragment {
             databaseReference = FirebaseDatabase.getInstance().getReference();
             firebaseAuth = FirebaseAuth.getInstance();
 
-            btnElMejor = (Button) view.findViewById(R.id.btnElMejor);
             btnContraTiempo = (Button) view.findViewById(R.id.btnContraTiempo);
             btnCreaCodigo = (Button) view.findViewById(R.id.btnCreaCodigo);
             btnTengoCodigo = (Button) view.findViewById(R.id.btnTengoCodigo);
@@ -153,23 +151,11 @@ public class DueloFragment extends Fragment {
         btnCreaCodigo.setVisibility(View.GONE);
         btnTengoCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.GONE);
-        btnElMejor.setVisibility(View.VISIBLE);
         btnContraTiempo.setVisibility(View.VISIBLE);
 
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("text",  codigoDuelo);
-        Toast.makeText(getContext(), "Codigo copiado a portapapeles", Toast.LENGTH_SHORT).show();
         clipboard.setPrimaryClip(clip);
-
-        btnElMejor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvEsperandoOponente.setVisibility(View.VISIBLE);
-                tipoDuelo = "elMejor";
-                numAleatorio();
-                //validandoCodigoPerUno();
-            }
-        });
 
         btnContraTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +163,7 @@ public class DueloFragment extends Fragment {
                 tvEsperandoOponente.setVisibility(View.VISIBLE);
                 tipoDuelo = "contraTiempo";
                 numAleatorio();
+                Toast.makeText(getContext(), "Codigo copiado a portapapeles", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -236,7 +223,6 @@ public class DueloFragment extends Fragment {
         conta=0;
         Duelo duelo = new Duelo(email, null, null, null, (long)numeroAleatorio, tipoDuelo, (long)totalPreguntas);
         databaseReference.child(nodoDuelos).child(codigoDuelo).setValue(duelo);
-        Log.w("FEIK", "Duelo creado");
 
         databaseReference.child(nodoDuelos).child(codigoDuelo).addValueEventListener(new ValueEventListener() {
             @Override
@@ -292,8 +278,8 @@ public class DueloFragment extends Fragment {
         edtIngresaCodigo.setVisibility(View.GONE);
         btnJugar.setVisibility(View.GONE);
         tvEsperandoOponente.setVisibility(View.GONE);
-        btnElMejor.setVisibility(View.GONE);
         btnContraTiempo.setVisibility(View.GONE);
+        edtIngresaCodigo.setText("");
     }
 
     public void valida(String materia){
@@ -321,7 +307,6 @@ public class DueloFragment extends Fragment {
                             totalPreguntas = totales[i];
                         }
                     }
-                    Log.w("FEIK", "Menor "+Integer.toString(totalPreguntas));
                     if(totalPreguntas==0){
                         Toast.makeText(getContext(), "Lo sentimos aun no tenemos preguntas para todas las materias", Toast.LENGTH_SHORT).show();
                     }else{
@@ -341,6 +326,7 @@ public class DueloFragment extends Fragment {
     }
 
     public void numAleatorio(){
+        conta = 0;
         valida("Razonamiento Matematico");
         valida("Algebra");
         valida("Geometria y Trigonometria");

@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Recuperar_Contra" android:padding="40dp">
+    tools:context=".Recuperar_Contra"
+    android:background="@drawable/fondo2">
 
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Recuper"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Correo"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Correo"
-
+        android:layout_height="match_parent"
+        android:background="@color/negro"
+        android:alpha="0.6"
         />
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Recup"
-        android:text="@string/envia"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="40dp"
+        android:gravity="center"
+        >
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="100dp" android:contentDescription="TODO" 
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/kep_icon_blanco"
+            android:layout_marginBottom="40dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/msj_recupera_contra"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="40dp"
+            />
+
+        <EditText
+            android:id="@+id/Correo"
+            android:hint="@string/correo_electronico"
+            android:inputType="textWebEmailAddress"
+            style="@style/AppTheme.txtFondoOscuro"
+            />
+
+        <Button
+            android:id="@+id/Recup"
+            android:text="@string/enviar"
+            style="@style/AppTheme.boton"
+            android:layout_marginTop="40dp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

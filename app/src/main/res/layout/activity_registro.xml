@@ -1,76 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="40dp"
-    tools:context=".Registro">
+    tools:context=".Registro"
+    android:background="@drawable/fondo2"
+    >
 
-    <EditText
-        android:id="@+id/Nick"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="NickName" />
+        android:layout_height="match_parent"
+        android:background="@color/negro"
+        android:alpha="0.6"
+        />
 
-    <EditText
-        android:id="@+id/Cor"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Correo" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/Pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Contraseña" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="40dp"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/Pass2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Confirma contraseña"
-        android:inputType="textPersonName" />
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="Escuela Actual"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+            <ImageView
+                android:layout_width="100dp" android:contentDescription="TODO" 
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/kep_icon_blanco"
+                android:layout_marginBottom="30dp"
+                />
 
-    <Spinner
-        android:id="@+id/EActual"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/Nick"
+                android:hint="@string/nick_name"
+                android:digits="abcdefghijklmnñopqrstuvxwyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789 "
+                style="@style/AppTheme.txtFondoOscuro"
+                />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="Escuela a Ingresar"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+            <EditText
+                android:id="@+id/Cor"
+                android:hint="@string/correo_electronico"
+                android:inputType="textWebEmailAddress"
+                style="@style/AppTheme.txtFondoOscuro"
+                />
 
-    <Spinner
-        android:id="@+id/EIngresar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/Pass"
+                android:hint="@string/contraseña"
+                android:inputType="textPassword"
+                style="@style/AppTheme.txtFondoOscuro"/>
 
-    <Button
-        android:id="@+id/Registro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Iniciar" />
+            <EditText
+                android:id="@+id/Pass2"
+                android:hint="@string/confirma_contraseña"
+                android:inputType="textPassword"
+                style="@style/AppTheme.txtFondoOscuro"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Escuela Actual"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/blanco"
+
+                android:layout_marginTop="10dp"
+                />
+
+            <Spinner
+                android:id="@+id/EActual"
+                style="@style/spinner"
+                />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Escuela a Ingresar"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/blanco"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/EIngresar"
+                style="@style/spinner"
+                />
+
+            <Button
+                android:id="@+id/Registro"
+                android:text="@string/iniciar"
+                style="@style/AppTheme.boton"
+                android:layout_marginTop="40dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
