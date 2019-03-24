@@ -1,15 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PerfilFragment"
-    android:background="#BB0D3A">
+    android:orientation="vertical"
+    android:background="#BB0D3A"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    >
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="YO SOY EL PERFIL" />
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PERFIL"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="50dp"
+            android:gravity="top"
 
-</FrameLayout>
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NickN"
+            android:text="NicKName:"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="50sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CorreO"
+            android:text="Correo:"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="50sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/E_A"
+            android:text="Escuela Actual:"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="50sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/E_I"
+            android:text="Escuela a Ingresar:"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="50sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RankG"
+            android:text="Ranking Global: "
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@color/negro"
+            android:layout_marginTop="40sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginRight="60sp"
+            />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Graficas"
+            android:id="@drawable/duelo_grande_icon"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@color/negro"
+            android:background="@color/amarillo"
+            android:layout_marginTop="50sp"
+
+            />
+
+        <ListView
+            android:id="@+id/listA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <ListView
+            android:id="@+id/listT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <ListView
+            android:id="@+id/listM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAjust"
+            android:text="Ajustes"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@color/negro"
+            android:background="@color/amarillo"
+            android:layout_margin="50sp"
+            />
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDelete"
+            android:text="Eliminar Cuenta"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textColor="@color/negro"
+            android:background="@color/amarillo"
+            android:layout_marginTop="30sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginRight="60sp"
+            />
+    </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

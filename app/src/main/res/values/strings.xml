@@ -19,4 +19,5 @@
     <string name="Recuper">Recuperar Contraseña</string>
     <string name="envia">Enviar correo</string>
     <string name="nodoCarrera">Carreras</string>
+    <string name="nodoPersona">Personas</string>
 </resources>

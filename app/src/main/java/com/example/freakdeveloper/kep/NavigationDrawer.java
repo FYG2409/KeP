@@ -22,7 +22,8 @@ public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PerfilFragment.OnFragmentInteractionListener, DueloFragment.OnFragmentInteractionListener, RankingFragment.OnFragmentInteractionListener, GraficasFragment.OnFragmentInteractionListener, PreguntasPorMateriaFragment.OnFragmentInteractionListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawe);
 
@@ -33,6 +34,9 @@ public class NavigationDrawer extends AppCompatActivity
 
         Fragment fragment = new PerfilFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_main,fragment).commit();
+        Intent Login = getIntent();
+        Bundle Datos = Login.getExtras();
+        String ID= Datos.getString("ID");
     }
 
     @Override
@@ -80,6 +84,7 @@ public class NavigationDrawer extends AppCompatActivity
         if (id == R.id.perfil) {
             fragment = new PerfilFragment();
             fragmentSeleccionado = true;
+
         } else if (id == R.id.duelo) {
             fragment = new DueloFragment();
             fragmentSeleccionado = true;

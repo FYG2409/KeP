@@ -69,6 +69,7 @@ public class Registro extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
             {
+
             }
         };
     }

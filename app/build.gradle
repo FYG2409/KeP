@@ -17,7 +17,9 @@ android {
         }
     }
 }
-
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
@@ -37,6 +39,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //GRAFICAS
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 //FIREBASE
 apply plugin: 'com.google.gms.google-services'
