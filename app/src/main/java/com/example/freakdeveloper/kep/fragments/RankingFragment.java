@@ -1,14 +1,17 @@
 package com.example.freakdeveloper.kep.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.freakdeveloper.kep.R;
+import com.example.freakdeveloper.kep.RankingActivity;
 
 public class RankingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +24,8 @@ public class RankingFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private LinearLayout todo;
 
     public RankingFragment() {
         // Required empty public constructor
@@ -48,8 +53,20 @@ public class RankingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ranking, container, false);
+        View v = inflater.inflate(R.layout.fragment_ranking, container, false);
+
+        todo = (LinearLayout) v.findViewById(R.id.todo);
+
+        /*todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), RankingActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

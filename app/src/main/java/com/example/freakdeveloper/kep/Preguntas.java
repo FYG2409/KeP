@@ -535,34 +535,36 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void guardaRespuestas(){
-        if(!(materiaSeleccionada.equals("todas"))){
-            final String nodoMateria = materiaSeleccionada.replace(" ","");
-            final String nodoTotalMateria = "total"+nodoMateria;
-           if(existe){
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if(dataSnapshot.exists()){
-                           existe = true;
-                           //Si ya existen respuestas para este usuario
-                           contaMateriaTotal = Integer.parseInt(dataSnapshot.getValue().toString());
+        if(codigoDuelo==null){
+            if(!todasMaterias){
+                final String nodoMateria = materiaSeleccionada.replace(" ","");
+                final String nodoTotalMateria = "total"+nodoMateria;
+                if(existe){
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                existe = true;
+                                //Si ya existen respuestas para este usuario
+                                contaMateriaTotal = Integer.parseInt(dataSnapshot.getValue().toString());
 
-                           databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaMateria+contaBuenas);
-                           databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaMateriaTotal+contaBuenas+contaMalas);
-                       }
-                   }
+                                databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaMateria+contaBuenas);
+                                databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaMateriaTotal+contaBuenas+contaMalas);
+                            }
+                        }
 
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                   }
-               });
+                        }
+                    });
 
-           }else{
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaBuenas);
-               int TotalPreg = contaBuenas+contaMalas;
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaBuenas+contaMalas);
-           }
+                }else{
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaBuenas);
+                    int TotalPreg = contaBuenas+contaMalas;
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaBuenas+contaMalas);
+                }
+            }
 
         }
 

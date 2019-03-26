@@ -30,7 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".faqs"></activity>
+        <activity android:name=".faqs" />
+        <activity android:name=".RankingActivity"></activity>
     </application>
 
 </manifest>

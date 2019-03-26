@@ -44,7 +44,9 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO"
                     android:layout_height="110dp"
-                    android:background="@drawable/icono126"/>
+                    android:background="@drawable/icon_fisica"
+                    android:backgroundTint="@color/blanco"
+                    />
                 <TextView
                     android:text="@string/fisica"
                     style="@style/tarjetasTextView"/>
@@ -59,7 +61,9 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/icono256"/>
+                    android:background="@drawable/icon_razmat"
+                    android:backgroundTint="@color/blanco"
+                    />
                 <TextView
                     android:text="@string/razonamiento_matematico"
                     style="@style/tarjetasTextView"/>
@@ -74,7 +78,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/icono512"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_algebra"/>
                 <TextView
                     android:text="@string/algebra"
                     style="@style/tarjetasTextView"/>
@@ -89,7 +94,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/geo_y_trigo_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_trigo"/>
                 <TextView
                     android:text="@string/geometria_y_trigonometria"
                     style="@style/tarjetasTextView"/>
@@ -104,7 +110,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/geo_analitica_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_analitica"/>
                 <TextView
                     android:text="@string/geometria_analitica"
                     style="@style/tarjetasTextView"/>
@@ -119,7 +126,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/cal_dif_e_int_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_integral"/>
                 <TextView
                     android:text="@string/calculo_diferencial_e_integral"
                     style="@style/tarjetasTextView"/>
@@ -134,7 +142,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/proba_y_esta_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_estadistica"/>
                 <TextView
                     android:text="@string/probabilidad_y_estadistica"
                     style="@style/tarjetasTextView"/>
@@ -149,7 +158,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/prod_escrita_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_escrita"/>
                 <TextView
                     android:text="@string/produccion_escrita"
                     style="@style/tarjetasTextView"/>
@@ -164,7 +174,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/com_textos_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_textos"/>
                 <TextView
                     android:text="@string/comprension_de_textos"
                     style="@style/tarjetasTextView"/>
@@ -180,7 +191,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/biologia_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_biologia"/>
                 <TextView
                     android:text="@string/biologia"
                     style="@style/tarjetasTextView"/>
@@ -196,7 +208,8 @@
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/quimica_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_quimica"/>
                 <TextView
                     android:text="@string/quimica"
                     style="@style/tarjetasTextView" />
