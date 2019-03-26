@@ -450,8 +450,11 @@ public class PerfilFragment extends Fragment
 
         for(int i=0; i<materias.length ; i++)
         {
-
-            aciertosPor [i] = (aciertos [i]*100)/TotalP;
+            if(TotalP==0){
+                aciertosPor[i] = 0;
+            }else{
+                aciertosPor [i] = (aciertos [i]*100)/TotalP;
+            }
         }
 
     }
