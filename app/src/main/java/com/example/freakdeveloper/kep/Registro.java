@@ -100,7 +100,7 @@ public class Registro extends AppCompatActivity
                                 {
                                     Auth.signInWithEmailAndPassword(email, contra);
                                     DatabaseReference Database = FirebaseDatabase.getInstance().getReference().child("usuarios");
-                                    DatabaseReference currentUserDB = Database.child(Auth.getCurrentUser().getUid());
+                                    //DatabaseReference currentUserDB = Database.child(Auth.getCurrentUser().getUid());
                                     //nuevo
 
                                     FirebaseUser Usu= Auth.getCurrentUser();
@@ -153,7 +153,7 @@ public class Registro extends AppCompatActivity
                 for(int i=0;i<sup.size();i++) {
                     superior[i]=sup.get(i);
                 }
-                EscuelaI.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, superior));
+                EscuelaI.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, superior));
 
             }
 

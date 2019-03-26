@@ -1,7 +1,11 @@
 package com.example.freakdeveloper.kep.fragments;
 
+import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.graphics.Color;
+
+import com.example.freakdeveloper.kep.Ajustes;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -24,6 +28,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +46,8 @@ import com.example.freakdeveloper.kep.NavigationDrawer;
 import com.example.freakdeveloper.kep.R;
 import com.example.freakdeveloper.kep.model.Persona;
 import com.example.freakdeveloper.kep.model.Respuestas;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -94,8 +101,8 @@ public class PerfilFragment extends Fragment
 
     //VARIABLES
     private String Email;
-    private int[] totales=new int[11];
-    private int[] aciertos=new int[11];
+    private int[] totales={0,0,0,0,0,0,0,0,0,0,0};
+    private int[] aciertos={0,0,0,0,0,0,0,0,0,0,0};
     private String[] materias=new String[11];
 
     private BarChart barChart;
@@ -111,9 +118,6 @@ public class PerfilFragment extends Fragment
 
     //VISTAS
     private TextView Usu;
-    private TextView Cor;
-    private TextView EA;
-    private TextView EI;
     private TextView Ran;
     private Button btnAjustes;
     private Button btnEliminar;
@@ -150,7 +154,7 @@ public class PerfilFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        final View view = inflater.inflate(R.layout.fragment_perfil, container, false);
         //Trae NickName, Correo, Escuela Actual y Escuela a Ingresar
         //PARA FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -159,11 +163,17 @@ public class PerfilFragment extends Fragment
         btnAjustes = (Button) view.findViewById(R.id.btnAjust);
         btnEliminar = (Button) view.findViewById(R.id.btnDelete);
         Usu = (TextView) view.findViewById(R.id.NickN);
-        Cor = (TextView) view.findViewById(R.id.CorreO);
-        EA = (TextView) view.findViewById(R.id.E_A);
-        EI = (TextView) view.findViewById(R.id.E_I);
         Ran= (TextView) view.findViewById(R.id.RankG);
         this.barChart = (BarChart)view.findViewById(R.id.barChar);
+
+
+        btnAjustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Ajustes.class);
+                startActivity(intent);
+            }
+        });
 
 
         //-----TRAYENDO PERSONA----
@@ -190,9 +200,7 @@ public class PerfilFragment extends Fragment
                         }
                     }
                     Usu.setText("NickName: " + NickName );
-                    Cor.setText("Email: " + Correo );
-                    EA.setText("Escuela Actual: " + EActual );
-                    EI.setText("Escuela a Ingresar: " + EIngresar );
+
 
                 }
             }
@@ -254,6 +262,7 @@ public class PerfilFragment extends Fragment
                     }
                     createChart();
                 }
+
             }
 
             @Override
@@ -262,26 +271,15 @@ public class PerfilFragment extends Fragment
             }
         });
 
-        btnAjustes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
-                ad.setCancelable(false);
+                ad.setCancelable(true);
                 ad.setTitle("Importante");
                 ad.setMessage("¿Esta seguro de querer eliminar su cuenta?");
-                ad.setButton("no", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
                 ad.setButton("si", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, int which) {
                         databaseReference.child(nodoPersona).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -294,7 +292,9 @@ public class PerfilFragment extends Fragment
                                         String idu=user.getUid();
                                         if(idp.equals(idu)){
                                             //SE ENCONTRO LA PERSONA CON EL ID INDICADO
+                                            FirebaseAuth us = FirebaseAuth.getInstance();
                                             user.delete();
+                                            us.signOut();
                                             databaseReference.child(nodoPersona).child(idp).removeValue();
                                             dialog.dismiss();
 
@@ -372,7 +372,7 @@ public class PerfilFragment extends Fragment
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         ArrayList<LegendEntry> entries = new ArrayList<> ();
-        for(int i=0; i<aciertos.length ; i++)
+        for(int i=0; i<materias.length ; i++)
         {
             LegendEntry entry = new LegendEntry();
             entry.formColor= Colores[i];
@@ -386,7 +386,7 @@ public class PerfilFragment extends Fragment
     private ArrayList<BarEntry>getBarEntries()
     {
         ArrayList <BarEntry> entries = new ArrayList<> ();
-        for(int i=0; i<aciertos.length ; i++)
+        for(int i=0; i<materias.length ; i++)
         {
             entries.add(new BarEntry(i , aciertos[i]));
         }
