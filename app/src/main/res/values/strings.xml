@@ -34,6 +34,19 @@
     <string name="olvido_contraseña">¿Olvidaste tu contraseña?</string>
     <string name="msj_recupera_contra">Introduce tu correo electronico para recuperar tu contraseña</string>
     <string name="enviar">Enviar</string>
+    <string name="fisica">FISICA</string>
+    <string name="razonamiento_matematico">RAZONAMIENTO MATEMATICO</string>
+    <string name="algebra">ALGEBRA</string>
+    <string name="geometria_y_trigonometria">GEOMETRIA Y TRIGONOMETRIA</string>
+    <string name="geometria_analitica">GEOMETRIA ANALITICA</string>
+    <string name="calculo_diferencial_e_integral">CALCULO DIFERENCIAL E INTEGRAL</string>
+    <string name="probabilidad_y_estadistica">PROBABILIDAD Y ESTADISTICA</string>
+    <string name="produccion_escrita">PRODUCCION ESCRITA</string>
+    <string name="comprension_de_textos">COMPRENSION DE TEXTOS</string>
+    <string name="biologia">BIOLOGIA</string>
+    <string name="quimica">QUIMICA</string>
+    <string name="infinity">INFINITY</string>
+    <string name="abandonar_partida">Abandonar Partida</string>
     <string name="Graf">ACIERTOS POR MATERIA</string>
     <string name="GrafE">ERRORES POR MATERIA</string>
 </resources>

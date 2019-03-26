@@ -181,10 +181,9 @@
                 android:id="@+id/salir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="salir"
                 android:layout_marginTop="40dp"
                 style="@style/AppTheme.boton"
-                android:text="Abandonar Partida" />
+                android:text="@string/abandonar_partida" />
 
         </LinearLayout>
 

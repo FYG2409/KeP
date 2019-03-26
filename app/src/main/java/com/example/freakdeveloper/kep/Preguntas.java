@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -139,6 +140,13 @@ public class Preguntas extends AppCompatActivity {
         limpiaCampos();
         //traePreguntas();
         traePersona();
+
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
+            }
+        });
     }
 
     //PARA ALEATORIO
@@ -384,7 +392,7 @@ public class Preguntas extends AppCompatActivity {
         miVentana.show();
     }
 
-    public void salir(View view){
+    public void salir(){
         if(codigoDuelo!=null){
             //CUANDO ABANDONAMOS UN DUELO
             LinearLayout marcadores;
@@ -527,34 +535,36 @@ public class Preguntas extends AppCompatActivity {
     }
 
     public void guardaRespuestas(){
-        if(!(materiaSeleccionada.equals("todas"))){
-            final String nodoMateria = materiaSeleccionada.replace(" ","");
-            final String nodoTotalMateria = "total"+nodoMateria;
-           if(existe){
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if(dataSnapshot.exists()){
-                           existe = true;
-                           //Si ya existen respuestas para este usuario
-                           contaMateriaTotal = Integer.parseInt(dataSnapshot.getValue().toString());
+        if(codigoDuelo==null){
+            if(!todasMaterias){
+                final String nodoMateria = materiaSeleccionada.replace(" ","");
+                final String nodoTotalMateria = "total"+nodoMateria;
+                if(existe){
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                existe = true;
+                                //Si ya existen respuestas para este usuario
+                                contaMateriaTotal = Integer.parseInt(dataSnapshot.getValue().toString());
 
-                           databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaMateria+contaBuenas);
-                           databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaMateriaTotal+contaBuenas+contaMalas);
-                       }
-                   }
+                                databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaMateria+contaBuenas);
+                                databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaMateriaTotal+contaBuenas+contaMalas);
+                            }
+                        }
 
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                   }
-               });
+                        }
+                    });
 
-           }else{
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaBuenas);
-               int TotalPreg = contaBuenas+contaMalas;
-               databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaBuenas+contaMalas);
-           }
+                }else{
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoMateria).setValue(contaBuenas);
+                    int TotalPreg = contaBuenas+contaMalas;
+                    databaseReference.child(nodoRespuestas).child(idPersona).child(nodoTotalMateria).setValue(contaBuenas+contaMalas);
+                }
+            }
 
         }
 
@@ -699,5 +709,13 @@ public class Preguntas extends AppCompatActivity {
 
     //-----------------------------
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            salir();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

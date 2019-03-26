@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 
 import com.example.freakdeveloper.kep.model.Carrera;
 import com.example.freakdeveloper.kep.model.Persona;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -106,36 +108,6 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String name = NickNameN.getText().toString().trim();
-                String contra = ContraseN.getText().toString().trim();
-                String contra2 = ContraseConf.getText().toString().trim();
-                String EA = EscA.getSelectedItem().toString();
-                String EI = EscI.getSelectedItem().toString();
-
-                if(TextUtils.isEmpty(name)) {
-                    name = NickName;
-                }
-                if(TextUtils.isEmpty(contra)) {
-                    contra = Contra;
-                    contra2 = Contra;
-                }
-                else {
-                    if(!contra.equals(contra2))
-                    {
-                        contra = Contra;
-                        contra2 = Contra;
-
-                        databaseReference.child(nodoPersona).child(uID).child("contra").setValue(contra);
-                        databaseReference.child(nodoPersona).child(uID).child("escActual").setValue(EA);
-                        databaseReference.child(nodoPersona).child(uID).child("escingresar").setValue(EI);
-                        databaseReference.child(nodoPersona).child(uID).child("nickName").setValue(name);
-                    }
-                }
-                NickNameA.setText("NickName Actual: " + name);
-                EmailA.setText("Email: " + Email);
-                ContraseA.setText("Contraseña Actual: " + contra);
-                EscuelaA.setText("Escuela Actual: " + EA);
-                EscuelaIngA.setText("Escuela a Ingresar Actual: " + EI);
             }
         });
     }
@@ -192,4 +164,56 @@ public class Ajustes extends AppCompatActivity {
         this.Cambiar = (Button) findViewById(R.id.btnCambiar);
     }
 
+    private void Cambiar()
+    {
+        databaseReference = firebaseDatabase.getInstance().getReference();
+
+        String name = NickNameN.getText().toString().trim();
+        String contra = ContraseN.getText().toString().trim();
+        String contra2 = ContraseConf.getText().toString().trim();
+        String EA = EscA.getSelectedItem().toString();
+        String EI = EscI.getSelectedItem().toString();
+
+        if(TextUtils.isEmpty(name))
+        {
+            name = NickName;
+        }
+
+        if(TextUtils.isEmpty(contra)) {
+            contra = Contra;
+            contra2 = Contra;
+        }
+
+        if(!contra.equals(contra2))
+        {
+            contra = Contra;
+            contra2 = Contra;
+
+            databaseReference.child(nodoPersona).child(uID).child("Contra").setValue(contra);
+            databaseReference.child(nodoPersona).child(uID).child("EscActual").setValue(EA);
+            databaseReference.child(nodoPersona).child(uID).child("Escingresar").setValue(EI);
+            databaseReference.child(nodoPersona).child(uID).child("nickName").setValue(name);
+
+            databaseReference.child(nodoPersona).child(uID).child("nickName").setValue(name).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Write was successful!
+                    // ...
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Write failed
+                            // ...
+                        }
+                    });
+        }
+
+        NickNameA.setText("NickName Actual: " + name);
+        EmailA.setText("Email: " + Email);
+        ContraseA.setText("Contraseña Actual: " + contra);
+        EscuelaA.setText("Escuela Actual: " + EA);
+        EscuelaIngA.setText("Escuela a Ingresar Actual: " + EI);
+    }
 }

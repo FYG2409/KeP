@@ -103,8 +103,8 @@ public class PerfilFragment extends Fragment
     private String Email;
     private int[] totales={0,0,0,0,0,0,0,0,0,0,0};
     private int[] aciertos={0,0,0,0,0,0,0,0,0,0,0};
-    private String[] materias=new String[11];
-
+    private String[] materias=new String[]{"Alge" , "Bio" , " CInteg" , "ComTex" , "Fisica" ,"GeoAn" , "GeoYTri" , "Proba" , "ProEsc", "Quimi" , "RazMat"};
+    private int[] aciertosPor = new int[11];
     private BarChart barChart;
     //private int [] Colores =  new int [] {Color.BLACK , Color.RED , Color.BLUE , Color.MAGENTA};
 
@@ -225,42 +225,35 @@ public class PerfilFragment extends Fragment
                             //SE ENCONTRO LA PERSONA CON EL ID INDICADO
                             aciertos[0]=respuestas.getAlgebra();
                             totales[0]=respuestas.getTotalAlgebra();
-                            materias[0]="Algebra";
                             aciertos[1]=respuestas.getBiologia();
                             totales[1]=respuestas.getTotalBiologia();
-                            materias[1]="Biologia";
                             aciertos[2]=respuestas.getCalculoDiferencialeIntegral();
                             totales[2]=respuestas.getTotalCalculoDiferencialeIntegral();
-                            materias[2]="CalculoDiferencialeIntegral";
                             aciertos[3]=respuestas.getComprensiondeTextos();
                             totales[3]=respuestas.getTotalComprensiondeTextos();
-                            materias[3]="CompresiondeTextos";
                             aciertos[4]=respuestas.getFisica();
                             totales[4]=respuestas.getTotalFisica();
-                            materias[4]="Fisica";
                             aciertos[5]=respuestas.getGeometriaAnalitica();
                             totales[5]=respuestas.getTotalGeometriaAnalitica();
-                            materias[5]="GeometriaAnalitica";
                             aciertos[6]=respuestas.getGeometriayTrigonometria();
                             totales[6]=respuestas.getTotalGeometriayTrigonometria();
-                            materias[6]="GeometriayTrigonometria";
                             aciertos[7]=respuestas.getProbabilidadyEstadistica();
                             totales[7]=respuestas.getTotalProbabilidadyEstadistica();
-                            materias[7]="ProbabilidadyEstadistica";
                             aciertos[8]=respuestas.getProduccionEscrita();
                             totales[8]=respuestas.getTotalProduccionEscrita();
-                            materias[8]="ProduccionEscrita";
                             aciertos[9]=respuestas.getQuimica();
                             totales[9]=respuestas.getTotalQuimica();
-                            materias[9]="Quimica";
                             aciertos[10]=respuestas.getRazonamientoMatematico();
                             totales[10]=respuestas.getTotalRazonamientoMatematico();
-                            materias[10]="RazonamientoMatematico";
+
                             break;
                         }
 
                     }
-                    createChart();
+                        Porcentaje();
+                       createChart();
+
+
                 }
 
             }
@@ -372,7 +365,7 @@ public class PerfilFragment extends Fragment
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         ArrayList<LegendEntry> entries = new ArrayList<> ();
-        for(int i=0; i<materias.length ; i++)
+        for(int i=0; i<11 ; i++)
         {
             LegendEntry entry = new LegendEntry();
             entry.formColor= Colores[i];
@@ -386,9 +379,15 @@ public class PerfilFragment extends Fragment
     private ArrayList<BarEntry>getBarEntries()
     {
         ArrayList <BarEntry> entries = new ArrayList<> ();
-        for(int i=0; i<materias.length ; i++)
+        for(int i=0; i<11 ; i++)
         {
-            entries.add(new BarEntry(i , aciertos[i]));
+            if(aciertos == null)
+            {
+                entries.add(new BarEntry(i , 0 ));
+            }
+            else {
+                entries.add(new BarEntry(i, aciertosPor[i]));
+            }
         }
         return entries;
     }
@@ -442,5 +441,18 @@ public class PerfilFragment extends Fragment
         return barData;
     }
 
+    private void Porcentaje()
+    {
+        for(int i=0; i<materias.length ; i++)
+        {
+            aciertosPor [i] = (aciertos [i]*100)/totales[i];
+        }
+
+        for(int i=0 ; i>materias.length; i++)
+        {
+
+        }
+
+    }
 
 }

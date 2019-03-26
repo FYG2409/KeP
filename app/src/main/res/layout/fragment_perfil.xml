@@ -50,8 +50,7 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/background_dark"
                 android:textSize="24sp" />
-
-            <com.github.mikephil.charting.charts.BarChart
+           <com.github.mikephil.charting.charts.BarChart
                 android:layout_height="500dp"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -66,11 +65,9 @@
                 android:textAlignment="center"
                 android:textSize="28sp"
                 android:textColor="@color/negro"
-                android:background="@color/amarillo"
+                android:background="#fef301"
                 android:layout_margin="50sp"
                 />
-
-
 
             <Button
                 android:layout_width="match_parent"
@@ -78,9 +75,9 @@
                 android:id="@+id/btnDelete"
                 android:text="Eliminar Cuenta"
                 android:textAlignment="center"
+                android:background="#fef301"
                 android:textSize="28sp"
                 android:textColor="@color/negro"
-                android:background="@color/amarillo"
                 android:layout_marginTop="30sp"
                 android:layout_marginLeft="60sp"
                 android:layout_marginRight="60sp"
@@ -90,6 +87,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

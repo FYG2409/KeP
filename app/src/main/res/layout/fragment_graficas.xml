@@ -15,7 +15,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Tit"
+                android:text="GRAFICAS"
+                android:textSize="27dp"
+                />
             <com.github.mikephil.charting.charts.PieChart
                 android:layout_height="500dp"
                 android:layout_width="match_parent"

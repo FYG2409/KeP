@@ -88,14 +88,18 @@ public class GraficasFragment extends Fragment
     private int[] totales=new int[11];
     private int[] aciertos=new int[11];
     private int[] errores= new int[11];
-    private String[] materias=new String[11];
+
+    private String[] materias=new String[]{"Alge" , "Bio" , " CInteg" , "ComTex" , "Fisica" ,"GeoAn" , "GeoYTri" , "Proba" , "ProEsc", "Quimi" , "RazMat"};
+
     private int [] AE = new int[2];
     ///Tot 1=== Aciertos Total Tot 2=== Errores
+
     private String [] TextAE = new String[]{"Aciertos" , "Erorres"};
     private BarChart barChart;
     private PieChart pieChart;
     private BarChart barChartE;
-
+    private int [] aciertosPor = new int[11];
+    private int[] erroresPor = new int[11];
     public GraficasFragment() {
         // Required empty public constructor
     }
@@ -146,47 +150,39 @@ public class GraficasFragment extends Fragment
                             //SE ENCONTRO LA PERSONA CON EL ID INDICADO
                             aciertos[0]=respuestas.getAlgebra();
                             totales[0]=respuestas.getTotalAlgebra();
-                            materias[0]="Algebra";
                             aciertos[1]=respuestas.getBiologia();
                             totales[1]=respuestas.getTotalBiologia();
-                            materias[1]="Biologia";
                             aciertos[2]=respuestas.getCalculoDiferencialeIntegral();
                             totales[2]=respuestas.getTotalCalculoDiferencialeIntegral();
-                            materias[2]="CDIntegral";
                             aciertos[3]=respuestas.getComprensiondeTextos();
                             totales[3]=respuestas.getTotalComprensiondeTextos();
-                            materias[3]="Compre Textos";
                             aciertos[4]=respuestas.getFisica();
                             totales[4]=respuestas.getTotalFisica();
-                            materias[4]="Fisica";
                             aciertos[5]=respuestas.getGeometriaAnalitica();
                             totales[5]=respuestas.getTotalGeometriaAnalitica();
-                            materias[5]="GeometriaAnalitica";
                             aciertos[6]=respuestas.getGeometriayTrigonometria();
                             totales[6]=respuestas.getTotalGeometriayTrigonometria();
-                            materias[6]="GeometriayTrigonometria";
                             aciertos[7]=respuestas.getProbabilidadyEstadistica();
                             totales[7]=respuestas.getTotalProbabilidadyEstadistica();
-                            materias[7]="ProbabilidadyEstadistica";
                             aciertos[8]=respuestas.getProduccionEscrita();
                             totales[8]=respuestas.getTotalProduccionEscrita();
-                            materias[8]="ProduccionEscrita";
                             aciertos[9]=respuestas.getQuimica();
                             totales[9]=respuestas.getTotalQuimica();
-                            materias[9]="Quimica";
                             aciertos[10]=respuestas.getRazonamientoMatematico();
                             totales[10]=respuestas.getTotalRazonamientoMatematico();
-                            materias[10]="RazonamientoMatematico";
+
                             break;
                         }
                     }
 
-                    Errores();
-                    Aciertos_Errores();
 
-                    //graficas
-                    createChartBarra();
-                    createPieChart();
+                        Errores();
+                        Aciertos_Errores();
+                        Porcentaje();
+                        //graficas
+                        createChartBarra();
+                        createPieChart();
+
                     //
                 }
             }
@@ -291,7 +287,7 @@ public class GraficasFragment extends Fragment
         ArrayList <BarEntry> entries = new ArrayList<> ();
         for(int i=0; i<aciertos.length ; i++)
         {
-            entries.add(new BarEntry(i , aciertos[i]));
+            entries.add(new BarEntry(i , aciertosPor[i]));
         }
         return entries;
     }
@@ -301,7 +297,7 @@ public class GraficasFragment extends Fragment
         ArrayList <BarEntry> entries = new ArrayList<> ();
         for(int i=0; i<aciertos.length ; i++)
         {
-            entries.add(new BarEntry(i , errores[i]));
+            entries.add(new BarEntry(i , erroresPor[i]));
         }
         return entries;
     }
@@ -426,4 +422,20 @@ public class GraficasFragment extends Fragment
         }
     }
 
+    private void Porcentaje()
+    {
+        int TotalP = 0;
+        for(int i=0; i<materias.length ; i++)
+        {
+            TotalP = TotalP + totales [i] ;
+        }
+
+        for(int i=0; i<materias.length ; i++)
+        {
+            aciertosPor [i] = (aciertos [i]*100)/totales[i];
+            erroresPor [i] = ((totales[i] - aciertos[i]))*100/totales[i];
+        }
+
+
+    }
 }

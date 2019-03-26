@@ -32,6 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".faqs" />
+        <activity android:name=".RankingActivity"></activity>
+
     </application>
 
 </manifest>

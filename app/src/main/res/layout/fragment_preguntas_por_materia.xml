@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.PreguntasPorMateriaFragment"
-    android:orientation="vertical"
-    android:padding="40dp">
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <GridLayout
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -22,242 +22,197 @@
 
             <LinearLayout
                 android:id="@+id/infinito"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:background="@color/verde"
-                android:padding="10dp"
                 android:tag="todas"
+                android:background="@color/color1"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/infinito_blanco_icon"/>
+                    android:background="@drawable/infinito_blanco_icon" />
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="PREGUNTAS INFINITAS"/>
+                    android:text="@string/infinity"
+                    style="@style/tarjetasTextView" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/fisica"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:background="@color/azul"
-                android:padding="10dp"
                 android:tag="Fisica"
+                android:background="@color/color2"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
-                    android:layout_width="match_parent" android:contentDescription="TODO" 
+                    android:layout_width="match_parent" android:contentDescription="TODO"
                     android:layout_height="110dp"
-                    android:background="@drawable/fisica_icon"/>
+                    android:background="@drawable/icon_fisica"
+                    android:backgroundTint="@color/blanco"
+                    />
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="FISICA"/>
+                    android:text="@string/fisica"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/razMatematico"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/naranja"
-                android:padding="10dp"
                 android:tag="Razonamiento Matematico"
+                android:background="@color/color3"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/raz_mat_icon"/>
+                    android:background="@drawable/icon_razmat"
+                    android:backgroundTint="@color/blanco"
+                    />
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="RAZONAMIENTO MATEMATICO"/>
+                    android:text="@string/razonamiento_matematico"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/algebra"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/morado"
-                android:padding="10dp"
                 android:tag="Algebra"
+                android:background="@color/color4"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/algebra_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_algebra"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ALGEBRA"/>
+                    android:text="@string/algebra"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/geoTrigo"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/verdeAgua"
-                android:padding="10dp"
                 android:tag="Geometria y Trigonometria"
+                android:background="@color/color5"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/geo_y_trigo_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_trigo"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="GEOMETRIA Y TRIGONOMETRIA"/>
+                    android:text="@string/geometria_y_trigonometria"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/geoAnalitica"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/amarillo"
-                android:padding="10dp"
                 android:tag="Geometria Analitica"
+                android:background="@color/color6"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/geo_analitica_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_analitica"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="GEOMETRIA ANALITICA"/>
+                    android:text="@string/geometria_analitica"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/calDifIntegral"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/rosa"
-                android:padding="10dp"
                 android:tag="Calculo Diferencial e Integral"
+                android:background="@color/color7"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/cal_dif_e_int_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_integral"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="CALCULO DIFERENCIAL E INTEGRAL"/>
+                    android:text="@string/calculo_diferencial_e_integral"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/probaEstadistica"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/rojo"
-                android:padding="10dp"
                 android:tag="Probabilidad y Estadistica"
+                android:background="@color/color8"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/proba_y_esta_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_estadistica"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="PROBABILIDAD Y ESTADISTICA"/>
+                    android:text="@string/probabilidad_y_estadistica"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/prodEscrita"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/verde"
-                android:padding="10dp"
                 android:tag="Produccion Escrita"
+                android:background="@color/color9"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/prod_escrita_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_escrita"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="PRODUCCION ESCRITA"/>
+                    android:text="@string/produccion_escrita"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/compreTextos"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/azulOscuro"
-                android:padding="10dp"
                 android:tag="Comprension de Textos"
+                android:background="@color/color10"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/com_textos_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_textos"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="COMPRENSION DE TEXTOS"/>
+                    android:text="@string/comprension_de_textos"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/biologia"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/verdeOscuro"
-                android:padding="10dp"
                 android:tag="Biologia"
+                android:background="@color/color11"
+                android:layout_marginBottom="30dp"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/biologia_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_biologia"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="BIOLOGIA"/>
+                    android:text="@string/biologia"
+                    style="@style/tarjetasTextView"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/quimica"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:background="@color/moradoOscuro"
-                android:padding="10dp"
                 android:tag="Quimica"
+                android:background="@color/color12"
+                android:layout_marginBottom="30dp"
+                style="@style/tarjetasLayout"
                 >
                 <ImageView
                     android:layout_width="match_parent" android:contentDescription="TODO" 
                     android:layout_height="110dp"
-                    android:background="@drawable/quimica_icon"/>
+                    android:backgroundTint="@color/blanco"
+                    android:background="@drawable/icon_quimica"/>
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="QUIMICA"/>
+                    android:text="@string/quimica"
+                    style="@style/tarjetasTextView" />
             </LinearLayout>
 
         </GridLayout>
