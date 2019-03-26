@@ -55,15 +55,6 @@ public class RankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ranking, container, false);
 
-        todo = (LinearLayout) v.findViewById(R.id.todo);
-
-        /*todo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RankingActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
 
         return v;

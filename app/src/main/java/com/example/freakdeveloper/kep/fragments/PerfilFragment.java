@@ -163,7 +163,6 @@ public class PerfilFragment extends Fragment
         btnAjustes = (Button) view.findViewById(R.id.btnAjust);
         btnEliminar = (Button) view.findViewById(R.id.btnDelete);
         Usu = (TextView) view.findViewById(R.id.NickN);
-        Ran= (TextView) view.findViewById(R.id.RankG);
         this.barChart = (BarChart)view.findViewById(R.id.barChar);
 
 

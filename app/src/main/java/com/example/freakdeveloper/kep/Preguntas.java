@@ -79,7 +79,7 @@ public class Preguntas extends AppCompatActivity {
     //PARA TIMER
     private TextView countdownText;
     private CountDownTimer countDownTimer;
-    private long tiempoEnMilisegundos = (10*60000); //Son los minutos que queremos en milisegundos
+    private long tiempoEnMilisegundos = (5*60000); //Son los minutos que queremos en milisegundos
 
     //PARA POP-UP
     private Dialog miVentana;

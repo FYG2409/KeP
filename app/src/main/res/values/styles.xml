@@ -40,7 +40,7 @@
     <style name="spinner" parent="Widget.AppCompat.Spinner.Underlined">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">30dp</item>
-        <item name="android:background">@color/blanco</item>
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:radius">10dp</item>
     </style>
 
