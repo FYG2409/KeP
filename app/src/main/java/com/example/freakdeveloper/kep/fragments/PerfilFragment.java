@@ -164,7 +164,7 @@ public class PerfilFragment extends Fragment
         EI = (TextView) view.findViewById(R.id.E_I);
         Ran= (TextView) view.findViewById(R.id.RankG);
         this.barChart = (BarChart)view.findViewById(R.id.barChar);
-        
+
 
         //-----TRAYENDO PERSONA----
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -421,6 +421,7 @@ public class PerfilFragment extends Fragment
         axisX(barChart.getXAxis());
         axisLeft(barChart.getAxisLeft());
         axisRight(barChart.getAxisRight());
+        barChart.getLegend().setEnabled(false);
 
     }
 

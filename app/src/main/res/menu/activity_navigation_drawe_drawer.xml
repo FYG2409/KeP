@@ -16,15 +16,16 @@
             android:id="@+id/ranking" android:title="" 
             android:icon="@drawable/ranking_icon"/>
         <item
+            android:id="@+id/preguntas"
+            android:icon="@drawable/preguntas_icon"
+            android:title="" />
+        <item
             android:id="@+id/graficas" android:title="" 
             android:icon="@drawable/graficas_icon"/>
-        <item
-            android:id="@+id/preguntas" android:title="" 
-            android:icon="@drawable/preguntas_icon" />
+
         <item
             android:id="@+id/cerrarSesion" android:title="" 
             android:icon="@drawable/cerrar_sesion_icon" />
-
     </group>
 
 </menu>

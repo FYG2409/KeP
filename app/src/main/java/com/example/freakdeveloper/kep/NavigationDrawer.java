@@ -51,7 +51,7 @@ public class NavigationDrawer extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.navigation_drawe, menu);
         return true;
     }
@@ -102,6 +102,7 @@ public class NavigationDrawer extends AppCompatActivity
             Intent Menu = new Intent(this, MainActivity.class);
             startActivity(Menu);
         }
+
 
         if(fragmentSeleccionado){
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,fragment).commit();

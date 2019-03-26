@@ -47,4 +47,6 @@
     <string name="quimica">QUIMICA</string>
     <string name="infinity">INFINITY</string>
     <string name="abandonar_partida">Abandonar Partida</string>
+    <string name="Graf">ACIERTOS POR MATERIA</string>
+    <string name="GrafE">ERRORES POR MATERIA</string>
 </resources>

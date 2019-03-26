@@ -41,15 +41,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GraficasFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GraficasFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class GraficasFragment extends Fragment {
+public class GraficasFragment extends Fragment
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,6 +71,7 @@ public class GraficasFragment extends Fragment {
     private int C11= Color.rgb(138, 220 , 201);
 
     private int [] Colores =  new int [] {C1, C2 , C3 , C4 , C5 , C6, C7, C8 , C9 , C10, C11};
+    private int [] ColoresAE = new int[] {CA , CE};
 
 
     //FIREBASE
@@ -93,26 +87,19 @@ public class GraficasFragment extends Fragment {
     private String Email;
     private int[] totales=new int[11];
     private int[] aciertos=new int[11];
+    private int[] errores= new int[11];
     private String[] materias=new String[11];
-
+    private int [] AE = new int[2];
+    ///Tot 1=== Aciertos Total Tot 2=== Errores
+    private String [] TextAE = new String[]{"Aciertos" , "Erorres"};
     private BarChart barChart;
     private PieChart pieChart;
-    private String [] Materias= new String[]{"Matematicas", "Español" , "Fisica" , "Quimica"};
-    private int [] Aciertos = new int[] {15, 2, 30, 20};
-    //private int [] Colores =  new int [] {Color.BLACK , Color.RED , Color.BLUE , Color.MAGENTA};
+    private BarChart barChartE;
 
     public GraficasFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GraficasFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static GraficasFragment newInstance(String param1, String param2) {
         GraficasFragment fragment = new GraficasFragment();
@@ -133,14 +120,14 @@ public class GraficasFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graficas, container, false);
 
         this.barChart = (BarChart)view.findViewById(R.id.barChar);
         this.pieChart= (PieChart)view.findViewById(R.id.pieChart);
-
+        this.barChartE = (BarChart) view.findViewById(R.id.barCharError);
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -165,10 +152,10 @@ public class GraficasFragment extends Fragment {
                             materias[1]="Biologia";
                             aciertos[2]=respuestas.getCalculoDiferencialeIntegral();
                             totales[2]=respuestas.getTotalCalculoDiferencialeIntegral();
-                            materias[2]="CalculoDiferencialeIntegral";
+                            materias[2]="CDIntegral";
                             aciertos[3]=respuestas.getComprensiondeTextos();
                             totales[3]=respuestas.getTotalComprensiondeTextos();
-                            materias[3]="CompresiondeTextos";
+                            materias[3]="Compre Textos";
                             aciertos[4]=respuestas.getFisica();
                             totales[4]=respuestas.getTotalFisica();
                             materias[4]="Fisica";
@@ -193,8 +180,13 @@ public class GraficasFragment extends Fragment {
                             break;
                         }
                     }
+
+                    Errores();
+                    Aciertos_Errores();
+
                     //graficas
-                    createChart();
+                    createChartBarra();
+                    createPieChart();
                     //
                 }
             }
@@ -231,16 +223,6 @@ public class GraficasFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -257,11 +239,22 @@ public class GraficasFragment extends Fragment {
         return chart;
     }
 
+    private Chart getSameChartPie(Chart chart , String Des , int TextC , int Back , int Time)
+    {
+        chart.getDescription().setText(Des);
+        chart.getDescription().setTextSize(15);
+        chart.setBackgroundColor(Back);
+        chart.animateY(Time);
+
+        legendPie(chart);
+        return chart;
+    }
+
     private void legend(Chart chart)
     {
         Legend legend = chart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
 
         ArrayList <LegendEntry> entries = new ArrayList<> ();
         for(int i=0; i<aciertos.length ; i++)
@@ -269,6 +262,24 @@ public class GraficasFragment extends Fragment {
             LegendEntry entry = new LegendEntry();
             entry.formColor= Colores[i];
             entry.label = materias[i];
+            entries.add(entry);
+        }
+
+        legend.setCustom(entries);
+    }
+
+    private void legendPie(Chart chart)
+    {
+        Legend legend = chart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+        ArrayList <LegendEntry> entries = new ArrayList<> ();
+        for(int i=0; i<AE.length ; i++)
+        {
+            LegendEntry entry = new LegendEntry();
+            entry.formColor= ColoresAE[i];
+            entry.label = TextAE[i];
             entries.add(entry);
         }
 
@@ -285,12 +296,22 @@ public class GraficasFragment extends Fragment {
         return entries;
     }
 
+    private ArrayList<BarEntry>getBarEntriesErrores()
+    {
+        ArrayList <BarEntry> entries = new ArrayList<> ();
+        for(int i=0; i<aciertos.length ; i++)
+        {
+            entries.add(new BarEntry(i , errores[i]));
+        }
+        return entries;
+    }
+
     private ArrayList<PieEntry> getPieEntries ()
     {
         ArrayList <PieEntry> entries = new ArrayList<> ();
-        for(int i=0; i<materias.length ; i++)
+        for(int i=0; i<AE.length ; i++)
         {
-            entries.add(new PieEntry( aciertos[i]));
+            entries.add(new PieEntry( AE[i]));
         }
         return entries;
     }
@@ -313,18 +334,31 @@ public class GraficasFragment extends Fragment {
         axis.setEnabled(false);
     }
 
-    private void createChart()
+    private void createChartBarra()
     {
-        barChart = (BarChart) getSameChart(barChart, "ACIERTOS" , Color.BLACK , Color.WHITE , 5000);
+        barChart = (BarChart) getSameChart(barChart, "" , Color.BLACK , Color.WHITE , 5000);
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(false);
         barChart.setData(getBarData());
+        barChart.getLegend().setEnabled(false);
         axisX(barChart.getXAxis());
         axisLeft(barChart.getAxisLeft());
         axisRight(barChart.getAxisRight());
 
-        pieChart = (PieChart) getSameChart(pieChart, "ACIERTOS" , Color.BLACK , Color.WHITE , 5000);
-        pieChart.setHoleRadius(15);
+        barChartE = (BarChart) getSameChart(barChartE, "" , Color.BLACK , Color.WHITE , 5000);
+        barChartE.setDrawGridBackground(true);
+        barChartE.setDrawBarShadow(false);
+        barChartE.setData(getBarDataE());
+        barChartE.getLegend().setEnabled(false);
+        axisX(barChartE.getXAxis());
+        axisLeft(barChartE.getAxisLeft());
+        axisRight(barChartE.getAxisRight());
+    }
+
+    private void createPieChart()
+    {
+        pieChart = (PieChart) getSameChartPie(pieChart, "T O T A L E S" , Color.BLACK , Color.WHITE , 5000);
+        pieChart.setHoleRadius(50);
         pieChart.setData(getPieData());
         pieChart.setTransparentCircleRadius(6);
         pieChart.invalidate();
@@ -338,21 +372,58 @@ public class GraficasFragment extends Fragment {
         return dataSet;
     }
 
+    private DataSet getDataPie (DataSet dataSet)
+    {
+        dataSet.setColors(this.ColoresAE);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextSize(10);
+        return dataSet;
+    }
+
     private BarData getBarData()
     {
         BarDataSet barDataSet= (BarDataSet) getData(new BarDataSet(getBarEntries() , ""));
         barDataSet.setBarShadowColor(Color.GRAY);
         BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(0.25f);
+        barData.setBarWidth(0.7f);
+        return barData;
+    }
+
+    private BarData getBarDataE()
+    {
+        BarDataSet barDataSet= (BarDataSet) getData(new BarDataSet(getBarEntriesErrores() , ""));
+        barDataSet.setBarShadowColor(Color.GRAY);
+        BarData barData = new BarData(barDataSet);
+        barData.setBarWidth(0.7f);
         return barData;
     }
 
     private PieData getPieData()
     {
-        PieDataSet pieDataSet = (PieDataSet) getData(new PieDataSet(getPieEntries() , ""));
+        PieDataSet pieDataSet = (PieDataSet) getDataPie(new PieDataSet(getPieEntries() , ""));
         pieDataSet.setSliceSpace(1);
         pieDataSet.setValueFormatter(new PercentFormatter());
 
         return new PieData(pieDataSet);
     }
+
+    private void Aciertos_Errores()
+    {
+
+        for(int i=0; i<materias.length ; i++)
+        {
+            AE [0] = AE[0] + aciertos[i];
+            AE [1] = AE[1] + (totales[i] - aciertos [i]);
+        }
+    }
+
+    private void Errores()
+    {
+
+        for(int i=0; i<materias.length ; i++)
+        {
+            errores[i] = totales[i] - aciertos [i];
+        }
+    }
+
 }
