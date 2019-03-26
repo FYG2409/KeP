@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -139,6 +140,13 @@ public class Preguntas extends AppCompatActivity {
         limpiaCampos();
         //traePreguntas();
         traePersona();
+
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
+            }
+        });
     }
 
     //PARA ALEATORIO
@@ -384,7 +392,7 @@ public class Preguntas extends AppCompatActivity {
         miVentana.show();
     }
 
-    public void salir(View view){
+    public void salir(){
         if(codigoDuelo!=null){
             //CUANDO ABANDONAMOS UN DUELO
             LinearLayout marcadores;
@@ -699,5 +707,13 @@ public class Preguntas extends AppCompatActivity {
 
     //-----------------------------
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            salir();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

@@ -96,7 +96,7 @@
             android:textAlignment="center"
             android:textSize="28sp"
             android:textColor="@color/negro"
-            android:background="@color/amarillo"
+            android:background="#fef301"
             android:layout_margin="50sp"
             />
 
@@ -110,7 +110,7 @@
             android:textAlignment="center"
             android:textSize="28sp"
             android:textColor="@color/negro"
-            android:background="@color/amarillo"
+            android:background="#fef301"
             android:layout_marginTop="30sp"
             android:layout_marginLeft="60sp"
             android:layout_marginRight="60sp"
