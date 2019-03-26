@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -107,7 +108,7 @@ public class Ajustes extends AppCompatActivity {
         Cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                 Cambiar();
             }
         });
     }
@@ -184,30 +185,14 @@ public class Ajustes extends AppCompatActivity {
             contra2 = Contra;
         }
 
-        if(!contra.equals(contra2))
+        if(contra.equals(contra2))
         {
-            contra = Contra;
-            contra2 = Contra;
-
-            databaseReference.child(nodoPersona).child(uID).child("Contra").setValue(contra);
-            databaseReference.child(nodoPersona).child(uID).child("EscActual").setValue(EA);
-            databaseReference.child(nodoPersona).child(uID).child("Escingresar").setValue(EI);
+            databaseReference.child(nodoPersona).child(uID).child("contra").setValue(contra);
+            databaseReference.child(nodoPersona).child(uID).child("escActual").setValue(EA);
+            databaseReference.child(nodoPersona).child(uID).child("escingresar").setValue(EI);
             databaseReference.child(nodoPersona).child(uID).child("nickName").setValue(name);
 
-            databaseReference.child(nodoPersona).child(uID).child("nickName").setValue(name).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    // Write was successful!
-                    // ...
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            // ...
-                        }
-                    });
+
         }
 
         NickNameA.setText("NickName Actual: " + name);

@@ -432,10 +432,10 @@ public class GraficasFragment extends Fragment
 
         for(int i=0; i<materias.length ; i++)
         {
-            aciertosPor [i] = (aciertos [i]*100)/totales[i];
-            erroresPor [i] = ((totales[i] - aciertos[i]))*100/totales[i];
+
+            aciertosPor [i] = (aciertos [i]*100)/TotalP;
+            int Erro= totales[i] - aciertos[i];
+            erroresPor [i] = (Erro)*100/TotalP;
         }
-
-
     }
 }
