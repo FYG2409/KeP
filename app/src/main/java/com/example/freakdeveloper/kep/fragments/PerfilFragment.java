@@ -443,14 +443,16 @@ public class PerfilFragment extends Fragment
 
     private void Porcentaje()
     {
+        int TotalP = 0;
         for(int i=0; i<materias.length ; i++)
         {
-            aciertosPor [i] = (aciertos [i]*100)/totales[i];
+            TotalP = TotalP + totales [i] ;
         }
 
-        for(int i=0 ; i>materias.length; i++)
+        for(int i=0; i<materias.length ; i++)
         {
 
+            aciertosPor [i] = (aciertos [i]*100)/TotalP;
         }
 
     }
