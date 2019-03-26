@@ -34,4 +34,6 @@
     <string name="olvido_contraseña">¿Olvidaste tu contraseña?</string>
     <string name="msj_recupera_contra">Introduce tu correo electronico para recuperar tu contraseña</string>
     <string name="enviar">Enviar</string>
+    <string name="Graf">ACIERTOS POR MATERIA</string>
+    <string name="GrafE">ERRORES POR MATERIA</string>
 </resources>

@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PerfilFragment"
     android:orientation="vertical"
-    android:background="#BB0D3A"
-
     >
 
     <ScrollView
