@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button regPregunta, regCarrera;
+    private Button regPregunta, regCarrera, btnFaq;
     private int conta = 0;
 
     @Override
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         regPregunta = findViewById(R.id.regPregunta);
         regCarrera = findViewById(R.id.regCarrera);
+        btnFaq = findViewById(R.id.btnFaq);
 
     }
 
@@ -26,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
         if(conta==0){
             regPregunta.setVisibility(View.VISIBLE);
             regCarrera.setVisibility(View.VISIBLE);
+            btnFaq.setVisibility(View.VISIBLE);
             conta = 1;
         }else if (conta == 1) {
             regPregunta.setVisibility(View.GONE);
             regCarrera.setVisibility(View.GONE);
+            btnFaq.setVisibility(View.GONE);
             conta = 0;
         }
     }
@@ -52,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void irARegCarrera(View view){
         Intent intent = new Intent(this, RegistroCarrera.class);
+        startActivity(intent);
+    }
+
+    public void irAFAQS(View view){
+        Intent intent = new Intent(this, faqs.class);
+        startActivity(intent);
+    }
+
+    public void irARegistraFAQS(View view){
+        Intent intent = new Intent(this, RegistraFaqs.class);
         startActivity(intent);
     }
 }

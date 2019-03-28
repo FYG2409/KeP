@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ajustes"></activity>
+        <activity android:name=".Ajustes" />
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawe"
@@ -32,8 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".faqs" />
-        <activity android:name=".RankingActivity"></activity>
-
+        <activity android:name=".RankingActivity" />
+        <activity android:name=".RegistraFaqs"></activity>
     </application>
 
 </manifest>

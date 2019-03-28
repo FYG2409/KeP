@@ -43,9 +43,6 @@
                 android:background="@drawable/graf_inicio_derecha"/>
         </LinearLayout>
 
-
-
-
         <Button
             style="@style/AppTheme.boton"
             android:text="@string/inicia_sesion"
@@ -63,6 +60,20 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
+            />
+
+        <Button
+            style="@style/AppTheme.boton"
+            android:text="FAQ's"
+            android:onClick="irAFAQS"
+            />
+
+        <Button
+            android:id="@+id/btnFaq"
+            style="@style/AppTheme.boton"
+            android:text="REGISTRA FAQ"
+            android:onClick="irARegistraFAQS"
+            android:visibility="gone"
             />
 
         <Button
